@@ -1,5 +1,5 @@
 type Params = {
-  format: 'avif' | 'webp' | 'png' | 'jpg' | 'jxl';
+  format: 'avif' | 'webp' | 'jxl';
   height?: number;
   imageId: string;
   width?: number;
