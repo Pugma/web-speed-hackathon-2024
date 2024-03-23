@@ -6,7 +6,7 @@ import (
 )
 
 func SelectAuthor(authorId *string) (api.GetAuthorDetail, error) {
-	row := db.QueryRow("SELECT * ", &authorId)
+	row := db.QueryRow("SELECT * FROM `author` WHERE `id`=$1", &authorId)
 	var authorDetail api.GetAuthorDetail
 	err := row.Scan(
 		&authorDetail.Books,

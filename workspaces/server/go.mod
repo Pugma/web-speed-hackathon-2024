@@ -5,6 +5,7 @@ go 1.21.4
 require (
 	github.com/getkin/kin-openapi v0.123.0
 	github.com/labstack/echo/v4 v4.11.4
+	github.com/mattn/go-sqlite3 v1.14.22
 	github.com/oapi-codegen/runtime v1.1.1
 )
 
