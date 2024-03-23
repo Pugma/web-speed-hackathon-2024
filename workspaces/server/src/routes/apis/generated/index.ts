@@ -10,7 +10,7 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
-export type { AuthorDetailBooks } from './models/AuthorDetailBooks';
+export type { AuthorDetailBooksItem } from './models/AuthorDetailBooksItem';
 export type { EpisodesPagesItem } from './models/EpisodesPagesItem';
 export type { GetAuthorDetail } from './models/GetAuthorDetail';
 export type { GetAuthorListItem } from './models/GetAuthorListItem';

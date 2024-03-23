@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { Image } from './Image';
-export type AuthorDetailBooks = {
+export type AuthorDetailBooksItem = {
     description: string;
     id: string;
     name: string;
