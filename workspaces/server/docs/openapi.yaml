@@ -47,7 +47,7 @@ paths:
             type: string
           required: true
           name: 'authorId'
-          in: 'path'
+          in: path
       responses:
         200:
           description: 'Get author.'
@@ -63,7 +63,7 @@ paths:
             type: string
           required: true
           name: 'authorId'
-          in: 'path'
+          in: path
       requestBody:
         content:
           application/json:
@@ -143,7 +143,7 @@ paths:
             type: string
           required: true
           name: 'authorId'
-          in: 'path'
+          in: path
       responses:
         200:
           description: 'Delete author.'
@@ -263,7 +263,7 @@ paths:
             type: string
           required: true
           name: 'episodeId'
-          in: 'path'
+          in: path
       responses:
         200:
           description: 'Get episode.'
@@ -279,7 +279,7 @@ paths:
             type: string
           required: true
           name: 'episodeId'
-          in: 'path'
+          in: path
       requestBody:
         content:
           application/json:
@@ -386,7 +386,7 @@ paths:
             type: string
           required: true
           name: 'episodeId'
-          in: 'path'
+          in: path
       responses:
         200:
           description: 'Get episode list.'
@@ -614,7 +614,7 @@ paths:
             type: string
           required: true
           name: 'bookId'
-          in: 'path'
+          in: path
       responses:
         200:
           description: 'Get book.'
@@ -674,7 +674,7 @@ paths:
             type: string
           required: true
           name: 'bookId'
-          in: 'path'
+          in: path
       requestBody:
         content:
           application/json:
@@ -752,7 +752,7 @@ paths:
             type: string
           required: true
           name: 'bookId'
-          in: 'path'
+          in: path
       responses:
         200:
           description: 'Delete book.'
@@ -932,7 +932,7 @@ paths:
             type: string
           required: true
           name: 'pageId'
-          in: 'path'
+          in: path
       responses:
         200:
           description: 'Get episode page.'
@@ -1039,7 +1039,7 @@ paths:
             type: string
           required: true
           name: 'episodePageId'
-          in: 'path'
+          in: path
       requestBody:
         content:
           application/json:
@@ -1080,7 +1080,7 @@ paths:
             type: string
           required: true
           name: 'episodePageId'
-          in: 'path'
+          in: path
       responses:
         200:
           description: 'Delete episode page.'
@@ -1193,7 +1193,7 @@ paths:
             type: string
           required: true
           name: 'dayOfWeek'
-          in: 'path'
+          in: path
       responses:
         200:
           description: 'Get release.'
@@ -1419,11 +1419,6 @@ paths:
       responses:
         200:
           description: 'Initialize.'
-          # content:
-          #   application/json:
-          #     schema:
-          #       type: object
-          #       properties:
 
 components:
   schemas:
