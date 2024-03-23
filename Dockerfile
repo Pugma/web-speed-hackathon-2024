@@ -32,8 +32,8 @@ FROM alpine:latest
 
 WORKDIR /
 
-COPY --from=client-build /app .
-COPY --from=server-build /app .
+COPY --from=client-build /usr/src/app .
+COPY --from=server-build /usr/src/app/app .
 
 EXPOSE 8000
 
