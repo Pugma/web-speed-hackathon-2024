@@ -1,3 +1,4 @@
+# フロントエンドビルド用
 FROM node:20.11.1-alpine as client-build
 
 WORKDIR /usr/src/app
@@ -17,10 +18,22 @@ RUN pnpm build
 ENV PORT 8000
 EXPOSE 8000
 
+# バックエンドビルド用
 FROM golang:1.22.1-alpine3.19 as server-build
 
 WORKDIR /usr/src/app
 
 RUN cd workspaces/server && go mod download && go build -o app .
+
+
+# 最終的な配信用
+FROM alpine:latest
+
+WORKDIR /
+
+COPY --from=client-build /app .
+COPY --from=server-build /app .
+
+EXPOSE 8000
 
 ENTRYPOINT ["./app"]
