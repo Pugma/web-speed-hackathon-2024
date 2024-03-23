@@ -164,7 +164,7 @@ export const EpisodeDetailEditor: React.FC<Props> = ({ book, episode }) => {
 
       createEpisodePage({
         episodeId: episode.id,
-        image: new File([blob], 'encrypted.png', { type: 'image/webp' }),
+        image: new File([blob], 'encrypted.webp', { type: 'image/webp' }),
         page: (episode.pages.at(-1)?.page ?? 0) + 1,
       });
     } finally {
