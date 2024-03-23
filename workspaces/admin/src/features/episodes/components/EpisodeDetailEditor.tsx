@@ -159,12 +159,12 @@ export const EpisodeDetailEditor: React.FC<Props> = ({ book, episode }) => {
         },
       });
 
-      const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
+      const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/webp'));
       if (blob == null) return;
 
       createEpisodePage({
         episodeId: episode.id,
-        image: new File([blob], 'encrypted.png', { type: 'image/png' }),
+        image: new File([blob], 'encrypted.png', { type: 'image/webp' }),
         page: (episode.pages.at(-1)?.page ?? 0) + 1,
       });
     } finally {
@@ -281,7 +281,7 @@ export const EpisodeDetailEditor: React.FC<Props> = ({ book, episode }) => {
                   src={
                     thumbnailUrl ??
                     (episode != null
-                      ? getImageUrl({ format: 'jpg', height: 200, imageId: episode.image.id, width: 200 })
+                      ? getImageUrl({ format: 'webp', height: 200, imageId: episode.image.id, width: 200 })
                       : undefined)
                   }
                   width={200}
