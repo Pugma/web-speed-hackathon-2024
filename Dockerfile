@@ -21,6 +21,6 @@ FROM golang:1.22.1-alpine3.19 as server-build
 
 WORKDIR /usr/src/app
 
-RUN cd server && go mod download && go build -o app .
+RUN cd workspaces/server && go mod download && go build -o app .
 
 ENTRYPOINT ["./app"]
