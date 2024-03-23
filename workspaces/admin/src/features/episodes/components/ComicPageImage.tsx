@@ -34,7 +34,7 @@ export const ComicPageImage: React.FC<Props> = ({ pageImageId }) => {
         },
       });
 
-      return new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
+      return new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/webp'));
     },
     queryKey: ['ComicPageImage', { pageImageId }] as const,
     refetchInterval: false,

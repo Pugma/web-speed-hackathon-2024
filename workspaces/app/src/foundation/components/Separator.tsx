@@ -38,7 +38,7 @@ export const Separator: React.FC = () => {
 
     ctx.stroke();
 
-    setImgUrl(canvas.toDataURL('image/png'));
+    setImgUrl(canvas.toDataURL('image/webp'));
   }, []);
 
   return (
