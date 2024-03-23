@@ -1286,68 +1286,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                    rank:
-                      type: number
-                    book:
-                      type: object
-                      properties:
-                        description:
-                          type: string
-                        id:
-                          type: string
-                        name:
-                          type: string
-                        author:
-                          type: object
-                          properties:
-                            description:
-                              type: string
-                            id:
-                              type: string
-                            name:
-                              type: string
-                            image:
-                              $ref: '#/components/schemas/Image'
-                          required:
-                            - 'description'
-                            - 'id'
-                            - 'name'
-                            - 'image'
-                        episodes:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              chapter:
-                                type: number
-                              description:
-                                type: string
-                              id:
-                                type: string
-                              name:
-                                type: string
-                            required:
-                              - 'chapter'
-                              - 'description'
-                              - 'id'
-                              - 'name'
-                        image:
-                          $ref: '#/components/schemas/Image'
-                      required:
-                        - 'description'
-                        - 'id'
-                        - 'name'
-                        - 'author'
-                        - 'episodes'
-                        - 'image'
-                  required:
-                    - 'id'
-                    - 'rank'
-                    - 'book'
+                  $ref: "#/components/schemas/GetRankingsItem"
   /admin/login:
     post:
       tags:
@@ -1600,3 +1539,52 @@ components:
         - 'id'
         - 'page'
         - 'image'
+    GetRankingsItem:
+      type: object
+      properties:
+        id:
+          type: string
+        rank:
+          type: number
+        book:
+          $ref: "#/components/schemas/GetRankingsItemBook"
+      required:
+        - 'id'
+        - 'rank'
+        - 'book'
+    GetRankingsItemBook:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        author:
+          $ref: '#/components/schemas/GetRankingsItemBookAuthor'
+        image:
+          $ref: '#/components/schemas/Image'
+      required:
+        - 'description'
+        - 'id'
+        - 'name'
+        - 'author'
+        - 'image'
+    GetRankingsItemBookAuthor:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        image:
+          $ref: '#/components/schemas/Image'
+      required:
+        - 'description'
+        - 'id'
+        - 'name'
+        - 'image'
+
