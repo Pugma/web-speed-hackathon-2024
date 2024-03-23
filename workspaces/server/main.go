@@ -1,6 +1,8 @@
 package main
 
 import (
+	"Pugma/webspeed2024/db"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -8,5 +10,9 @@ import (
 func main(){
 	e := echo.New()
 	e.Use(middleware.Logger())
-	e.Logger.Fatal(e.Start(":8000"))
+
+	// DBのセットアップ
+	db.SetUp()
+
+	e.Logger.Fatal(e.Start(":8080"))
 }
