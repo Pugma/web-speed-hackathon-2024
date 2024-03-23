@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { GetBooksDetail } from '../models/GetBooksDetail';
 import type { Image } from '../models/Image';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
@@ -9,27 +10,12 @@ export class AppBooksApiService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * @param bookId
-     * @returns any Get book.
+     * @returns GetBooksDetail Get book.
      * @throws ApiError
      */
     public getBooks(
         bookId: string,
-    ): CancelablePromise<{
-        description: string;
-        id: string;
-        name: string;
-        nameRuby: string;
-        author: {
-            description: string;
-            id: string;
-            name: string;
-            image: Image;
-        };
-        episodes: Array<{
-            id: string;
-        }>;
-        image: Image;
-    }> {
+    ): CancelablePromise<GetBooksDetail> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/books/{bookId}',

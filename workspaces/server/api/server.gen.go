@@ -65,6 +65,23 @@ type GetAuthorListItem struct {
 	Name        string `json:"name"`
 }
 
+// GetBooksDetail defines model for GetBooksDetail.
+type GetBooksDetail struct {
+	Author struct {
+		Id    string `json:"id"`
+		Image Image  `json:"image"`
+		Name  string `json:"name"`
+	} `json:"author"`
+	Description string `json:"description"`
+	Episodes    []struct {
+		Id string `json:"id"`
+	} `json:"episodes"`
+	Id       string `json:"id"`
+	Image    Image  `json:"image"`
+	Name     string `json:"name"`
+	NameRuby string `json:"nameRuby"`
+}
+
 // GetEpisodes defines model for GetEpisodes.
 type GetEpisodes struct {
 	Book struct {
@@ -94,32 +111,32 @@ type GetEpisodes struct {
 
 // GetRankingsItem defines model for GetRankingsItem.
 type GetRankingsItem struct {
-	Book GetRankingsItemBook `json:"book"`
-	Id   string              `json:"id"`
-	Rank float32             `json:"rank"`
-}
-
-// GetRankingsItemBook defines model for GetRankingsItemBook.
-type GetRankingsItemBook struct {
-	Author      GetRankingsItemBookAuthor `json:"author"`
-	Description string                    `json:"description"`
-	Id          string                    `json:"id"`
-	Image       Image                     `json:"image"`
-	Name        string                    `json:"name"`
-}
-
-// GetRankingsItemBookAuthor defines model for GetRankingsItemBookAuthor.
-type GetRankingsItemBookAuthor struct {
-	Description string `json:"description"`
-	Id          string `json:"id"`
-	Image       Image  `json:"image"`
-	Name        string `json:"name"`
+	Book RankingsItemBook `json:"book"`
+	Id   string           `json:"id"`
+	Rank float32          `json:"rank"`
 }
 
 // Image defines model for Image.
 type Image struct {
 	Alt string `json:"alt"`
 	Id  string `json:"id"`
+}
+
+// RankingsItemBook defines model for RankingsItemBook.
+type RankingsItemBook struct {
+	Author      RankingsItemBookAuthor `json:"author"`
+	Description string                 `json:"description"`
+	Id          string                 `json:"id"`
+	Image       Image                  `json:"image"`
+	Name        string                 `json:"name"`
+}
+
+// RankingsItemBookAuthor defines model for RankingsItemBookAuthor.
+type RankingsItemBookAuthor struct {
+	Description string `json:"description"`
+	Id          string `json:"id"`
+	Image       Image  `json:"image"`
+	Name        string `json:"name"`
 }
 
 // PostAdminLoginJSONBody defines parameters for PostAdminLogin.
@@ -2684,22 +2701,7 @@ func (r DeleteBooksBookIdResponse) StatusCode() int {
 type GetBooksBookIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
-		Author struct {
-			Description string `json:"description"`
-			Id          string `json:"id"`
-			Image       Image  `json:"image"`
-			Name        string `json:"name"`
-		} `json:"author"`
-		Description string `json:"description"`
-		Episodes    []struct {
-			Id string `json:"id"`
-		} `json:"episodes"`
-		Id       string `json:"id"`
-		Image    Image  `json:"image"`
-		Name     string `json:"name"`
-		NameRuby string `json:"nameRuby"`
-	}
+	JSON200      *GetBooksDetail
 }
 
 // Status returns HTTPResponse.Status
@@ -3917,22 +3919,7 @@ func ParseGetBooksBookIdResponse(rsp *http.Response) (*GetBooksBookIdResponse, e
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Author struct {
-				Description string `json:"description"`
-				Id          string `json:"id"`
-				Image       Image  `json:"image"`
-				Name        string `json:"name"`
-			} `json:"author"`
-			Description string `json:"description"`
-			Episodes    []struct {
-				Id string `json:"id"`
-			} `json:"episodes"`
-			Id       string `json:"id"`
-			Image    Image  `json:"image"`
-			Name     string `json:"name"`
-			NameRuby string `json:"nameRuby"`
-		}
+		var dest GetBooksDetail
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -5164,35 +5151,35 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

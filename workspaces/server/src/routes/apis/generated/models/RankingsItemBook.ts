@@ -3,10 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { Image } from './Image';
-export type GetRankingsItemBookAuthor = {
+import type { RankingsItemBookAuthor } from './RankingsItemBookAuthor';
+export type RankingsItemBook = {
     description: string;
     id: string;
     name: string;
+    author: RankingsItemBookAuthor;
     image: Image;
 };
 

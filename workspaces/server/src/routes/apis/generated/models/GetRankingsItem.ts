@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { GetRankingsItemBook } from './GetRankingsItemBook';
+import type { RankingsItemBook } from './RankingsItemBook';
 export type GetRankingsItem = {
     id: string;
     rank: number;
-    book: GetRankingsItemBook;
+    book: RankingsItemBook;
 };
 
