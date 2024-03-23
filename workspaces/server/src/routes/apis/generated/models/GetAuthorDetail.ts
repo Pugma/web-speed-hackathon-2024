@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { AuthorDetailBooks } from './AuthorDetailBooks';
+import type { AuthorDetailBooksItem } from './AuthorDetailBooksItem';
 export type GetAuthorDetail = {
     description?: string;
     id?: string;
     name?: string;
-    books?: Array<AuthorDetailBooks>;
+    books?: Array<AuthorDetailBooksItem>;
 };
 

@@ -1329,8 +1329,8 @@ components:
         books:
           type: array
           items:
-            $ref: '#/components/schemas/AuthorDetailBooks'
-    AuthorDetailBooks:
+            $ref: '#/components/schemas/AuthorDetailBooksItem'
+    AuthorDetailBooksItem:
       type: object
       properties:
         description:
