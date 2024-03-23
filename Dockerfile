@@ -1,4 +1,4 @@
-FROM node:20.11.1-alpine
+FROM node:20.11.1-alpine as client-build
 
 WORKDIR /usr/src/app
 
@@ -17,5 +17,10 @@ RUN pnpm build
 ENV PORT 8000
 EXPOSE 8000
 
-ENTRYPOINT ["pnpm"]
-CMD ["start"]
+FROM golang:1.22.1-alpine3.19 as server-build
+
+WORKDIR /usr/src/app
+
+RUN cd server && go mod download && go build -o app .
+
+ENTRYPOINT ["./app"]
