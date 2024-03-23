@@ -22,6 +22,7 @@ EXPOSE 8000
 FROM golang:1.22.1-alpine3.19 as server-build
 
 WORKDIR /usr/src/app
+COPY . .
 
 RUN cd workspaces/server && go mod download && go build -o app .
 
