@@ -79,12 +79,9 @@ type GetEpisodes struct {
 		} `json:"author"`
 		Description string `json:"description"`
 		Id          string `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Name     string `json:"name"`
-		NameRuby string `json:"nameRuby"`
+		Image       Image  `json:"image"`
+		Name        string `json:"name"`
+		NameRuby    string `json:"nameRuby"`
 	} `json:"book"`
 	Chapter     float32             `json:"chapter"`
 	Description string              `json:"description"`
@@ -2354,10 +2351,7 @@ type PostAdminLoginResponse struct {
 	JSON200      *struct {
 		Description string `json:"description"`
 		Id          string `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
+		Image       Image  `json:"image"`
 	}
 }
 
@@ -2404,10 +2398,7 @@ type GetAdminMeResponse struct {
 	JSON200      *struct {
 		Description string `json:"description"`
 		Id          string `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
+		Image       Image  `json:"image"`
 	}
 }
 
@@ -2462,19 +2453,13 @@ type PostAuthorsResponse struct {
 				Name        string  `json:"name"`
 			} `json:"episodes"`
 			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image Image  `json:"image"`
+			Name  string `json:"name"`
 		} `json:"books"`
 		Description string `json:"description"`
 		Id          string `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Name string `json:"name"`
+		Image       Image  `json:"image"`
+		Name        string `json:"name"`
 	}
 }
 
@@ -2550,19 +2535,13 @@ type PatchAuthorsAuthorIdResponse struct {
 				Name        string  `json:"name"`
 			} `json:"episodes"`
 			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image Image  `json:"image"`
+			Name  string `json:"name"`
 		} `json:"books"`
 		Description string `json:"description"`
 		Id          string `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Name string `json:"name"`
+		Image       Image  `json:"image"`
+		Name        string `json:"name"`
 	}
 }
 
@@ -2589,21 +2568,15 @@ type GetBooksResponse struct {
 		Author struct {
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image       Image  `json:"image"`
+			Name        string `json:"name"`
 		} `json:"author"`
 		Description string `json:"description"`
 		Episodes    []struct {
 			Id string `json:"id"`
 		} `json:"episodes"`
-		Id    string `json:"id"`
-		Image struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
+		Id       string `json:"id"`
+		Image    Image  `json:"image"`
 		Name     string `json:"name"`
 		NameRuby string `json:"nameRuby"`
 	}
@@ -2632,21 +2605,15 @@ type PostBooksResponse struct {
 		Author struct {
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image       Image  `json:"image"`
+			Name        string `json:"name"`
 		} `json:"author"`
 		Description string `json:"description"`
 		Episodes    []struct {
 			Id string `json:"id"`
 		} `json:"episodes"`
-		Id    string `json:"id"`
-		Image struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
+		Id       string `json:"id"`
+		Image    Image  `json:"image"`
 		Name     string `json:"name"`
 		NameRuby string `json:"nameRuby"`
 	}
@@ -2697,21 +2664,15 @@ type GetBooksBookIdResponse struct {
 		Author struct {
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image       Image  `json:"image"`
+			Name        string `json:"name"`
 		} `json:"author"`
 		Description string `json:"description"`
 		Episodes    []struct {
 			Id string `json:"id"`
 		} `json:"episodes"`
-		Id    string `json:"id"`
-		Image struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
+		Id       string `json:"id"`
+		Image    Image  `json:"image"`
 		Name     string `json:"name"`
 		NameRuby string `json:"nameRuby"`
 	}
@@ -2740,21 +2701,15 @@ type PatchBooksBookIdResponse struct {
 		Author struct {
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image       Image  `json:"image"`
+			Name        string `json:"name"`
 		} `json:"author"`
 		Description string `json:"description"`
 		Episodes    []struct {
 			Id string `json:"id"`
 		} `json:"episodes"`
-		Id    string `json:"id"`
-		Image struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
+		Id       string `json:"id"`
+		Image    Image  `json:"image"`
 		Name     string `json:"name"`
 		NameRuby string `json:"nameRuby"`
 	}
@@ -2780,12 +2735,9 @@ type GetEpisodePagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *[]struct {
-		Id    string `json:"id"`
-		Image struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Page float32 `json:"page"`
+		Id    string  `json:"id"`
+		Image Image   `json:"image"`
+		Page  float32 `json:"page"`
 	}
 }
 
@@ -2809,12 +2761,9 @@ type PostEpisodePagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		Id    string `json:"id"`
-		Image struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Page float32 `json:"page"`
+		Id    string  `json:"id"`
+		Image Image   `json:"image"`
+		Page  float32 `json:"page"`
 	}
 }
 
@@ -2860,12 +2809,9 @@ type PatchEpisodePagesEpisodePageIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		Id    string `json:"id"`
-		Image struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Page float32 `json:"page"`
+		Id    string  `json:"id"`
+		Image Image   `json:"image"`
+		Page  float32 `json:"page"`
 	}
 }
 
@@ -2889,12 +2835,9 @@ type GetEpisodePagesPageIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		Id    string `json:"id"`
-		Image struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Page float32 `json:"page"`
+		Id    string  `json:"id"`
+		Image Image   `json:"image"`
+		Page  float32 `json:"page"`
 	}
 }
 
@@ -2922,37 +2865,25 @@ type GetEpisodesResponse struct {
 			Author struct {
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"author"`
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name     string `json:"name"`
-			NameRuby string `json:"nameRuby"`
+			Image       Image  `json:"image"`
+			Name        string `json:"name"`
+			NameRuby    string `json:"nameRuby"`
 		} `json:"book"`
 		Chapter     float32 `json:"chapter"`
 		Description string  `json:"description"`
 		Id          string  `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Name     string `json:"name"`
-		NameRuby string `json:"nameRuby"`
-		Pages    []struct {
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Page float32 `json:"page"`
+		Image       Image   `json:"image"`
+		Name        string  `json:"name"`
+		NameRuby    string  `json:"nameRuby"`
+		Pages       []struct {
+			Id    string  `json:"id"`
+			Image Image   `json:"image"`
+			Page  float32 `json:"page"`
 		} `json:"pages"`
 	}
 }
@@ -2981,37 +2912,25 @@ type PostEpisodesResponse struct {
 			Author struct {
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"author"`
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name     string `json:"name"`
-			NameRuby string `json:"nameRuby"`
+			Image       Image  `json:"image"`
+			Name        string `json:"name"`
+			NameRuby    string `json:"nameRuby"`
 		} `json:"book"`
 		Chapter     float32 `json:"chapter"`
 		Description string  `json:"description"`
 		Id          string  `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Name     string `json:"name"`
-		NameRuby string `json:"nameRuby"`
-		Pages    []struct {
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Page float32 `json:"page"`
+		Image       Image   `json:"image"`
+		Name        string  `json:"name"`
+		NameRuby    string  `json:"nameRuby"`
+		Pages       []struct {
+			Id    string  `json:"id"`
+			Image Image   `json:"image"`
+			Page  float32 `json:"page"`
 		} `json:"pages"`
 	}
 }
@@ -3084,37 +3003,25 @@ type PatchEpisodesEpisodeIdResponse struct {
 			Author struct {
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"author"`
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name     string `json:"name"`
-			NameRuby string `json:"nameRuby"`
+			Image       Image  `json:"image"`
+			Name        string `json:"name"`
+			NameRuby    string `json:"nameRuby"`
 		} `json:"book"`
 		Chapter     float32 `json:"chapter"`
 		Description string  `json:"description"`
 		Id          string  `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Name     string `json:"name"`
-		NameRuby string `json:"nameRuby"`
-		Pages    []struct {
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Page float32 `json:"page"`
+		Image       Image   `json:"image"`
+		Name        string  `json:"name"`
+		NameRuby    string  `json:"nameRuby"`
+		Pages       []struct {
+			Id    string  `json:"id"`
+			Image Image   `json:"image"`
+			Page  float32 `json:"page"`
 		} `json:"pages"`
 	}
 }
@@ -3143,19 +3050,13 @@ type GetFeaturesResponse struct {
 			Author struct {
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"author"`
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image       Image  `json:"image"`
+			Name        string `json:"name"`
 		} `json:"book"`
 		Id string `json:"id"`
 	}
@@ -3231,11 +3132,8 @@ type GetRankingsResponse struct {
 			Author struct {
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"author"`
 			Description string `json:"description"`
 			Episodes    []struct {
@@ -3245,11 +3143,8 @@ type GetRankingsResponse struct {
 				Name        string  `json:"name"`
 			} `json:"episodes"`
 			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image Image  `json:"image"`
+			Name  string `json:"name"`
 		} `json:"book"`
 		Id   string  `json:"id"`
 		Rank float32 `json:"rank"`
@@ -3305,18 +3200,12 @@ type GetReleasesDayOfWeekResponse struct {
 			Author struct {
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"author"`
 			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image Image  `json:"image"`
+			Name  string `json:"name"`
 		} `json:"books"`
 		DayOfWeek string `json:"dayOfWeek"`
 		Id        string `json:"id"`
@@ -3690,10 +3579,7 @@ func ParsePostAdminLoginResponse(rsp *http.Response) (*PostAdminLoginResponse, e
 		var dest struct {
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
+			Image       Image  `json:"image"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -3739,10 +3625,7 @@ func ParseGetAdminMeResponse(rsp *http.Response) (*GetAdminMeResponse, error) {
 		var dest struct {
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
+			Image       Image  `json:"image"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -3805,19 +3688,13 @@ func ParsePostAuthorsResponse(rsp *http.Response) (*PostAuthorsResponse, error) 
 					Name        string  `json:"name"`
 				} `json:"episodes"`
 				Id    string `json:"id"`
-				Image struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image Image  `json:"image"`
+				Name  string `json:"name"`
 			} `json:"books"`
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image       Image  `json:"image"`
+			Name        string `json:"name"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -3896,19 +3773,13 @@ func ParsePatchAuthorsAuthorIdResponse(rsp *http.Response) (*PatchAuthorsAuthorI
 					Name        string  `json:"name"`
 				} `json:"episodes"`
 				Id    string `json:"id"`
-				Image struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image Image  `json:"image"`
+				Name  string `json:"name"`
 			} `json:"books"`
 			Description string `json:"description"`
 			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
+			Image       Image  `json:"image"`
+			Name        string `json:"name"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -3939,21 +3810,15 @@ func ParseGetBooksResponse(rsp *http.Response) (*GetBooksResponse, error) {
 			Author struct {
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"author"`
 			Description string `json:"description"`
 			Episodes    []struct {
 				Id string `json:"id"`
 			} `json:"episodes"`
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
+			Id       string `json:"id"`
+			Image    Image  `json:"image"`
 			Name     string `json:"name"`
 			NameRuby string `json:"nameRuby"`
 		}
@@ -3986,21 +3851,15 @@ func ParsePostBooksResponse(rsp *http.Response) (*PostBooksResponse, error) {
 			Author struct {
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"author"`
 			Description string `json:"description"`
 			Episodes    []struct {
 				Id string `json:"id"`
 			} `json:"episodes"`
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
+			Id       string `json:"id"`
+			Image    Image  `json:"image"`
 			Name     string `json:"name"`
 			NameRuby string `json:"nameRuby"`
 		}
@@ -4059,21 +3918,15 @@ func ParseGetBooksBookIdResponse(rsp *http.Response) (*GetBooksBookIdResponse, e
 			Author struct {
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"author"`
 			Description string `json:"description"`
 			Episodes    []struct {
 				Id string `json:"id"`
 			} `json:"episodes"`
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
+			Id       string `json:"id"`
+			Image    Image  `json:"image"`
 			Name     string `json:"name"`
 			NameRuby string `json:"nameRuby"`
 		}
@@ -4106,21 +3959,15 @@ func ParsePatchBooksBookIdResponse(rsp *http.Response) (*PatchBooksBookIdRespons
 			Author struct {
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"author"`
 			Description string `json:"description"`
 			Episodes    []struct {
 				Id string `json:"id"`
 			} `json:"episodes"`
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
+			Id       string `json:"id"`
+			Image    Image  `json:"image"`
 			Name     string `json:"name"`
 			NameRuby string `json:"nameRuby"`
 		}
@@ -4150,12 +3997,9 @@ func ParseGetEpisodePagesResponse(rsp *http.Response) (*GetEpisodePagesResponse,
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest []struct {
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Page float32 `json:"page"`
+			Id    string  `json:"id"`
+			Image Image   `json:"image"`
+			Page  float32 `json:"page"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -4183,12 +4027,9 @@ func ParsePostEpisodePagesResponse(rsp *http.Response) (*PostEpisodePagesRespons
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Page float32 `json:"page"`
+			Id    string  `json:"id"`
+			Image Image   `json:"image"`
+			Page  float32 `json:"page"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -4242,12 +4083,9 @@ func ParsePatchEpisodePagesEpisodePageIdResponse(rsp *http.Response) (*PatchEpis
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Page float32 `json:"page"`
+			Id    string  `json:"id"`
+			Image Image   `json:"image"`
+			Page  float32 `json:"page"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -4275,12 +4113,9 @@ func ParseGetEpisodePagesPageIdResponse(rsp *http.Response) (*GetEpisodePagesPag
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Page float32 `json:"page"`
+			Id    string  `json:"id"`
+			Image Image   `json:"image"`
+			Page  float32 `json:"page"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -4312,37 +4147,25 @@ func ParseGetEpisodesResponse(rsp *http.Response) (*GetEpisodesResponse, error) 
 				Author struct {
 					Description string `json:"description"`
 					Id          string `json:"id"`
-					Image       struct {
-						Alt string `json:"alt"`
-						Id  string `json:"id"`
-					} `json:"image"`
-					Name string `json:"name"`
+					Image       Image  `json:"image"`
+					Name        string `json:"name"`
 				} `json:"author"`
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name     string `json:"name"`
-				NameRuby string `json:"nameRuby"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
+				NameRuby    string `json:"nameRuby"`
 			} `json:"book"`
 			Chapter     float32 `json:"chapter"`
 			Description string  `json:"description"`
 			Id          string  `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name     string `json:"name"`
-			NameRuby string `json:"nameRuby"`
-			Pages    []struct {
-				Id    string `json:"id"`
-				Image struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Page float32 `json:"page"`
+			Image       Image   `json:"image"`
+			Name        string  `json:"name"`
+			NameRuby    string  `json:"nameRuby"`
+			Pages       []struct {
+				Id    string  `json:"id"`
+				Image Image   `json:"image"`
+				Page  float32 `json:"page"`
 			} `json:"pages"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -4375,37 +4198,25 @@ func ParsePostEpisodesResponse(rsp *http.Response) (*PostEpisodesResponse, error
 				Author struct {
 					Description string `json:"description"`
 					Id          string `json:"id"`
-					Image       struct {
-						Alt string `json:"alt"`
-						Id  string `json:"id"`
-					} `json:"image"`
-					Name string `json:"name"`
+					Image       Image  `json:"image"`
+					Name        string `json:"name"`
 				} `json:"author"`
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name     string `json:"name"`
-				NameRuby string `json:"nameRuby"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
+				NameRuby    string `json:"nameRuby"`
 			} `json:"book"`
 			Chapter     float32 `json:"chapter"`
 			Description string  `json:"description"`
 			Id          string  `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name     string `json:"name"`
-			NameRuby string `json:"nameRuby"`
-			Pages    []struct {
-				Id    string `json:"id"`
-				Image struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Page float32 `json:"page"`
+			Image       Image   `json:"image"`
+			Name        string  `json:"name"`
+			NameRuby    string  `json:"nameRuby"`
+			Pages       []struct {
+				Id    string  `json:"id"`
+				Image Image   `json:"image"`
+				Page  float32 `json:"page"`
 			} `json:"pages"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -4490,37 +4301,25 @@ func ParsePatchEpisodesEpisodeIdResponse(rsp *http.Response) (*PatchEpisodesEpis
 				Author struct {
 					Description string `json:"description"`
 					Id          string `json:"id"`
-					Image       struct {
-						Alt string `json:"alt"`
-						Id  string `json:"id"`
-					} `json:"image"`
-					Name string `json:"name"`
+					Image       Image  `json:"image"`
+					Name        string `json:"name"`
 				} `json:"author"`
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name     string `json:"name"`
-				NameRuby string `json:"nameRuby"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
+				NameRuby    string `json:"nameRuby"`
 			} `json:"book"`
 			Chapter     float32 `json:"chapter"`
 			Description string  `json:"description"`
 			Id          string  `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name     string `json:"name"`
-			NameRuby string `json:"nameRuby"`
-			Pages    []struct {
-				Id    string `json:"id"`
-				Image struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Page float32 `json:"page"`
+			Image       Image   `json:"image"`
+			Name        string  `json:"name"`
+			NameRuby    string  `json:"nameRuby"`
+			Pages       []struct {
+				Id    string  `json:"id"`
+				Image Image   `json:"image"`
+				Page  float32 `json:"page"`
 			} `json:"pages"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -4553,19 +4352,13 @@ func ParseGetFeaturesResponse(rsp *http.Response) (*GetFeaturesResponse, error) 
 				Author struct {
 					Description string `json:"description"`
 					Id          string `json:"id"`
-					Image       struct {
-						Alt string `json:"alt"`
-						Id  string `json:"id"`
-					} `json:"image"`
-					Name string `json:"name"`
+					Image       Image  `json:"image"`
+					Name        string `json:"name"`
 				} `json:"author"`
 				Description string `json:"description"`
 				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image       Image  `json:"image"`
+				Name        string `json:"name"`
 			} `json:"book"`
 			Id string `json:"id"`
 		}
@@ -4644,11 +4437,8 @@ func ParseGetRankingsResponse(rsp *http.Response) (*GetRankingsResponse, error) 
 				Author struct {
 					Description string `json:"description"`
 					Id          string `json:"id"`
-					Image       struct {
-						Alt string `json:"alt"`
-						Id  string `json:"id"`
-					} `json:"image"`
-					Name string `json:"name"`
+					Image       Image  `json:"image"`
+					Name        string `json:"name"`
 				} `json:"author"`
 				Description string `json:"description"`
 				Episodes    []struct {
@@ -4658,11 +4448,8 @@ func ParseGetRankingsResponse(rsp *http.Response) (*GetRankingsResponse, error) 
 					Name        string  `json:"name"`
 				} `json:"episodes"`
 				Id    string `json:"id"`
-				Image struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image Image  `json:"image"`
+				Name  string `json:"name"`
 			} `json:"book"`
 			Id   string  `json:"id"`
 			Rank float32 `json:"rank"`
@@ -4726,18 +4513,12 @@ func ParseGetReleasesDayOfWeekResponse(rsp *http.Response) (*GetReleasesDayOfWee
 				Author struct {
 					Description string `json:"description"`
 					Id          string `json:"id"`
-					Image       struct {
-						Alt string `json:"alt"`
-						Id  string `json:"id"`
-					} `json:"image"`
-					Name string `json:"name"`
+					Image       Image  `json:"image"`
+					Name        string `json:"name"`
 				} `json:"author"`
 				Id    string `json:"id"`
-				Image struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
+				Image Image  `json:"image"`
+				Name  string `json:"name"`
 			} `json:"books"`
 			DayOfWeek string `json:"dayOfWeek"`
 			Id        string `json:"id"`
@@ -5401,35 +5182,34 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

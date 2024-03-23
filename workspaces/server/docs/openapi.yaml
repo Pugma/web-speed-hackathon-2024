@@ -120,15 +120,7 @@ paths:
                               - 'id'
                               - 'name'
                         image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
+                          $ref: '#/components/schemas/Image'
                       required:
                         - 'description'
                         - 'id'
@@ -136,15 +128,7 @@ paths:
                         - 'episodes'
                         - 'image'
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                 required:
                   - 'description'
                   - 'id'
@@ -191,7 +175,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/GetAuthorListItem"
+                  $ref: '#/components/schemas/GetAuthorListItem'
     post:
       tags:
         - '[Admin] Authors API'
@@ -255,15 +239,7 @@ paths:
                               - 'id'
                               - 'name'
                         image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
+                          $ref: '#/components/schemas/Image'
                       required:
                         - 'description'
                         - 'id'
@@ -271,15 +247,7 @@ paths:
                         - 'episodes'
                         - 'image'
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                 required:
                   - 'description'
                   - 'id'
@@ -302,7 +270,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetEpisodes"
+                $ref: '#/components/schemas/GetEpisodes'
     patch:
       tags:
         - '[Admin] Episodes API'
@@ -369,30 +337,14 @@ paths:
                           name:
                             type: string
                           image:
-                            type: object
-                            properties:
-                              alt:
-                                type: string
-                              id:
-                                type: string
-                            required:
-                              - 'alt'
-                              - 'id'
+                            $ref: '#/components/schemas/Image'
                         required:
                           - 'description'
                           - 'id'
                           - 'name'
                           - 'image'
                       image:
-                        type: object
-                        properties:
-                          alt:
-                            type: string
-                          id:
-                            type: string
-                        required:
-                          - 'alt'
-                          - 'id'
+                        $ref: '#/components/schemas/Image'
                     required:
                       - 'description'
                       - 'id'
@@ -401,15 +353,7 @@ paths:
                       - 'author'
                       - 'image'
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                   pages:
                     type: array
                     items:
@@ -420,15 +364,7 @@ paths:
                         page:
                           type: number
                         image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
+                          $ref: '#/components/schemas/Image'
                       required:
                         - 'id'
                         - 'page'
@@ -520,30 +456,14 @@ paths:
                             name:
                               type: string
                             image:
-                              type: object
-                              properties:
-                                alt:
-                                  type: string
-                                id:
-                                  type: string
-                              required:
-                                - 'alt'
-                                - 'id'
+                              $ref: '#/components/schemas/Image'
                           required:
                             - 'description'
                             - 'id'
                             - 'name'
                             - 'image'
                         image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
+                          $ref: '#/components/schemas/Image'
                       required:
                         - 'description'
                         - 'id'
@@ -552,15 +472,7 @@ paths:
                         - 'author'
                         - 'image'
                     image:
-                      type: object
-                      properties:
-                        alt:
-                          type: string
-                        id:
-                          type: string
-                      required:
-                        - 'alt'
-                        - 'id'
+                      $ref: '#/components/schemas/Image'
                     pages:
                       type: array
                       items:
@@ -571,15 +483,7 @@ paths:
                           page:
                             type: number
                           image:
-                            type: object
-                            properties:
-                              alt:
-                                type: string
-                              id:
-                                type: string
-                            required:
-                              - 'alt'
-                              - 'id'
+                            $ref: '#/components/schemas/Image'
                         required:
                           - 'id'
                           - 'page'
@@ -660,30 +564,14 @@ paths:
                           name:
                             type: string
                           image:
-                            type: object
-                            properties:
-                              alt:
-                                type: string
-                              id:
-                                type: string
-                            required:
-                              - 'alt'
-                              - 'id'
+                            $ref: '#/components/schemas/Image'
                         required:
                           - 'description'
                           - 'id'
                           - 'name'
                           - 'image'
                       image:
-                        type: object
-                        properties:
-                          alt:
-                            type: string
-                          id:
-                            type: string
-                        required:
-                          - 'alt'
-                          - 'id'
+                        $ref: '#/components/schemas/Image'
                     required:
                       - 'description'
                       - 'id'
@@ -692,15 +580,7 @@ paths:
                       - 'author'
                       - 'image'
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                   pages:
                     type: array
                     items:
@@ -711,15 +591,7 @@ paths:
                         page:
                           type: number
                         image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
+                          $ref: '#/components/schemas/Image'
                       required:
                         - 'id'
                         - 'page'
@@ -769,15 +641,7 @@ paths:
                       name:
                         type: string
                       image:
-                        type: object
-                        properties:
-                          alt:
-                            type: string
-                          id:
-                            type: string
-                        required:
-                          - 'alt'
-                          - 'id'
+                        $ref: '#/components/schemas/Image'
                     required:
                       - 'description'
                       - 'id'
@@ -793,15 +657,7 @@ paths:
                       required:
                         - 'id'
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                 required:
                   - 'description'
                   - 'id'
@@ -863,15 +719,7 @@ paths:
                       name:
                         type: string
                       image:
-                        type: object
-                        properties:
-                          alt:
-                            type: string
-                          id:
-                            type: string
-                        required:
-                          - 'alt'
-                          - 'id'
+                        $ref: '#/components/schemas/Image'
                     required:
                       - 'description'
                       - 'id'
@@ -887,15 +735,7 @@ paths:
                       required:
                         - 'id'
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                 required:
                   - 'description'
                   - 'id'
@@ -979,15 +819,7 @@ paths:
                         name:
                           type: string
                         image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
+                          $ref: '#/components/schemas/Image'
                       required:
                         - 'description'
                         - 'id'
@@ -1003,15 +835,7 @@ paths:
                         required:
                           - 'id'
                     image:
-                      type: object
-                      properties:
-                        alt:
-                          type: string
-                        id:
-                          type: string
-                      required:
-                        - 'alt'
-                        - 'id'
+                      $ref: '#/components/schemas/Image'
                   required:
                     - 'description'
                     - 'id'
@@ -1074,15 +898,7 @@ paths:
                       name:
                         type: string
                       image:
-                        type: object
-                        properties:
-                          alt:
-                            type: string
-                          id:
-                            type: string
-                        required:
-                          - 'alt'
-                          - 'id'
+                        $ref: '#/components/schemas/Image'
                     required:
                       - 'description'
                       - 'id'
@@ -1098,15 +914,7 @@ paths:
                       required:
                         - 'id'
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                 required:
                   - 'description'
                   - 'id'
@@ -1138,15 +946,7 @@ paths:
                   page:
                     type: number
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                 required:
                   - 'id'
                   - 'page'
@@ -1186,15 +986,7 @@ paths:
                     page:
                       type: number
                     image:
-                      type: object
-                      properties:
-                        alt:
-                          type: string
-                        id:
-                          type: string
-                      required:
-                        - 'alt'
-                        - 'id'
+                      $ref: '#/components/schemas/Image'
                   required:
                     - 'id'
                     - 'page'
@@ -1233,15 +1025,7 @@ paths:
                   page:
                     type: number
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                 required:
                   - 'id'
                   - 'page'
@@ -1283,15 +1067,7 @@ paths:
                   page:
                     type: number
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                 required:
                   - 'id'
                   - 'page'
@@ -1391,30 +1167,14 @@ paths:
                             name:
                               type: string
                             image:
-                              type: object
-                              properties:
-                                alt:
-                                  type: string
-                                id:
-                                  type: string
-                              required:
-                                - 'alt'
-                                - 'id'
+                              $ref: '#/components/schemas/Image'
                           required:
                             - 'description'
                             - 'id'
                             - 'name'
                             - 'image'
                         image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
+                          $ref: '#/components/schemas/Image'
                       required:
                         - 'description'
                         - 'id'
@@ -1465,30 +1225,14 @@ paths:
                             name:
                               type: string
                             image:
-                              type: object
-                              properties:
-                                alt:
-                                  type: string
-                                id:
-                                  type: string
-                              required:
-                                - 'alt'
-                                - 'id'
+                              $ref: '#/components/schemas/Image'
                           required:
                             - 'description'
                             - 'id'
                             - 'name'
                             - 'image'
                         image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
+                          $ref: '#/components/schemas/Image'
                       required:
                         - 'id'
                         - 'name'
@@ -1567,15 +1311,7 @@ paths:
                             name:
                               type: string
                             image:
-                              type: object
-                              properties:
-                                alt:
-                                  type: string
-                                id:
-                                  type: string
-                              required:
-                                - 'alt'
-                                - 'id'
+                              $ref: '#/components/schemas/Image'
                           required:
                             - 'description'
                             - 'id'
@@ -1600,15 +1336,7 @@ paths:
                               - 'id'
                               - 'name'
                         image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
+                          $ref: '#/components/schemas/Image'
                       required:
                         - 'description'
                         - 'id'
@@ -1650,15 +1378,7 @@ paths:
                   id:
                     type: string
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                 required:
                   - 'description'
                   - 'id'
@@ -1670,11 +1390,6 @@ paths:
       responses:
         200:
           description: 'Logout.'
-          # content:
-          #   application/json:
-          #     schema:
-          #       type: object
-          #       properties:
   /admin/me:
     get:
       tags:
@@ -1692,15 +1407,7 @@ paths:
                   id:
                     type: string
                   image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
+                    $ref: '#/components/schemas/Image'
                 required:
                   - 'description'
                   - 'id'
@@ -1798,7 +1505,7 @@ components:
                     - 'id'
                     - 'name'
               image:
-                $ref: "#/components/schemas/Image"
+                $ref: '#/components/schemas/Image'
             required:
               - 'description'
               - 'id'
@@ -1806,7 +1513,7 @@ components:
               - 'episodes'
               - 'image'
         image:
-          $ref: "#/components/schemas/Image"
+          $ref: '#/components/schemas/Image'
       required:
         - 'description'
         - 'id'
@@ -1862,15 +1569,7 @@ components:
                 - 'name'
                 - 'image'
             image:
-              type: object
-              properties:
-                alt:
-                  type: string
-                id:
-                  type: string
-              required:
-                - 'alt'
-                - 'id'
+              $ref: '#/components/schemas/Image'
           required:
             - 'description'
             - 'id'
@@ -1879,11 +1578,11 @@ components:
             - 'author'
             - 'image'
         image:
-          $ref: "#/components/schemas/Image"
+          $ref: '#/components/schemas/Image'
         pages:
           type: array
           items:
-            $ref: "#/components/schemas/EpisodesPagesItem"
+            $ref: '#/components/schemas/EpisodesPagesItem'
       required:
         - 'chapter'
         - 'description'
@@ -1901,9 +1600,8 @@ components:
         page:
           type: number
         image:
-          $ref: "#/components/schemas/Image"
+          $ref: '#/components/schemas/Image'
       required:
         - 'id'
         - 'page'
         - 'image'
-
