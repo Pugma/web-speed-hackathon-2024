@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { Image } from '../models/Image';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class AppFeaturesApiService {
@@ -25,15 +26,9 @@ export class AppFeaturesApiService {
                 description: string;
                 id: string;
                 name: string;
-                image: {
-                    alt: string;
-                    id: string;
-                };
+                image: Image;
             };
-            image: {
-                alt: string;
-                id: string;
-            };
+            image: Image;
         };
     }>> {
         return this.httpRequest.request({

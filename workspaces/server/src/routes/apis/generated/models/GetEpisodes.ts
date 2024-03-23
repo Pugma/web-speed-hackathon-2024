@@ -24,10 +24,7 @@ export type GetEpisodes = {
                 id: string;
             };
         };
-        image: {
-            alt: string;
-            id: string;
-        };
+        image: Image;
     };
     image: Image;
     pages: Array<EpisodesPagesItem>;

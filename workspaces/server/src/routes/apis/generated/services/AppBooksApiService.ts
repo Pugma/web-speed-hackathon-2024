@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { Image } from '../models/Image';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class AppBooksApiService {
@@ -22,18 +23,12 @@ export class AppBooksApiService {
             description: string;
             id: string;
             name: string;
-            image: {
-                alt: string;
-                id: string;
-            };
+            image: Image;
         };
         episodes: Array<{
             id: string;
         }>;
-        image: {
-            alt: string;
-            id: string;
-        };
+        image: Image;
     }> {
         return this.httpRequest.request({
             method: 'GET',
@@ -67,18 +62,12 @@ export class AppBooksApiService {
             description: string;
             id: string;
             name: string;
-            image: {
-                alt: string;
-                id: string;
-            };
+            image: Image;
         };
         episodes: Array<{
             id: string;
         }>;
-        image: {
-            alt: string;
-            id: string;
-        };
+        image: Image;
     }>> {
         return this.httpRequest.request({
             method: 'GET',
