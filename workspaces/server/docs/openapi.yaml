@@ -1,0 +1,1963 @@
+openapi: 3.0.3
+
+info:
+  title: API Docs
+  version: 1.0.0
+
+tags:
+  - name: '[App] Authors API'
+    description: aaa
+  - name: '[Admin] Authors API'
+    description: aaa
+  - name: '[App] Episodes API'
+    description: aaa
+  - name: '[Admin] Episodes API'
+    description: aaa
+  - name: '[App] Episode Pages API'
+    description: aaa
+  - name: '[Admin] Episode Pages API'
+    description: aaa
+  - name: '[Admin] Images API'
+    description: aaa
+  - name: '[App] Features API'
+    description: aaa
+  - name: '[App] Books API'
+    description: aaa
+  - name: '[Admin] Books API'
+    description: aaa
+  - name: '[App] Releases API'
+    description: aaa
+  - name: '[App] Rankings API'
+    description: aaa
+  - name: '[Admin] Auth API'
+    description: aaa
+  - name: '[Internal] Internal API'
+    description: aaa
+
+paths:
+  /api/v1/authors/{authorId}:
+    get:
+      tags:
+        - '[App] Authors API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'authorId'
+          in: 'path'
+      responses:
+        200:
+          description: 'Get author.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  books:
+                    type: 'array'
+                    items:
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        episodes:
+                          type: 'array'
+                          items:
+                            type: object
+                            properties:
+                              chapter:
+                                type: number
+                              description:
+                                type: string
+                              id:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                              - 'chapter'
+                              - 'description'
+                              - 'id'
+                              - 'name'
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'description'
+                        - 'id'
+                        - 'name'
+                        - 'episodes'
+                        - 'image'
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'description'
+                  - 'id'
+                  - 'name'
+                  - 'books'
+                  - 'image'
+    patch:
+      tags:
+        - '[Admin] Authors API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'authorId'
+          in: 'path'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                imageId:
+                  type: string
+                name:
+                  type: string
+      responses:
+        200:
+          description: 'Update author.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  books:
+                    type: 'array'
+                    items:
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        episodes:
+                          type: 'array'
+                          items:
+                            type: object
+                            properties:
+                              chapter:
+                                type: number
+                              description:
+                                type: string
+                              id:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                              - 'chapter'
+                              - 'description'
+                              - 'id'
+                              - 'name'
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'description'
+                        - 'id'
+                        - 'name'
+                        - 'episodes'
+                        - 'image'
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'description'
+                  - 'id'
+                  - 'name'
+                  - 'books'
+                  - 'image'
+    delete:
+      tags:
+        - '[Admin] Authors API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'authorId'
+          in: 'path'
+      responses:
+        200:
+          description: 'Delete author.'
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  /api/v1/authors:
+    get:
+      tags:
+        - '[App] Authors API'
+      parameters:
+        - in: query
+          schema:
+            type: number
+          required: false
+          name: 'limit'
+        - in: query
+          schema:
+            type: string
+          required: false
+          name: 'name'
+        - in: query
+          schema:
+            type: number
+          required: false
+          name: 'offset'
+      responses:
+        200:
+          description: 'Get author list.'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    books:
+                      type: 'array'
+                      items:
+                        type: object
+                        properties:
+                          description:
+                            type: string
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          episodes:
+                            type: 'array'
+                            items:
+                              type: object
+                              properties:
+                                chapter:
+                                  type: number
+                                description:
+                                  type: string
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                              required:
+                                - 'chapter'
+                                - 'description'
+                                - 'id'
+                                - 'name'
+                          image:
+                            type: object
+                            properties:
+                              alt:
+                                type: string
+                              id:
+                                type: string
+                            required:
+                              - 'alt'
+                              - 'id'
+                        required:
+                          - 'description'
+                          - 'id'
+                          - 'name'
+                          - 'episodes'
+                          - 'image'
+                    image:
+                      type: object
+                      properties:
+                        alt:
+                          type: string
+                        id:
+                          type: string
+                      required:
+                        - 'alt'
+                        - 'id'
+                  required:
+                    - 'description'
+                    - 'id'
+                    - 'name'
+                    - 'books'
+                    - 'image'
+    post:
+      tags:
+        - '[Admin] Authors API'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                imageId:
+                  type: string
+                name:
+                  type: string
+              required:
+                - 'description'
+                - 'imageId'
+                - 'name'
+      responses:
+        200:
+          description: 'Create author.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  books:
+                    type: 'array'
+                    items:
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        episodes:
+                          type: 'array'
+                          items:
+                            type: object
+                            properties:
+                              chapter:
+                                type: number
+                              description:
+                                type: string
+                              id:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                              - 'chapter'
+                              - 'description'
+                              - 'id'
+                              - 'name'
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'description'
+                        - 'id'
+                        - 'name'
+                        - 'episodes'
+                        - 'image'
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'description'
+                  - 'id'
+                  - 'name'
+                  - 'books'
+                  - 'image'
+  /api/v1/episodes/{episodeId}:
+    get:
+      tags:
+        - '[App] Episodes API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'episodeId'
+          in: 'path'
+      responses:
+        200:
+          description: 'Get episode.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chapter:
+                    type: number
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  nameRuby:
+                    type: string
+                  book:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      nameRuby:
+                        type: string
+                      author:
+                        type: object
+                        properties:
+                          description:
+                            type: string
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          image:
+                            type: object
+                            properties:
+                              alt:
+                                type: string
+                              id:
+                                type: string
+                            required:
+                              - 'alt'
+                              - 'id'
+                        required:
+                          - 'description'
+                          - 'id'
+                          - 'name'
+                          - 'image'
+                      image:
+                        type: object
+                        properties:
+                          alt:
+                            type: string
+                          id:
+                            type: string
+                        required:
+                          - 'alt'
+                          - 'id'
+                    required:
+                      - 'description'
+                      - 'id'
+                      - 'name'
+                      - 'nameRuby'
+                      - 'author'
+                      - 'image'
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                  pages:
+                    type: 'array'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        page:
+                          type: number
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'id'
+                        - 'page'
+                        - 'image'
+                required:
+                  - 'chapter'
+                  - 'description'
+                  - 'id'
+                  - 'name'
+                  - 'nameRuby'
+                  - 'book'
+                  - 'image'
+                  - 'pages'
+    patch:
+      tags:
+        - '[Admin] Episodes API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'episodeId'
+          in: 'path'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookId:
+                  type: string
+                chapter:
+                  type: number
+                description:
+                  type: string
+                imageId:
+                  type: string
+                name:
+                  type: string
+                nameRuby:
+                  type: string
+      responses:
+        200:
+          description: 'Update episode.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chapter:
+                    type: number
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  nameRuby:
+                    type: string
+                  book:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      nameRuby:
+                        type: string
+                      author:
+                        type: object
+                        properties:
+                          description:
+                            type: string
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          image:
+                            type: object
+                            properties:
+                              alt:
+                                type: string
+                              id:
+                                type: string
+                            required:
+                              - 'alt'
+                              - 'id'
+                        required:
+                          - 'description'
+                          - 'id'
+                          - 'name'
+                          - 'image'
+                      image:
+                        type: object
+                        properties:
+                          alt:
+                            type: string
+                          id:
+                            type: string
+                        required:
+                          - 'alt'
+                          - 'id'
+                    required:
+                      - 'description'
+                      - 'id'
+                      - 'name'
+                      - 'nameRuby'
+                      - 'author'
+                      - 'image'
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                  pages:
+                    type: 'array'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        page:
+                          type: number
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'id'
+                        - 'page'
+                        - 'image'
+                required:
+                  - 'chapter'
+                  - 'description'
+                  - 'id'
+                  - 'name'
+                  - 'nameRuby'
+                  - 'book'
+                  - 'image'
+                  - 'pages'
+    delete:
+      tags:
+        - '[Admin] Episodes API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'episodeId'
+          in: 'path'
+      responses:
+        200:
+          description: 'Get episode list.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+  /api/v1/episodes:
+    get:
+      tags:
+        - '[App] Episodes API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'bookId'
+          in: 'query'
+        - schema:
+            type: number
+          required: false
+          name: 'limit'
+          in: 'query'
+        - schema:
+            type: number
+          required: false
+          name: 'offset'
+          in: 'query'
+      responses:
+        200:
+          description: 'Get episode.'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  type: object
+                  properties:
+                    chapter:
+                      type: number
+                    description:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    nameRuby:
+                      type: string
+                    book:
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        nameRuby:
+                          type: string
+                        author:
+                          type: object
+                          properties:
+                            description:
+                              type: string
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            image:
+                              type: object
+                              properties:
+                                alt:
+                                  type: string
+                                id:
+                                  type: string
+                              required:
+                                - 'alt'
+                                - 'id'
+                          required:
+                            - 'description'
+                            - 'id'
+                            - 'name'
+                            - 'image'
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'description'
+                        - 'id'
+                        - 'name'
+                        - 'nameRuby'
+                        - 'author'
+                        - 'image'
+                    image:
+                      type: object
+                      properties:
+                        alt:
+                          type: string
+                        id:
+                          type: string
+                      required:
+                        - 'alt'
+                        - 'id'
+                    pages:
+                      type: 'array'
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          page:
+                            type: number
+                          image:
+                            type: object
+                            properties:
+                              alt:
+                                type: string
+                              id:
+                                type: string
+                            required:
+                              - 'alt'
+                              - 'id'
+                        required:
+                          - 'id'
+                          - 'page'
+                          - 'image'
+                  required:
+                    - 'chapter'
+                    - 'description'
+                    - 'id'
+                    - 'name'
+                    - 'nameRuby'
+                    - 'book'
+                    - 'image'
+                    - 'pages'
+    post:
+      tags:
+        - '[Admin] Episodes API'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookId:
+                  type: string
+                chapter:
+                  type: number
+                description:
+                  type: string
+                imageId:
+                  type: string
+                name:
+                  type: string
+                nameRuby:
+                  type: string
+              required:
+                - 'bookId'
+                - 'chapter'
+                - 'description'
+                - 'imageId'
+                - 'name'
+                - 'nameRuby'
+      responses:
+        200:
+          description: 'Create episode.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chapter:
+                    type: number
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  nameRuby:
+                    type: string
+                  book:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      nameRuby:
+                        type: string
+                      author:
+                        type: object
+                        properties:
+                          description:
+                            type: string
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          image:
+                            type: object
+                            properties:
+                              alt:
+                                type: string
+                              id:
+                                type: string
+                            required:
+                              - 'alt'
+                              - 'id'
+                        required:
+                          - 'description'
+                          - 'id'
+                          - 'name'
+                          - 'image'
+                      image:
+                        type: object
+                        properties:
+                          alt:
+                            type: string
+                          id:
+                            type: string
+                        required:
+                          - 'alt'
+                          - 'id'
+                    required:
+                      - 'description'
+                      - 'id'
+                      - 'name'
+                      - 'nameRuby'
+                      - 'author'
+                      - 'image'
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                  pages:
+                    type: 'array'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        page:
+                          type: number
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'id'
+                        - 'page'
+                        - 'image'
+                required:
+                  - 'chapter'
+                  - 'description'
+                  - 'id'
+                  - 'name'
+                  - 'nameRuby'
+                  - 'book'
+                  - 'image'
+                  - 'pages'
+  /api/v1/books/{bookId}:
+    get:
+      tags:
+        - '[App] Books API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'bookId'
+          in: 'path'
+      responses:
+        200:
+          description: 'Get book.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  nameRuby:
+                    type: string
+                  author:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      image:
+                        type: object
+                        properties:
+                          alt:
+                            type: string
+                          id:
+                            type: string
+                        required:
+                          - 'alt'
+                          - 'id'
+                    required:
+                      - 'description'
+                      - 'id'
+                      - 'name'
+                      - 'image'
+                  episodes:
+                    type: 'array'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                      required:
+                        - 'id'
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'description'
+                  - 'id'
+                  - 'name'
+                  - 'nameRuby'
+                  - 'author'
+                  - 'episodes'
+                  - 'image'
+    patch:
+      tags:
+        - '[Admin] Books API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'bookId'
+          in: 'path'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                authorId:
+                  type: string
+                description:
+                  type: string
+                imageId:
+                  type: string
+                name:
+                  type: string
+                nameRuby:
+                  type: string
+                releaseId:
+                  type: string
+      responses:
+        200:
+          description: 'Update book.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  nameRuby:
+                    type: string
+                  author:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      image:
+                        type: object
+                        properties:
+                          alt:
+                            type: string
+                          id:
+                            type: string
+                        required:
+                          - 'alt'
+                          - 'id'
+                    required:
+                      - 'description'
+                      - 'id'
+                      - 'name'
+                      - 'image'
+                  episodes:
+                    type: 'array'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                      required:
+                        - 'id'
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'description'
+                  - 'id'
+                  - 'name'
+                  - 'nameRuby'
+                  - 'author'
+                  - 'episodes'
+                  - 'image'
+    delete:
+      tags:
+        - '[Admin] Books API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'bookId'
+          in: 'path'
+      responses:
+        200:
+          description: 'Delete book.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+  /api/v1/books:
+    get:
+      tags:
+        - '[App] Books API'
+      parameters:
+        - schema:
+            type: string
+          required: false
+          name: 'authorId'
+          in: 'query'
+        - schema:
+            type: string
+          required: false
+          name: 'authorName'
+          in: 'query'
+        - schema:
+            type: number
+          required: false
+          name: 'limit'
+          in: 'query'
+        - schema:
+            type: string
+          required: false
+          name: 'name'
+          in: 'query'
+        - schema:
+            type: number
+          required: false
+          name: 'offset'
+          in: 'query'
+      responses:
+        200:
+          description: 'Get book list.'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    nameRuby:
+                      type: string
+                    author:
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'description'
+                        - 'id'
+                        - 'name'
+                        - 'image'
+                    episodes:
+                      type: 'array'
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                        required:
+                          - 'id'
+                    image:
+                      type: object
+                      properties:
+                        alt:
+                          type: string
+                        id:
+                          type: string
+                      required:
+                        - 'alt'
+                        - 'id'
+                  required:
+                    - 'description'
+                    - 'id'
+                    - 'name'
+                    - 'nameRuby'
+                    - 'author'
+                    - 'episodes'
+                    - 'image'
+    post:
+      tags:
+        - '[Admin] Books API'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                authorId:
+                  type: string
+                description:
+                  type: string
+                imageId:
+                  type: string
+                name:
+                  type: string
+                nameRuby:
+                  type: string
+                releaseId:
+                  type: string
+              required:
+                - 'authorId'
+                - 'description'
+                - 'imageId'
+                - 'name'
+                - 'nameRuby'
+                - 'releaseId'
+      responses:
+        200:
+          description: 'Create book.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  nameRuby:
+                    type: string
+                  author:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      image:
+                        type: object
+                        properties:
+                          alt:
+                            type: string
+                          id:
+                            type: string
+                        required:
+                          - 'alt'
+                          - 'id'
+                    required:
+                      - 'description'
+                      - 'id'
+                      - 'name'
+                      - 'image'
+                  episodes:
+                    type: 'array'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                      required:
+                        - 'id'
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'description'
+                  - 'id'
+                  - 'name'
+                  - 'nameRuby'
+                  - 'author'
+                  - 'episodes'
+                  - 'image'
+  /api/v1/episodePages/{pageId}:
+    get:
+      tags:
+        - '[App] Episode Pages API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'pageId'
+          in: 'path'
+      responses:
+        200:
+          description: 'Get episode page.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  page:
+                    type: number
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'id'
+                  - 'page'
+                  - 'image'
+  /api/v1/episodePages:
+    get:
+      tags:
+        - '[App] Episode Pages API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'episodeId'
+          in: 'query'
+        - schema:
+            type: number
+          required: false
+          name: 'limit'
+          in: 'query'
+        - schema:
+            type: number
+          required: false
+          name: 'offset'
+          in: 'query'
+      responses:
+        200:
+          description: 'Get episode page list.'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    page:
+                      type: number
+                    image:
+                      type: object
+                      properties:
+                        alt:
+                          type: string
+                        id:
+                          type: string
+                      required:
+                        - 'alt'
+                        - 'id'
+                  required:
+                    - 'id'
+                    - 'page'
+                    - 'image'
+    post:
+      tags:
+        - '[Admin] Episode Pages API'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                episodeId:
+                  type: string
+                id:
+                  type: string
+                imageId:
+                  type: string
+                page:
+                  type: number
+              required:
+                - 'episodeId'
+                - 'imageId'
+                - 'page'
+      responses:
+        200:
+          description: 'Create episode page.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  page:
+                    type: number
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'id'
+                  - 'page'
+                  - 'image'
+  /api/v1/episodePages/{episodePageId}:
+    patch:
+      tags:
+        - '[Admin] Episode Pages API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'episodePageId'
+          in: 'path'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                episodeId:
+                  type: string
+                id:
+                  type: string
+                imageId:
+                  type: string
+                page:
+                  type: number
+      responses:
+        200:
+          description: 'Update episode page.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  page:
+                    type: number
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'id'
+                  - 'page'
+                  - 'image'
+    delete:
+      tags:
+        - '[Admin] Episode Pages API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'episodePageId'
+          in: 'path'
+      responses:
+        200:
+          description: 'Delete episode page.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+  /api/v1/images:
+    post:
+      tags:
+        - '[Admin] Images API'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                alt:
+                  type: string
+                content:
+                  type: string
+                  format: 'binary'
+              required:
+                - 'alt'
+      responses:
+        200:
+          description: 'Create image.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alt:
+                    type: string
+                  id:
+                    type: string
+                required:
+                  - 'alt'
+                  - 'id'
+  /api/v1/features:
+    get:
+      tags:
+        - '[App] Features API'
+      parameters:
+        - schema:
+            type: number
+          required: false
+          name: 'limit'
+          in: 'query'
+        - schema:
+            type: number
+          required: false
+          name: 'offset'
+          in: 'query'
+      responses:
+        200:
+          description: 'Get feature list.'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    book:
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        author:
+                          type: object
+                          properties:
+                            description:
+                              type: string
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            image:
+                              type: object
+                              properties:
+                                alt:
+                                  type: string
+                                id:
+                                  type: string
+                              required:
+                                - 'alt'
+                                - 'id'
+                          required:
+                            - 'description'
+                            - 'id'
+                            - 'name'
+                            - 'image'
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'description'
+                        - 'id'
+                        - 'name'
+                        - 'author'
+                        - 'image'
+                  required:
+                    - 'id'
+                    - 'book'
+  /api/v1/releases/{dayOfWeek}:
+    get:
+      tags:
+        - '[App] Releases API'
+      parameters:
+        - schema:
+            type: string
+          required: true
+          name: 'dayOfWeek'
+          in: 'path'
+      responses:
+        200:
+          description: 'Get release.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dayOfWeek:
+                    type: string
+                  id:
+                    type: string
+                  books:
+                    type: 'array'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        author:
+                          type: object
+                          properties:
+                            description:
+                              type: string
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            image:
+                              type: object
+                              properties:
+                                alt:
+                                  type: string
+                                id:
+                                  type: string
+                              required:
+                                - 'alt'
+                                - 'id'
+                          required:
+                            - 'description'
+                            - 'id'
+                            - 'name'
+                            - 'image'
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'id'
+                        - 'name'
+                        - 'author'
+                        - 'image'
+                required:
+                  - 'dayOfWeek'
+                  - 'id'
+                  - 'books'
+  /api/v1/releases:
+    get:
+      tags:
+        - '[App] Releases API'
+      responses:
+        200:
+          description: 'Get release list.'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  type: object
+                  properties:
+                    dayOfWeek:
+                      type: string
+                    id:
+                      type: string
+                  required:
+                    - 'dayOfWeek'
+                    - 'id'
+  /api/v1/rankings:
+    get:
+      tags:
+        - '[App] Rankings API'
+      parameters:
+        - schema:
+            type: number
+          required: false
+          name: 'limit'
+          in: 'query'
+        - schema:
+            type: number
+          required: false
+          name: 'offset'
+          in: 'query'
+      responses:
+        200:
+          description: 'Get feature list.'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    rank:
+                      type: number
+                    book:
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        author:
+                          type: object
+                          properties:
+                            description:
+                              type: string
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            image:
+                              type: object
+                              properties:
+                                alt:
+                                  type: string
+                                id:
+                                  type: string
+                              required:
+                                - 'alt'
+                                - 'id'
+                          required:
+                            - 'description'
+                            - 'id'
+                            - 'name'
+                            - 'image'
+                        episodes:
+                          type: 'array'
+                          items:
+                            type: object
+                            properties:
+                              chapter:
+                                type: number
+                              description:
+                                type: string
+                              id:
+                                type: string
+                              name:
+                                type: string
+                            required:
+                              - 'chapter'
+                              - 'description'
+                              - 'id'
+                              - 'name'
+                        image:
+                          type: object
+                          properties:
+                            alt:
+                              type: string
+                            id:
+                              type: string
+                          required:
+                            - 'alt'
+                            - 'id'
+                      required:
+                        - 'description'
+                        - 'id'
+                        - 'name'
+                        - 'author'
+                        - 'episodes'
+                        - 'image'
+                  required:
+                    - 'id'
+                    - 'rank'
+                    - 'book'
+  /api/v1/admin/login:
+    post:
+      tags:
+        - '[Admin] Auth API'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - 'email'
+                - 'password'
+      responses:
+        200:
+          description: 'Login.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'description'
+                  - 'id'
+                  - 'image'
+  /api/v1/admin/logout:
+    post:
+      tags:
+        - '[Admin] Auth API'
+      responses:
+        200:
+          description: 'Logout.'
+          # content:
+          #   application/json:
+          #     schema:
+          #       type: object
+          #       properties:
+  /api/v1/admin/me:
+    get:
+      tags:
+        - '[Admin] Auth API'
+      responses:
+        200:
+          description: 'Get auth user.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                  id:
+                    type: string
+                  image:
+                    type: object
+                    properties:
+                      alt:
+                        type: string
+                      id:
+                        type: string
+                    required:
+                      - 'alt'
+                      - 'id'
+                required:
+                  - 'description'
+                  - 'id'
+                  - 'image'
+  /api/v1/initialize:
+    post:
+      tags:
+        - '[Internal] Internal API'
+      responses:
+        200:
+          description: 'Initialize.'
+          # content:
+          #   application/json:
+          #     schema:
+          #       type: object
+          #       properties:
+webhooks:
