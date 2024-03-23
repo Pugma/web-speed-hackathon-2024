@@ -2,13 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { GetRankingsItemBookAuthor } from './GetRankingsItemBookAuthor';
 import type { Image } from './Image';
-export type GetRankingsItemBook = {
+export type RankingsItemBookAuthor = {
     description: string;
     id: string;
     name: string;
-    author: GetRankingsItemBookAuthor;
     image: Image;
 };
 

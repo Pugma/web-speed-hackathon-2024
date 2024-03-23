@@ -14,11 +14,12 @@ export type { AuthorDetailBooks } from './models/AuthorDetailBooks';
 export type { EpisodesPagesItem } from './models/EpisodesPagesItem';
 export type { GetAuthorDetail } from './models/GetAuthorDetail';
 export type { GetAuthorListItem } from './models/GetAuthorListItem';
+export type { GetBooksDetail } from './models/GetBooksDetail';
 export type { GetEpisodes } from './models/GetEpisodes';
 export type { GetRankingsItem } from './models/GetRankingsItem';
-export type { GetRankingsItemBook } from './models/GetRankingsItemBook';
-export type { GetRankingsItemBookAuthor } from './models/GetRankingsItemBookAuthor';
 export type { Image } from './models/Image';
+export type { RankingsItemBook } from './models/RankingsItemBook';
+export type { RankingsItemBookAuthor } from './models/RankingsItemBookAuthor';
 
 export { AdminAuthApiService } from './services/AdminAuthApiService';
 export { AdminAuthorsApiService } from './services/AdminAuthorsApiService';

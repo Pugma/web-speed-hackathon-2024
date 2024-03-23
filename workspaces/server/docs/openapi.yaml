@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 
 info:
   title: API Docs
@@ -621,51 +621,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  description:
-                    type: string
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  nameRuby:
-                    type: string
-                  author:
-                    type: object
-                    properties:
-                      description:
-                        type: string
-                      id:
-                        type: string
-                      name:
-                        type: string
-                      image:
-                        $ref: '#/components/schemas/Image'
-                    required:
-                      - 'description'
-                      - 'id'
-                      - 'name'
-                      - 'image'
-                  episodes:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                      required:
-                        - 'id'
-                  image:
-                    $ref: '#/components/schemas/Image'
-                required:
-                  - 'description'
-                  - 'id'
-                  - 'name'
-                  - 'nameRuby'
-                  - 'author'
-                  - 'episodes'
-                  - 'image'
+                $ref: "#/components/schemas/GetBooksDetail"
     patch:
       tags:
         - '[Admin] Books API'
@@ -1547,12 +1503,12 @@ components:
         rank:
           type: number
         book:
-          $ref: "#/components/schemas/GetRankingsItemBook"
+          $ref: "#/components/schemas/RankingsItemBook"
       required:
         - 'id'
         - 'rank'
         - 'book'
-    GetRankingsItemBook:
+    RankingsItemBook:
       type: object
       properties:
         description:
@@ -1562,7 +1518,7 @@ components:
         name:
           type: string
         author:
-          $ref: '#/components/schemas/GetRankingsItemBookAuthor'
+          $ref: '#/components/schemas/RankingsItemBookAuthor'
         image:
           $ref: '#/components/schemas/Image'
       required:
@@ -1571,7 +1527,7 @@ components:
         - 'name'
         - 'author'
         - 'image'
-    GetRankingsItemBookAuthor:
+    RankingsItemBookAuthor:
       type: object
       properties:
         description:
@@ -1587,4 +1543,46 @@ components:
         - 'id'
         - 'name'
         - 'image'
-
+    GetBooksDetail:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        nameRuby:
+          type: string
+        author:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            image:
+              $ref: '#/components/schemas/Image'
+          required:
+            - 'id'
+            - 'name'
+            - 'image'
+        episodes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+            required:
+              - 'id'
+        image:
+          $ref: '#/components/schemas/Image'
+      required:
+        - 'description'
+        - 'id'
+        - 'name'
+        - 'nameRuby'
+        - 'author'
+        - 'episodes'
+        - 'image'
