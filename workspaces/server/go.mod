@@ -1,15 +1,19 @@
 module Pugma/webspeed2024
 
-go 1.21.4
+go 1.22.1
 
 require (
 	github.com/getkin/kin-openapi v0.123.0
+	github.com/go-sql-driver/mysql v1.8.0
+	github.com/jmoiron/sqlx v1.3.5
 	github.com/labstack/echo/v4 v4.11.4
 	github.com/mattn/go-sqlite3 v1.14.22
 	github.com/oapi-codegen/runtime v1.1.1
+	github.com/tanimutomo/sqlfile v1.0.0
 )
 
 require (
+	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
 	github.com/go-openapi/jsonpointer v0.20.2 // indirect
 	github.com/go-openapi/swag v0.22.8 // indirect
