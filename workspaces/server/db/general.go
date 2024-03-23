@@ -45,7 +45,7 @@ func SetUpDB() error {
 
 	// ここで初期値の代入をする
 	s := sqlfile.New()
-	err = s.File("schema.sql")
+	err = s.File("/app/db/schema.sql")
 	if err != nil {
 		slog.Error("Failed to open sql file: %v", err)
 	}
