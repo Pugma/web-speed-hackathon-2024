@@ -4,6 +4,9 @@ info:
   title: API Docs
   version: 1.0.0
 
+servers:
+  - url: /api/v1
+
 tags:
   - name: '[App] Authors API'
     description: aaa
@@ -35,7 +38,7 @@ tags:
     description: aaa
 
 paths:
-  /api/v1/authors/{authorId}:
+  /authors/{authorId}:
     get:
       tags:
         - '[App] Authors API'
@@ -51,75 +54,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  description:
-                    type: string
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  books:
-                    type: 'array'
-                    items:
-                      type: object
-                      properties:
-                        description:
-                          type: string
-                        id:
-                          type: string
-                        name:
-                          type: string
-                        episodes:
-                          type: 'array'
-                          items:
-                            type: object
-                            properties:
-                              chapter:
-                                type: number
-                              description:
-                                type: string
-                              id:
-                                type: string
-                              name:
-                                type: string
-                            required:
-                              - 'chapter'
-                              - 'description'
-                              - 'id'
-                              - 'name'
-                        image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
-                      required:
-                        - 'description'
-                        - 'id'
-                        - 'name'
-                        - 'episodes'
-                        - 'image'
-                  image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
-                required:
-                  - 'description'
-                  - 'id'
-                  - 'name'
-                  - 'books'
-                  - 'image'
+                $ref: '#/components/schemas/GetAuthorDetail'
     patch:
       tags:
         - '[Admin] Authors API'
@@ -156,7 +91,7 @@ paths:
                   name:
                     type: string
                   books:
-                    type: 'array'
+                    type: array
                     items:
                       type: object
                       properties:
@@ -167,7 +102,7 @@ paths:
                         name:
                           type: string
                         episodes:
-                          type: 'array'
+                          type: array
                           items:
                             type: object
                             properties:
@@ -228,12 +163,7 @@ paths:
       responses:
         200:
           description: 'Delete author.'
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  /api/v1/authors:
+  /authors:
     get:
       tags:
         - '[App] Authors API'
@@ -259,77 +189,9 @@ paths:
           content:
             application/json:
               schema:
-                type: 'array'
+                type: array
                 items:
-                  type: object
-                  properties:
-                    description:
-                      type: string
-                    id:
-                      type: string
-                    name:
-                      type: string
-                    books:
-                      type: 'array'
-                      items:
-                        type: object
-                        properties:
-                          description:
-                            type: string
-                          id:
-                            type: string
-                          name:
-                            type: string
-                          episodes:
-                            type: 'array'
-                            items:
-                              type: object
-                              properties:
-                                chapter:
-                                  type: number
-                                description:
-                                  type: string
-                                id:
-                                  type: string
-                                name:
-                                  type: string
-                              required:
-                                - 'chapter'
-                                - 'description'
-                                - 'id'
-                                - 'name'
-                          image:
-                            type: object
-                            properties:
-                              alt:
-                                type: string
-                              id:
-                                type: string
-                            required:
-                              - 'alt'
-                              - 'id'
-                        required:
-                          - 'description'
-                          - 'id'
-                          - 'name'
-                          - 'episodes'
-                          - 'image'
-                    image:
-                      type: object
-                      properties:
-                        alt:
-                          type: string
-                        id:
-                          type: string
-                      required:
-                        - 'alt'
-                        - 'id'
-                  required:
-                    - 'description'
-                    - 'id'
-                    - 'name'
-                    - 'books'
-                    - 'image'
+                  $ref: "#/components/schemas/GetAuthorListItem"
     post:
       tags:
         - '[Admin] Authors API'
@@ -364,7 +226,7 @@ paths:
                   name:
                     type: string
                   books:
-                    type: 'array'
+                    type: array
                     items:
                       type: object
                       properties:
@@ -375,7 +237,7 @@ paths:
                         name:
                           type: string
                         episodes:
-                          type: 'array'
+                          type: array
                           items:
                             type: object
                             properties:
@@ -424,7 +286,7 @@ paths:
                   - 'name'
                   - 'books'
                   - 'image'
-  /api/v1/episodes/{episodeId}:
+  /episodes/{episodeId}:
     get:
       tags:
         - '[App] Episodes API'
@@ -440,112 +302,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  chapter:
-                    type: number
-                  description:
-                    type: string
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  nameRuby:
-                    type: string
-                  book:
-                    type: object
-                    properties:
-                      description:
-                        type: string
-                      id:
-                        type: string
-                      name:
-                        type: string
-                      nameRuby:
-                        type: string
-                      author:
-                        type: object
-                        properties:
-                          description:
-                            type: string
-                          id:
-                            type: string
-                          name:
-                            type: string
-                          image:
-                            type: object
-                            properties:
-                              alt:
-                                type: string
-                              id:
-                                type: string
-                            required:
-                              - 'alt'
-                              - 'id'
-                        required:
-                          - 'description'
-                          - 'id'
-                          - 'name'
-                          - 'image'
-                      image:
-                        type: object
-                        properties:
-                          alt:
-                            type: string
-                          id:
-                            type: string
-                        required:
-                          - 'alt'
-                          - 'id'
-                    required:
-                      - 'description'
-                      - 'id'
-                      - 'name'
-                      - 'nameRuby'
-                      - 'author'
-                      - 'image'
-                  image:
-                    type: object
-                    properties:
-                      alt:
-                        type: string
-                      id:
-                        type: string
-                    required:
-                      - 'alt'
-                      - 'id'
-                  pages:
-                    type: 'array'
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                        page:
-                          type: number
-                        image:
-                          type: object
-                          properties:
-                            alt:
-                              type: string
-                            id:
-                              type: string
-                          required:
-                            - 'alt'
-                            - 'id'
-                      required:
-                        - 'id'
-                        - 'page'
-                        - 'image'
-                required:
-                  - 'chapter'
-                  - 'description'
-                  - 'id'
-                  - 'name'
-                  - 'nameRuby'
-                  - 'book'
-                  - 'image'
-                  - 'pages'
+                $ref: "#/components/schemas/GetEpisodes"
     patch:
       tags:
         - '[Admin] Episodes API'
@@ -654,7 +411,7 @@ paths:
                       - 'alt'
                       - 'id'
                   pages:
-                    type: 'array'
+                    type: array
                     items:
                       type: object
                       properties:
@@ -702,7 +459,7 @@ paths:
               schema:
                 type: object
                 properties:
-  /api/v1/episodes:
+  /episodes:
     get:
       tags:
         - '[App] Episodes API'
@@ -728,7 +485,7 @@ paths:
           content:
             application/json:
               schema:
-                type: 'array'
+                type: array
                 items:
                   type: object
                   properties:
@@ -805,7 +562,7 @@ paths:
                         - 'alt'
                         - 'id'
                     pages:
-                      type: 'array'
+                      type: array
                       items:
                         type: object
                         properties:
@@ -945,7 +702,7 @@ paths:
                       - 'alt'
                       - 'id'
                   pages:
-                    type: 'array'
+                    type: array
                     items:
                       type: object
                       properties:
@@ -976,7 +733,7 @@ paths:
                   - 'book'
                   - 'image'
                   - 'pages'
-  /api/v1/books/{bookId}:
+  /books/{bookId}:
     get:
       tags:
         - '[App] Books API'
@@ -1027,7 +784,7 @@ paths:
                       - 'name'
                       - 'image'
                   episodes:
-                    type: 'array'
+                    type: array
                     items:
                       type: object
                       properties:
@@ -1121,7 +878,7 @@ paths:
                       - 'name'
                       - 'image'
                   episodes:
-                    type: 'array'
+                    type: array
                     items:
                       type: object
                       properties:
@@ -1164,7 +921,7 @@ paths:
               schema:
                 type: object
                 properties:
-  /api/v1/books:
+  /books:
     get:
       tags:
         - '[App] Books API'
@@ -1200,7 +957,7 @@ paths:
           content:
             application/json:
               schema:
-                type: 'array'
+                type: array
                 items:
                   type: object
                   properties:
@@ -1237,7 +994,7 @@ paths:
                         - 'name'
                         - 'image'
                     episodes:
-                      type: 'array'
+                      type: array
                       items:
                         type: object
                         properties:
@@ -1332,7 +1089,7 @@ paths:
                       - 'name'
                       - 'image'
                   episodes:
-                    type: 'array'
+                    type: array
                     items:
                       type: object
                       properties:
@@ -1358,7 +1115,7 @@ paths:
                   - 'author'
                   - 'episodes'
                   - 'image'
-  /api/v1/episodePages/{pageId}:
+  /episodePages/{pageId}:
     get:
       tags:
         - '[App] Episode Pages API'
@@ -1394,7 +1151,7 @@ paths:
                   - 'id'
                   - 'page'
                   - 'image'
-  /api/v1/episodePages:
+  /episodePages:
     get:
       tags:
         - '[App] Episode Pages API'
@@ -1420,7 +1177,7 @@ paths:
           content:
             application/json:
               schema:
-                type: 'array'
+                type: array
                 items:
                   type: object
                   properties:
@@ -1489,7 +1246,7 @@ paths:
                   - 'id'
                   - 'page'
                   - 'image'
-  /api/v1/episodePages/{episodePageId}:
+  /episodePages/{episodePageId}:
     patch:
       tags:
         - '[Admin] Episode Pages API'
@@ -1556,7 +1313,7 @@ paths:
               schema:
                 type: object
                 properties:
-  /api/v1/images:
+  /images:
     post:
       tags:
         - '[Admin] Images API'
@@ -1588,7 +1345,7 @@ paths:
                 required:
                   - 'alt'
                   - 'id'
-  /api/v1/features:
+  /features:
     get:
       tags:
         - '[App] Features API'
@@ -1609,7 +1366,7 @@ paths:
           content:
             application/json:
               schema:
-                type: 'array'
+                type: array
                 items:
                   type: object
                   properties:
@@ -1667,7 +1424,7 @@ paths:
                   required:
                     - 'id'
                     - 'book'
-  /api/v1/releases/{dayOfWeek}:
+  /releases/{dayOfWeek}:
     get:
       tags:
         - '[App] Releases API'
@@ -1690,7 +1447,7 @@ paths:
                   id:
                     type: string
                   books:
-                    type: 'array'
+                    type: array
                     items:
                       type: object
                       properties:
@@ -1741,7 +1498,7 @@ paths:
                   - 'dayOfWeek'
                   - 'id'
                   - 'books'
-  /api/v1/releases:
+  /releases:
     get:
       tags:
         - '[App] Releases API'
@@ -1751,7 +1508,7 @@ paths:
           content:
             application/json:
               schema:
-                type: 'array'
+                type: array
                 items:
                   type: object
                   properties:
@@ -1762,7 +1519,7 @@ paths:
                   required:
                     - 'dayOfWeek'
                     - 'id'
-  /api/v1/rankings:
+  /rankings:
     get:
       tags:
         - '[App] Rankings API'
@@ -1783,7 +1540,7 @@ paths:
           content:
             application/json:
               schema:
-                type: 'array'
+                type: array
                 items:
                   type: object
                   properties:
@@ -1825,7 +1582,7 @@ paths:
                             - 'name'
                             - 'image'
                         episodes:
-                          type: 'array'
+                          type: array
                           items:
                             type: object
                             properties:
@@ -1863,7 +1620,7 @@ paths:
                     - 'id'
                     - 'rank'
                     - 'book'
-  /api/v1/admin/login:
+  /admin/login:
     post:
       tags:
         - '[Admin] Auth API'
@@ -1906,7 +1663,7 @@ paths:
                   - 'description'
                   - 'id'
                   - 'image'
-  /api/v1/admin/logout:
+  /admin/logout:
     post:
       tags:
         - '[Admin] Auth API'
@@ -1918,7 +1675,7 @@ paths:
           #     schema:
           #       type: object
           #       properties:
-  /api/v1/admin/me:
+  /admin/me:
     get:
       tags:
         - '[Admin] Auth API'
@@ -1948,7 +1705,7 @@ paths:
                   - 'description'
                   - 'id'
                   - 'image'
-  /api/v1/initialize:
+  /initialize:
     post:
       tags:
         - '[Internal] Internal API'
@@ -1960,4 +1717,193 @@ paths:
           #     schema:
           #       type: object
           #       properties:
-webhooks:
+
+components:
+  schemas:
+    GetAuthorDetail:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorDetailBooks'
+    AuthorDetailBooks:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        image:
+          $ref: '#/components/schemas/Image'
+      required:
+        - 'description'
+        - 'id'
+        - 'name'
+        - 'image'
+    Image:
+      type: object
+      properties:
+        alt:
+          type: string
+        id:
+          type: string
+      required:
+        - 'alt'
+        - 'id'
+    GetAuthorListItem:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        books:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+              id:
+                type: string
+              name:
+                type: string
+              episodes:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    chapter:
+                      type: number
+                    description:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+                  required:
+                    - 'chapter'
+                    - 'description'
+                    - 'id'
+                    - 'name'
+              image:
+                $ref: "#/components/schemas/Image"
+            required:
+              - 'description'
+              - 'id'
+              - 'name'
+              - 'episodes'
+              - 'image'
+        image:
+          $ref: "#/components/schemas/Image"
+      required:
+        - 'description'
+        - 'id'
+        - 'name'
+        - 'books'
+        - 'image'
+    GetEpisodes:
+      type: object
+      properties:
+        chapter:
+          type: number
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        nameRuby:
+          type: string
+        book:
+          type: object
+          properties:
+            description:
+              type: string
+            id:
+              type: string
+            name:
+              type: string
+            nameRuby:
+              type: string
+            author:
+              type: object
+              properties:
+                description:
+                  type: string
+                id:
+                  type: string
+                name:
+                  type: string
+                image:
+                  type: object
+                  properties:
+                    alt:
+                      type: string
+                    id:
+                      type: string
+                  required:
+                    - 'alt'
+                    - 'id'
+              required:
+                - 'description'
+                - 'id'
+                - 'name'
+                - 'image'
+            image:
+              type: object
+              properties:
+                alt:
+                  type: string
+                id:
+                  type: string
+              required:
+                - 'alt'
+                - 'id'
+          required:
+            - 'description'
+            - 'id'
+            - 'name'
+            - 'nameRuby'
+            - 'author'
+            - 'image'
+        image:
+          $ref: "#/components/schemas/Image"
+        pages:
+          type: array
+          items:
+            $ref: "#/components/schemas/EpisodesPagesItem"
+      required:
+        - 'chapter'
+        - 'description'
+        - 'id'
+        - 'name'
+        - 'nameRuby'
+        - 'book'
+        - 'image'
+        - 'pages'
+    EpisodesPagesItem:
+      type: object
+      properties:
+        id:
+          type: string
+        page:
+          type: number
+        image:
+          $ref: "#/components/schemas/Image"
+      required:
+        - 'id'
+        - 'page'
+        - 'image'
+

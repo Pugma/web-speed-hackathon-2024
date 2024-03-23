@@ -22,35 +22,114 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
-// PostApiV1AdminLoginJSONBody defines parameters for PostApiV1AdminLogin.
-type PostApiV1AdminLoginJSONBody struct {
+// AuthorDetailBooks defines model for AuthorDetailBooks.
+type AuthorDetailBooks struct {
+	Description string `json:"description"`
+	Id          string `json:"id"`
+	Image       Image  `json:"image"`
+	Name        string `json:"name"`
+}
+
+// EpisodesPagesItem defines model for EpisodesPagesItem.
+type EpisodesPagesItem struct {
+	Id    string  `json:"id"`
+	Image Image   `json:"image"`
+	Page  float32 `json:"page"`
+}
+
+// GetAuthorDetail defines model for GetAuthorDetail.
+type GetAuthorDetail struct {
+	Books       *[]AuthorDetailBooks `json:"books,omitempty"`
+	Description *string              `json:"description,omitempty"`
+	Id          *string              `json:"id,omitempty"`
+	Name        *string              `json:"name,omitempty"`
+}
+
+// GetAuthorListItem defines model for GetAuthorListItem.
+type GetAuthorListItem struct {
+	Books []struct {
+		Description string `json:"description"`
+		Episodes    []struct {
+			Chapter     float32 `json:"chapter"`
+			Description string  `json:"description"`
+			Id          string  `json:"id"`
+			Name        string  `json:"name"`
+		} `json:"episodes"`
+		Id    string `json:"id"`
+		Image Image  `json:"image"`
+		Name  string `json:"name"`
+	} `json:"books"`
+	Description string `json:"description"`
+	Id          string `json:"id"`
+	Image       Image  `json:"image"`
+	Name        string `json:"name"`
+}
+
+// GetEpisodes defines model for GetEpisodes.
+type GetEpisodes struct {
+	Book struct {
+		Author struct {
+			Description string `json:"description"`
+			Id          string `json:"id"`
+			Image       struct {
+				Alt string `json:"alt"`
+				Id  string `json:"id"`
+			} `json:"image"`
+			Name string `json:"name"`
+		} `json:"author"`
+		Description string `json:"description"`
+		Id          string `json:"id"`
+		Image       struct {
+			Alt string `json:"alt"`
+			Id  string `json:"id"`
+		} `json:"image"`
+		Name     string `json:"name"`
+		NameRuby string `json:"nameRuby"`
+	} `json:"book"`
+	Chapter     float32             `json:"chapter"`
+	Description string              `json:"description"`
+	Id          string              `json:"id"`
+	Image       Image               `json:"image"`
+	Name        string              `json:"name"`
+	NameRuby    string              `json:"nameRuby"`
+	Pages       []EpisodesPagesItem `json:"pages"`
+}
+
+// Image defines model for Image.
+type Image struct {
+	Alt string `json:"alt"`
+	Id  string `json:"id"`
+}
+
+// PostAdminLoginJSONBody defines parameters for PostAdminLogin.
+type PostAdminLoginJSONBody struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
-// GetApiV1AuthorsParams defines parameters for GetApiV1Authors.
-type GetApiV1AuthorsParams struct {
+// GetAuthorsParams defines parameters for GetAuthors.
+type GetAuthorsParams struct {
 	Limit  *float32 `form:"limit,omitempty" json:"limit,omitempty"`
 	Name   *string  `form:"name,omitempty" json:"name,omitempty"`
 	Offset *float32 `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// PostApiV1AuthorsJSONBody defines parameters for PostApiV1Authors.
-type PostApiV1AuthorsJSONBody struct {
+// PostAuthorsJSONBody defines parameters for PostAuthors.
+type PostAuthorsJSONBody struct {
 	Description string `json:"description"`
 	ImageId     string `json:"imageId"`
 	Name        string `json:"name"`
 }
 
-// PatchApiV1AuthorsAuthorIdJSONBody defines parameters for PatchApiV1AuthorsAuthorId.
-type PatchApiV1AuthorsAuthorIdJSONBody struct {
+// PatchAuthorsAuthorIdJSONBody defines parameters for PatchAuthorsAuthorId.
+type PatchAuthorsAuthorIdJSONBody struct {
 	Description *string `json:"description,omitempty"`
 	ImageId     *string `json:"imageId,omitempty"`
 	Name        *string `json:"name,omitempty"`
 }
 
-// GetApiV1BooksParams defines parameters for GetApiV1Books.
-type GetApiV1BooksParams struct {
+// GetBooksParams defines parameters for GetBooks.
+type GetBooksParams struct {
 	AuthorId   *string  `form:"authorId,omitempty" json:"authorId,omitempty"`
 	AuthorName *string  `form:"authorName,omitempty" json:"authorName,omitempty"`
 	Limit      *float32 `form:"limit,omitempty" json:"limit,omitempty"`
@@ -58,8 +137,8 @@ type GetApiV1BooksParams struct {
 	Offset     *float32 `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// PostApiV1BooksJSONBody defines parameters for PostApiV1Books.
-type PostApiV1BooksJSONBody struct {
+// PostBooksJSONBody defines parameters for PostBooks.
+type PostBooksJSONBody struct {
 	AuthorId    string `json:"authorId"`
 	Description string `json:"description"`
 	ImageId     string `json:"imageId"`
@@ -68,8 +147,8 @@ type PostApiV1BooksJSONBody struct {
 	ReleaseId   string `json:"releaseId"`
 }
 
-// PatchApiV1BooksBookIdJSONBody defines parameters for PatchApiV1BooksBookId.
-type PatchApiV1BooksBookIdJSONBody struct {
+// PatchBooksBookIdJSONBody defines parameters for PatchBooksBookId.
+type PatchBooksBookIdJSONBody struct {
 	AuthorId    *string `json:"authorId,omitempty"`
 	Description *string `json:"description,omitempty"`
 	ImageId     *string `json:"imageId,omitempty"`
@@ -78,38 +157,38 @@ type PatchApiV1BooksBookIdJSONBody struct {
 	ReleaseId   *string `json:"releaseId,omitempty"`
 }
 
-// GetApiV1EpisodePagesParams defines parameters for GetApiV1EpisodePages.
-type GetApiV1EpisodePagesParams struct {
+// GetEpisodePagesParams defines parameters for GetEpisodePages.
+type GetEpisodePagesParams struct {
 	EpisodeId string   `form:"episodeId" json:"episodeId"`
 	Limit     *float32 `form:"limit,omitempty" json:"limit,omitempty"`
 	Offset    *float32 `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// PostApiV1EpisodePagesJSONBody defines parameters for PostApiV1EpisodePages.
-type PostApiV1EpisodePagesJSONBody struct {
+// PostEpisodePagesJSONBody defines parameters for PostEpisodePages.
+type PostEpisodePagesJSONBody struct {
 	EpisodeId string  `json:"episodeId"`
 	Id        *string `json:"id,omitempty"`
 	ImageId   string  `json:"imageId"`
 	Page      float32 `json:"page"`
 }
 
-// PatchApiV1EpisodePagesEpisodePageIdJSONBody defines parameters for PatchApiV1EpisodePagesEpisodePageId.
-type PatchApiV1EpisodePagesEpisodePageIdJSONBody struct {
+// PatchEpisodePagesEpisodePageIdJSONBody defines parameters for PatchEpisodePagesEpisodePageId.
+type PatchEpisodePagesEpisodePageIdJSONBody struct {
 	EpisodeId *string  `json:"episodeId,omitempty"`
 	Id        *string  `json:"id,omitempty"`
 	ImageId   *string  `json:"imageId,omitempty"`
 	Page      *float32 `json:"page,omitempty"`
 }
 
-// GetApiV1EpisodesParams defines parameters for GetApiV1Episodes.
-type GetApiV1EpisodesParams struct {
+// GetEpisodesParams defines parameters for GetEpisodes.
+type GetEpisodesParams struct {
 	BookId string   `form:"bookId" json:"bookId"`
 	Limit  *float32 `form:"limit,omitempty" json:"limit,omitempty"`
 	Offset *float32 `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// PostApiV1EpisodesJSONBody defines parameters for PostApiV1Episodes.
-type PostApiV1EpisodesJSONBody struct {
+// PostEpisodesJSONBody defines parameters for PostEpisodes.
+type PostEpisodesJSONBody struct {
 	BookId      string  `json:"bookId"`
 	Chapter     float32 `json:"chapter"`
 	Description string  `json:"description"`
@@ -118,8 +197,8 @@ type PostApiV1EpisodesJSONBody struct {
 	NameRuby    string  `json:"nameRuby"`
 }
 
-// PatchApiV1EpisodesEpisodeIdJSONBody defines parameters for PatchApiV1EpisodesEpisodeId.
-type PatchApiV1EpisodesEpisodeIdJSONBody struct {
+// PatchEpisodesEpisodeIdJSONBody defines parameters for PatchEpisodesEpisodeId.
+type PatchEpisodesEpisodeIdJSONBody struct {
 	BookId      *string  `json:"bookId,omitempty"`
 	Chapter     *float32 `json:"chapter,omitempty"`
 	Description *string  `json:"description,omitempty"`
@@ -128,53 +207,53 @@ type PatchApiV1EpisodesEpisodeIdJSONBody struct {
 	NameRuby    *string  `json:"nameRuby,omitempty"`
 }
 
-// GetApiV1FeaturesParams defines parameters for GetApiV1Features.
-type GetApiV1FeaturesParams struct {
+// GetFeaturesParams defines parameters for GetFeatures.
+type GetFeaturesParams struct {
 	Limit  *float32 `form:"limit,omitempty" json:"limit,omitempty"`
 	Offset *float32 `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// PostApiV1ImagesMultipartBody defines parameters for PostApiV1Images.
-type PostApiV1ImagesMultipartBody struct {
+// PostImagesMultipartBody defines parameters for PostImages.
+type PostImagesMultipartBody struct {
 	Alt     string              `json:"alt"`
 	Content *openapi_types.File `json:"content,omitempty"`
 }
 
-// GetApiV1RankingsParams defines parameters for GetApiV1Rankings.
-type GetApiV1RankingsParams struct {
+// GetRankingsParams defines parameters for GetRankings.
+type GetRankingsParams struct {
 	Limit  *float32 `form:"limit,omitempty" json:"limit,omitempty"`
 	Offset *float32 `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// PostApiV1AdminLoginJSONRequestBody defines body for PostApiV1AdminLogin for application/json ContentType.
-type PostApiV1AdminLoginJSONRequestBody PostApiV1AdminLoginJSONBody
+// PostAdminLoginJSONRequestBody defines body for PostAdminLogin for application/json ContentType.
+type PostAdminLoginJSONRequestBody PostAdminLoginJSONBody
 
-// PostApiV1AuthorsJSONRequestBody defines body for PostApiV1Authors for application/json ContentType.
-type PostApiV1AuthorsJSONRequestBody PostApiV1AuthorsJSONBody
+// PostAuthorsJSONRequestBody defines body for PostAuthors for application/json ContentType.
+type PostAuthorsJSONRequestBody PostAuthorsJSONBody
 
-// PatchApiV1AuthorsAuthorIdJSONRequestBody defines body for PatchApiV1AuthorsAuthorId for application/json ContentType.
-type PatchApiV1AuthorsAuthorIdJSONRequestBody PatchApiV1AuthorsAuthorIdJSONBody
+// PatchAuthorsAuthorIdJSONRequestBody defines body for PatchAuthorsAuthorId for application/json ContentType.
+type PatchAuthorsAuthorIdJSONRequestBody PatchAuthorsAuthorIdJSONBody
 
-// PostApiV1BooksJSONRequestBody defines body for PostApiV1Books for application/json ContentType.
-type PostApiV1BooksJSONRequestBody PostApiV1BooksJSONBody
+// PostBooksJSONRequestBody defines body for PostBooks for application/json ContentType.
+type PostBooksJSONRequestBody PostBooksJSONBody
 
-// PatchApiV1BooksBookIdJSONRequestBody defines body for PatchApiV1BooksBookId for application/json ContentType.
-type PatchApiV1BooksBookIdJSONRequestBody PatchApiV1BooksBookIdJSONBody
+// PatchBooksBookIdJSONRequestBody defines body for PatchBooksBookId for application/json ContentType.
+type PatchBooksBookIdJSONRequestBody PatchBooksBookIdJSONBody
 
-// PostApiV1EpisodePagesJSONRequestBody defines body for PostApiV1EpisodePages for application/json ContentType.
-type PostApiV1EpisodePagesJSONRequestBody PostApiV1EpisodePagesJSONBody
+// PostEpisodePagesJSONRequestBody defines body for PostEpisodePages for application/json ContentType.
+type PostEpisodePagesJSONRequestBody PostEpisodePagesJSONBody
 
-// PatchApiV1EpisodePagesEpisodePageIdJSONRequestBody defines body for PatchApiV1EpisodePagesEpisodePageId for application/json ContentType.
-type PatchApiV1EpisodePagesEpisodePageIdJSONRequestBody PatchApiV1EpisodePagesEpisodePageIdJSONBody
+// PatchEpisodePagesEpisodePageIdJSONRequestBody defines body for PatchEpisodePagesEpisodePageId for application/json ContentType.
+type PatchEpisodePagesEpisodePageIdJSONRequestBody PatchEpisodePagesEpisodePageIdJSONBody
 
-// PostApiV1EpisodesJSONRequestBody defines body for PostApiV1Episodes for application/json ContentType.
-type PostApiV1EpisodesJSONRequestBody PostApiV1EpisodesJSONBody
+// PostEpisodesJSONRequestBody defines body for PostEpisodes for application/json ContentType.
+type PostEpisodesJSONRequestBody PostEpisodesJSONBody
 
-// PatchApiV1EpisodesEpisodeIdJSONRequestBody defines body for PatchApiV1EpisodesEpisodeId for application/json ContentType.
-type PatchApiV1EpisodesEpisodeIdJSONRequestBody PatchApiV1EpisodesEpisodeIdJSONBody
+// PatchEpisodesEpisodeIdJSONRequestBody defines body for PatchEpisodesEpisodeId for application/json ContentType.
+type PatchEpisodesEpisodeIdJSONRequestBody PatchEpisodesEpisodeIdJSONBody
 
-// PostApiV1ImagesMultipartRequestBody defines body for PostApiV1Images for multipart/form-data ContentType.
-type PostApiV1ImagesMultipartRequestBody PostApiV1ImagesMultipartBody
+// PostImagesMultipartRequestBody defines body for PostImages for multipart/form-data ContentType.
+type PostImagesMultipartRequestBody PostImagesMultipartBody
 
 // RequestEditorFn  is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
@@ -249,114 +328,114 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// PostApiV1AdminLoginWithBody request with any body
-	PostApiV1AdminLoginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PostAdminLoginWithBody request with any body
+	PostAdminLoginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostApiV1AdminLogin(ctx context.Context, body PostApiV1AdminLoginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostAdminLogin(ctx context.Context, body PostAdminLoginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1AdminLogout request
-	PostApiV1AdminLogout(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PostAdminLogout request
+	PostAdminLogout(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1AdminMe request
-	GetApiV1AdminMe(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetAdminMe request
+	GetAdminMe(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1Authors request
-	GetApiV1Authors(ctx context.Context, params *GetApiV1AuthorsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetAuthors request
+	GetAuthors(ctx context.Context, params *GetAuthorsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1AuthorsWithBody request with any body
-	PostApiV1AuthorsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PostAuthorsWithBody request with any body
+	PostAuthorsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostApiV1Authors(ctx context.Context, body PostApiV1AuthorsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostAuthors(ctx context.Context, body PostAuthorsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteApiV1AuthorsAuthorId request
-	DeleteApiV1AuthorsAuthorId(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DeleteAuthorsAuthorId request
+	DeleteAuthorsAuthorId(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1AuthorsAuthorId request
-	GetApiV1AuthorsAuthorId(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetAuthorsAuthorId request
+	GetAuthorsAuthorId(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PatchApiV1AuthorsAuthorIdWithBody request with any body
-	PatchApiV1AuthorsAuthorIdWithBody(ctx context.Context, authorId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PatchAuthorsAuthorIdWithBody request with any body
+	PatchAuthorsAuthorIdWithBody(ctx context.Context, authorId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PatchApiV1AuthorsAuthorId(ctx context.Context, authorId string, body PatchApiV1AuthorsAuthorIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PatchAuthorsAuthorId(ctx context.Context, authorId string, body PatchAuthorsAuthorIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1Books request
-	GetApiV1Books(ctx context.Context, params *GetApiV1BooksParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetBooks request
+	GetBooks(ctx context.Context, params *GetBooksParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1BooksWithBody request with any body
-	PostApiV1BooksWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PostBooksWithBody request with any body
+	PostBooksWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostApiV1Books(ctx context.Context, body PostApiV1BooksJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostBooks(ctx context.Context, body PostBooksJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteApiV1BooksBookId request
-	DeleteApiV1BooksBookId(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DeleteBooksBookId request
+	DeleteBooksBookId(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1BooksBookId request
-	GetApiV1BooksBookId(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetBooksBookId request
+	GetBooksBookId(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PatchApiV1BooksBookIdWithBody request with any body
-	PatchApiV1BooksBookIdWithBody(ctx context.Context, bookId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PatchBooksBookIdWithBody request with any body
+	PatchBooksBookIdWithBody(ctx context.Context, bookId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PatchApiV1BooksBookId(ctx context.Context, bookId string, body PatchApiV1BooksBookIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PatchBooksBookId(ctx context.Context, bookId string, body PatchBooksBookIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1EpisodePages request
-	GetApiV1EpisodePages(ctx context.Context, params *GetApiV1EpisodePagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetEpisodePages request
+	GetEpisodePages(ctx context.Context, params *GetEpisodePagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1EpisodePagesWithBody request with any body
-	PostApiV1EpisodePagesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PostEpisodePagesWithBody request with any body
+	PostEpisodePagesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostApiV1EpisodePages(ctx context.Context, body PostApiV1EpisodePagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostEpisodePages(ctx context.Context, body PostEpisodePagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteApiV1EpisodePagesEpisodePageId request
-	DeleteApiV1EpisodePagesEpisodePageId(ctx context.Context, episodePageId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DeleteEpisodePagesEpisodePageId request
+	DeleteEpisodePagesEpisodePageId(ctx context.Context, episodePageId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PatchApiV1EpisodePagesEpisodePageIdWithBody request with any body
-	PatchApiV1EpisodePagesEpisodePageIdWithBody(ctx context.Context, episodePageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PatchEpisodePagesEpisodePageIdWithBody request with any body
+	PatchEpisodePagesEpisodePageIdWithBody(ctx context.Context, episodePageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PatchApiV1EpisodePagesEpisodePageId(ctx context.Context, episodePageId string, body PatchApiV1EpisodePagesEpisodePageIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PatchEpisodePagesEpisodePageId(ctx context.Context, episodePageId string, body PatchEpisodePagesEpisodePageIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1EpisodePagesPageId request
-	GetApiV1EpisodePagesPageId(ctx context.Context, pageId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetEpisodePagesPageId request
+	GetEpisodePagesPageId(ctx context.Context, pageId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1Episodes request
-	GetApiV1Episodes(ctx context.Context, params *GetApiV1EpisodesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetEpisodes request
+	GetEpisodes(ctx context.Context, params *GetEpisodesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1EpisodesWithBody request with any body
-	PostApiV1EpisodesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PostEpisodesWithBody request with any body
+	PostEpisodesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PostApiV1Episodes(ctx context.Context, body PostApiV1EpisodesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PostEpisodes(ctx context.Context, body PostEpisodesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteApiV1EpisodesEpisodeId request
-	DeleteApiV1EpisodesEpisodeId(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// DeleteEpisodesEpisodeId request
+	DeleteEpisodesEpisodeId(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1EpisodesEpisodeId request
-	GetApiV1EpisodesEpisodeId(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetEpisodesEpisodeId request
+	GetEpisodesEpisodeId(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PatchApiV1EpisodesEpisodeIdWithBody request with any body
-	PatchApiV1EpisodesEpisodeIdWithBody(ctx context.Context, episodeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PatchEpisodesEpisodeIdWithBody request with any body
+	PatchEpisodesEpisodeIdWithBody(ctx context.Context, episodeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	PatchApiV1EpisodesEpisodeId(ctx context.Context, episodeId string, body PatchApiV1EpisodesEpisodeIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	PatchEpisodesEpisodeId(ctx context.Context, episodeId string, body PatchEpisodesEpisodeIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1Features request
-	GetApiV1Features(ctx context.Context, params *GetApiV1FeaturesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetFeatures request
+	GetFeatures(ctx context.Context, params *GetFeaturesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1ImagesWithBody request with any body
-	PostApiV1ImagesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PostImagesWithBody request with any body
+	PostImagesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PostApiV1Initialize request
-	PostApiV1Initialize(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// PostInitialize request
+	PostInitialize(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1Rankings request
-	GetApiV1Rankings(ctx context.Context, params *GetApiV1RankingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetRankings request
+	GetRankings(ctx context.Context, params *GetRankingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1Releases request
-	GetApiV1Releases(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetReleases request
+	GetReleases(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetApiV1ReleasesDayOfWeek request
-	GetApiV1ReleasesDayOfWeek(ctx context.Context, dayOfWeek string, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// GetReleasesDayOfWeek request
+	GetReleasesDayOfWeek(ctx context.Context, dayOfWeek string, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) PostApiV1AdminLoginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1AdminLoginRequestWithBody(c.Server, contentType, body)
+func (c *Client) PostAdminLoginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostAdminLoginRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -367,8 +446,8 @@ func (c *Client) PostApiV1AdminLoginWithBody(ctx context.Context, contentType st
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1AdminLogin(ctx context.Context, body PostApiV1AdminLoginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1AdminLoginRequest(c.Server, body)
+func (c *Client) PostAdminLogin(ctx context.Context, body PostAdminLoginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostAdminLoginRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -379,8 +458,8 @@ func (c *Client) PostApiV1AdminLogin(ctx context.Context, body PostApiV1AdminLog
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1AdminLogout(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1AdminLogoutRequest(c.Server)
+func (c *Client) PostAdminLogout(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostAdminLogoutRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -391,8 +470,8 @@ func (c *Client) PostApiV1AdminLogout(ctx context.Context, reqEditors ...Request
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1AdminMe(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1AdminMeRequest(c.Server)
+func (c *Client) GetAdminMe(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAdminMeRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -403,8 +482,8 @@ func (c *Client) GetApiV1AdminMe(ctx context.Context, reqEditors ...RequestEdito
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1Authors(ctx context.Context, params *GetApiV1AuthorsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1AuthorsRequest(c.Server, params)
+func (c *Client) GetAuthors(ctx context.Context, params *GetAuthorsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAuthorsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -415,8 +494,8 @@ func (c *Client) GetApiV1Authors(ctx context.Context, params *GetApiV1AuthorsPar
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1AuthorsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1AuthorsRequestWithBody(c.Server, contentType, body)
+func (c *Client) PostAuthorsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostAuthorsRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -427,8 +506,8 @@ func (c *Client) PostApiV1AuthorsWithBody(ctx context.Context, contentType strin
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1Authors(ctx context.Context, body PostApiV1AuthorsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1AuthorsRequest(c.Server, body)
+func (c *Client) PostAuthors(ctx context.Context, body PostAuthorsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostAuthorsRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -439,8 +518,8 @@ func (c *Client) PostApiV1Authors(ctx context.Context, body PostApiV1AuthorsJSON
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteApiV1AuthorsAuthorId(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteApiV1AuthorsAuthorIdRequest(c.Server, authorId)
+func (c *Client) DeleteAuthorsAuthorId(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteAuthorsAuthorIdRequest(c.Server, authorId)
 	if err != nil {
 		return nil, err
 	}
@@ -451,8 +530,8 @@ func (c *Client) DeleteApiV1AuthorsAuthorId(ctx context.Context, authorId string
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1AuthorsAuthorId(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1AuthorsAuthorIdRequest(c.Server, authorId)
+func (c *Client) GetAuthorsAuthorId(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAuthorsAuthorIdRequest(c.Server, authorId)
 	if err != nil {
 		return nil, err
 	}
@@ -463,8 +542,8 @@ func (c *Client) GetApiV1AuthorsAuthorId(ctx context.Context, authorId string, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) PatchApiV1AuthorsAuthorIdWithBody(ctx context.Context, authorId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPatchApiV1AuthorsAuthorIdRequestWithBody(c.Server, authorId, contentType, body)
+func (c *Client) PatchAuthorsAuthorIdWithBody(ctx context.Context, authorId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchAuthorsAuthorIdRequestWithBody(c.Server, authorId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -475,8 +554,8 @@ func (c *Client) PatchApiV1AuthorsAuthorIdWithBody(ctx context.Context, authorId
 	return c.Client.Do(req)
 }
 
-func (c *Client) PatchApiV1AuthorsAuthorId(ctx context.Context, authorId string, body PatchApiV1AuthorsAuthorIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPatchApiV1AuthorsAuthorIdRequest(c.Server, authorId, body)
+func (c *Client) PatchAuthorsAuthorId(ctx context.Context, authorId string, body PatchAuthorsAuthorIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchAuthorsAuthorIdRequest(c.Server, authorId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -487,8 +566,8 @@ func (c *Client) PatchApiV1AuthorsAuthorId(ctx context.Context, authorId string,
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1Books(ctx context.Context, params *GetApiV1BooksParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1BooksRequest(c.Server, params)
+func (c *Client) GetBooks(ctx context.Context, params *GetBooksParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetBooksRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -499,8 +578,8 @@ func (c *Client) GetApiV1Books(ctx context.Context, params *GetApiV1BooksParams,
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1BooksWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1BooksRequestWithBody(c.Server, contentType, body)
+func (c *Client) PostBooksWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostBooksRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -511,8 +590,8 @@ func (c *Client) PostApiV1BooksWithBody(ctx context.Context, contentType string,
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1Books(ctx context.Context, body PostApiV1BooksJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1BooksRequest(c.Server, body)
+func (c *Client) PostBooks(ctx context.Context, body PostBooksJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostBooksRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -523,8 +602,8 @@ func (c *Client) PostApiV1Books(ctx context.Context, body PostApiV1BooksJSONRequ
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteApiV1BooksBookId(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteApiV1BooksBookIdRequest(c.Server, bookId)
+func (c *Client) DeleteBooksBookId(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteBooksBookIdRequest(c.Server, bookId)
 	if err != nil {
 		return nil, err
 	}
@@ -535,8 +614,8 @@ func (c *Client) DeleteApiV1BooksBookId(ctx context.Context, bookId string, reqE
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1BooksBookId(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1BooksBookIdRequest(c.Server, bookId)
+func (c *Client) GetBooksBookId(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetBooksBookIdRequest(c.Server, bookId)
 	if err != nil {
 		return nil, err
 	}
@@ -547,8 +626,8 @@ func (c *Client) GetApiV1BooksBookId(ctx context.Context, bookId string, reqEdit
 	return c.Client.Do(req)
 }
 
-func (c *Client) PatchApiV1BooksBookIdWithBody(ctx context.Context, bookId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPatchApiV1BooksBookIdRequestWithBody(c.Server, bookId, contentType, body)
+func (c *Client) PatchBooksBookIdWithBody(ctx context.Context, bookId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchBooksBookIdRequestWithBody(c.Server, bookId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -559,8 +638,8 @@ func (c *Client) PatchApiV1BooksBookIdWithBody(ctx context.Context, bookId strin
 	return c.Client.Do(req)
 }
 
-func (c *Client) PatchApiV1BooksBookId(ctx context.Context, bookId string, body PatchApiV1BooksBookIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPatchApiV1BooksBookIdRequest(c.Server, bookId, body)
+func (c *Client) PatchBooksBookId(ctx context.Context, bookId string, body PatchBooksBookIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchBooksBookIdRequest(c.Server, bookId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -571,8 +650,8 @@ func (c *Client) PatchApiV1BooksBookId(ctx context.Context, bookId string, body 
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1EpisodePages(ctx context.Context, params *GetApiV1EpisodePagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1EpisodePagesRequest(c.Server, params)
+func (c *Client) GetEpisodePages(ctx context.Context, params *GetEpisodePagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetEpisodePagesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -583,8 +662,8 @@ func (c *Client) GetApiV1EpisodePages(ctx context.Context, params *GetApiV1Episo
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1EpisodePagesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1EpisodePagesRequestWithBody(c.Server, contentType, body)
+func (c *Client) PostEpisodePagesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostEpisodePagesRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -595,8 +674,8 @@ func (c *Client) PostApiV1EpisodePagesWithBody(ctx context.Context, contentType 
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1EpisodePages(ctx context.Context, body PostApiV1EpisodePagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1EpisodePagesRequest(c.Server, body)
+func (c *Client) PostEpisodePages(ctx context.Context, body PostEpisodePagesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostEpisodePagesRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -607,8 +686,8 @@ func (c *Client) PostApiV1EpisodePages(ctx context.Context, body PostApiV1Episod
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteApiV1EpisodePagesEpisodePageId(ctx context.Context, episodePageId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteApiV1EpisodePagesEpisodePageIdRequest(c.Server, episodePageId)
+func (c *Client) DeleteEpisodePagesEpisodePageId(ctx context.Context, episodePageId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteEpisodePagesEpisodePageIdRequest(c.Server, episodePageId)
 	if err != nil {
 		return nil, err
 	}
@@ -619,8 +698,8 @@ func (c *Client) DeleteApiV1EpisodePagesEpisodePageId(ctx context.Context, episo
 	return c.Client.Do(req)
 }
 
-func (c *Client) PatchApiV1EpisodePagesEpisodePageIdWithBody(ctx context.Context, episodePageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPatchApiV1EpisodePagesEpisodePageIdRequestWithBody(c.Server, episodePageId, contentType, body)
+func (c *Client) PatchEpisodePagesEpisodePageIdWithBody(ctx context.Context, episodePageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchEpisodePagesEpisodePageIdRequestWithBody(c.Server, episodePageId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -631,8 +710,8 @@ func (c *Client) PatchApiV1EpisodePagesEpisodePageIdWithBody(ctx context.Context
 	return c.Client.Do(req)
 }
 
-func (c *Client) PatchApiV1EpisodePagesEpisodePageId(ctx context.Context, episodePageId string, body PatchApiV1EpisodePagesEpisodePageIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPatchApiV1EpisodePagesEpisodePageIdRequest(c.Server, episodePageId, body)
+func (c *Client) PatchEpisodePagesEpisodePageId(ctx context.Context, episodePageId string, body PatchEpisodePagesEpisodePageIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchEpisodePagesEpisodePageIdRequest(c.Server, episodePageId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -643,8 +722,8 @@ func (c *Client) PatchApiV1EpisodePagesEpisodePageId(ctx context.Context, episod
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1EpisodePagesPageId(ctx context.Context, pageId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1EpisodePagesPageIdRequest(c.Server, pageId)
+func (c *Client) GetEpisodePagesPageId(ctx context.Context, pageId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetEpisodePagesPageIdRequest(c.Server, pageId)
 	if err != nil {
 		return nil, err
 	}
@@ -655,8 +734,8 @@ func (c *Client) GetApiV1EpisodePagesPageId(ctx context.Context, pageId string, 
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1Episodes(ctx context.Context, params *GetApiV1EpisodesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1EpisodesRequest(c.Server, params)
+func (c *Client) GetEpisodes(ctx context.Context, params *GetEpisodesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetEpisodesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -667,8 +746,8 @@ func (c *Client) GetApiV1Episodes(ctx context.Context, params *GetApiV1EpisodesP
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1EpisodesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1EpisodesRequestWithBody(c.Server, contentType, body)
+func (c *Client) PostEpisodesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostEpisodesRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -679,8 +758,8 @@ func (c *Client) PostApiV1EpisodesWithBody(ctx context.Context, contentType stri
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1Episodes(ctx context.Context, body PostApiV1EpisodesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1EpisodesRequest(c.Server, body)
+func (c *Client) PostEpisodes(ctx context.Context, body PostEpisodesJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostEpisodesRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -691,8 +770,8 @@ func (c *Client) PostApiV1Episodes(ctx context.Context, body PostApiV1EpisodesJS
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteApiV1EpisodesEpisodeId(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteApiV1EpisodesEpisodeIdRequest(c.Server, episodeId)
+func (c *Client) DeleteEpisodesEpisodeId(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteEpisodesEpisodeIdRequest(c.Server, episodeId)
 	if err != nil {
 		return nil, err
 	}
@@ -703,8 +782,8 @@ func (c *Client) DeleteApiV1EpisodesEpisodeId(ctx context.Context, episodeId str
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1EpisodesEpisodeId(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1EpisodesEpisodeIdRequest(c.Server, episodeId)
+func (c *Client) GetEpisodesEpisodeId(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetEpisodesEpisodeIdRequest(c.Server, episodeId)
 	if err != nil {
 		return nil, err
 	}
@@ -715,8 +794,8 @@ func (c *Client) GetApiV1EpisodesEpisodeId(ctx context.Context, episodeId string
 	return c.Client.Do(req)
 }
 
-func (c *Client) PatchApiV1EpisodesEpisodeIdWithBody(ctx context.Context, episodeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPatchApiV1EpisodesEpisodeIdRequestWithBody(c.Server, episodeId, contentType, body)
+func (c *Client) PatchEpisodesEpisodeIdWithBody(ctx context.Context, episodeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchEpisodesEpisodeIdRequestWithBody(c.Server, episodeId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -727,8 +806,8 @@ func (c *Client) PatchApiV1EpisodesEpisodeIdWithBody(ctx context.Context, episod
 	return c.Client.Do(req)
 }
 
-func (c *Client) PatchApiV1EpisodesEpisodeId(ctx context.Context, episodeId string, body PatchApiV1EpisodesEpisodeIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPatchApiV1EpisodesEpisodeIdRequest(c.Server, episodeId, body)
+func (c *Client) PatchEpisodesEpisodeId(ctx context.Context, episodeId string, body PatchEpisodesEpisodeIdJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchEpisodesEpisodeIdRequest(c.Server, episodeId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -739,8 +818,8 @@ func (c *Client) PatchApiV1EpisodesEpisodeId(ctx context.Context, episodeId stri
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1Features(ctx context.Context, params *GetApiV1FeaturesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1FeaturesRequest(c.Server, params)
+func (c *Client) GetFeatures(ctx context.Context, params *GetFeaturesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetFeaturesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -751,8 +830,8 @@ func (c *Client) GetApiV1Features(ctx context.Context, params *GetApiV1FeaturesP
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1ImagesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1ImagesRequestWithBody(c.Server, contentType, body)
+func (c *Client) PostImagesWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostImagesRequestWithBody(c.Server, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -763,8 +842,8 @@ func (c *Client) PostApiV1ImagesWithBody(ctx context.Context, contentType string
 	return c.Client.Do(req)
 }
 
-func (c *Client) PostApiV1Initialize(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPostApiV1InitializeRequest(c.Server)
+func (c *Client) PostInitialize(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostInitializeRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -775,8 +854,8 @@ func (c *Client) PostApiV1Initialize(ctx context.Context, reqEditors ...RequestE
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1Rankings(ctx context.Context, params *GetApiV1RankingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1RankingsRequest(c.Server, params)
+func (c *Client) GetRankings(ctx context.Context, params *GetRankingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRankingsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -787,8 +866,8 @@ func (c *Client) GetApiV1Rankings(ctx context.Context, params *GetApiV1RankingsP
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1Releases(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1ReleasesRequest(c.Server)
+func (c *Client) GetReleases(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetReleasesRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -799,8 +878,8 @@ func (c *Client) GetApiV1Releases(ctx context.Context, reqEditors ...RequestEdit
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetApiV1ReleasesDayOfWeek(ctx context.Context, dayOfWeek string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetApiV1ReleasesDayOfWeekRequest(c.Server, dayOfWeek)
+func (c *Client) GetReleasesDayOfWeek(ctx context.Context, dayOfWeek string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetReleasesDayOfWeekRequest(c.Server, dayOfWeek)
 	if err != nil {
 		return nil, err
 	}
@@ -811,19 +890,19 @@ func (c *Client) GetApiV1ReleasesDayOfWeek(ctx context.Context, dayOfWeek string
 	return c.Client.Do(req)
 }
 
-// NewPostApiV1AdminLoginRequest calls the generic PostApiV1AdminLogin builder with application/json body
-func NewPostApiV1AdminLoginRequest(server string, body PostApiV1AdminLoginJSONRequestBody) (*http.Request, error) {
+// NewPostAdminLoginRequest calls the generic PostAdminLogin builder with application/json body
+func NewPostAdminLoginRequest(server string, body PostAdminLoginJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostApiV1AdminLoginRequestWithBody(server, "application/json", bodyReader)
+	return NewPostAdminLoginRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1AdminLoginRequestWithBody generates requests for PostApiV1AdminLogin with any type of body
-func NewPostApiV1AdminLoginRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewPostAdminLoginRequestWithBody generates requests for PostAdminLogin with any type of body
+func NewPostAdminLoginRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -831,7 +910,7 @@ func NewPostApiV1AdminLoginRequestWithBody(server string, contentType string, bo
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/admin/login")
+	operationPath := fmt.Sprintf("/admin/login")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -851,8 +930,8 @@ func NewPostApiV1AdminLoginRequestWithBody(server string, contentType string, bo
 	return req, nil
 }
 
-// NewPostApiV1AdminLogoutRequest generates requests for PostApiV1AdminLogout
-func NewPostApiV1AdminLogoutRequest(server string) (*http.Request, error) {
+// NewPostAdminLogoutRequest generates requests for PostAdminLogout
+func NewPostAdminLogoutRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -860,7 +939,7 @@ func NewPostApiV1AdminLogoutRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/admin/logout")
+	operationPath := fmt.Sprintf("/admin/logout")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -878,8 +957,8 @@ func NewPostApiV1AdminLogoutRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewGetApiV1AdminMeRequest generates requests for GetApiV1AdminMe
-func NewGetApiV1AdminMeRequest(server string) (*http.Request, error) {
+// NewGetAdminMeRequest generates requests for GetAdminMe
+func NewGetAdminMeRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -887,7 +966,7 @@ func NewGetApiV1AdminMeRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/admin/me")
+	operationPath := fmt.Sprintf("/admin/me")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -905,8 +984,8 @@ func NewGetApiV1AdminMeRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewGetApiV1AuthorsRequest generates requests for GetApiV1Authors
-func NewGetApiV1AuthorsRequest(server string, params *GetApiV1AuthorsParams) (*http.Request, error) {
+// NewGetAuthorsRequest generates requests for GetAuthors
+func NewGetAuthorsRequest(server string, params *GetAuthorsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -914,7 +993,7 @@ func NewGetApiV1AuthorsRequest(server string, params *GetApiV1AuthorsParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/authors")
+	operationPath := fmt.Sprintf("/authors")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -986,19 +1065,19 @@ func NewGetApiV1AuthorsRequest(server string, params *GetApiV1AuthorsParams) (*h
 	return req, nil
 }
 
-// NewPostApiV1AuthorsRequest calls the generic PostApiV1Authors builder with application/json body
-func NewPostApiV1AuthorsRequest(server string, body PostApiV1AuthorsJSONRequestBody) (*http.Request, error) {
+// NewPostAuthorsRequest calls the generic PostAuthors builder with application/json body
+func NewPostAuthorsRequest(server string, body PostAuthorsJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostApiV1AuthorsRequestWithBody(server, "application/json", bodyReader)
+	return NewPostAuthorsRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1AuthorsRequestWithBody generates requests for PostApiV1Authors with any type of body
-func NewPostApiV1AuthorsRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewPostAuthorsRequestWithBody generates requests for PostAuthors with any type of body
+func NewPostAuthorsRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1006,7 +1085,7 @@ func NewPostApiV1AuthorsRequestWithBody(server string, contentType string, body 
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/authors")
+	operationPath := fmt.Sprintf("/authors")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1026,8 +1105,8 @@ func NewPostApiV1AuthorsRequestWithBody(server string, contentType string, body 
 	return req, nil
 }
 
-// NewDeleteApiV1AuthorsAuthorIdRequest generates requests for DeleteApiV1AuthorsAuthorId
-func NewDeleteApiV1AuthorsAuthorIdRequest(server string, authorId string) (*http.Request, error) {
+// NewDeleteAuthorsAuthorIdRequest generates requests for DeleteAuthorsAuthorId
+func NewDeleteAuthorsAuthorIdRequest(server string, authorId string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1042,7 +1121,7 @@ func NewDeleteApiV1AuthorsAuthorIdRequest(server string, authorId string) (*http
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/authors/%s", pathParam0)
+	operationPath := fmt.Sprintf("/authors/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1060,8 +1139,8 @@ func NewDeleteApiV1AuthorsAuthorIdRequest(server string, authorId string) (*http
 	return req, nil
 }
 
-// NewGetApiV1AuthorsAuthorIdRequest generates requests for GetApiV1AuthorsAuthorId
-func NewGetApiV1AuthorsAuthorIdRequest(server string, authorId string) (*http.Request, error) {
+// NewGetAuthorsAuthorIdRequest generates requests for GetAuthorsAuthorId
+func NewGetAuthorsAuthorIdRequest(server string, authorId string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1076,7 +1155,7 @@ func NewGetApiV1AuthorsAuthorIdRequest(server string, authorId string) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/authors/%s", pathParam0)
+	operationPath := fmt.Sprintf("/authors/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1094,19 +1173,19 @@ func NewGetApiV1AuthorsAuthorIdRequest(server string, authorId string) (*http.Re
 	return req, nil
 }
 
-// NewPatchApiV1AuthorsAuthorIdRequest calls the generic PatchApiV1AuthorsAuthorId builder with application/json body
-func NewPatchApiV1AuthorsAuthorIdRequest(server string, authorId string, body PatchApiV1AuthorsAuthorIdJSONRequestBody) (*http.Request, error) {
+// NewPatchAuthorsAuthorIdRequest calls the generic PatchAuthorsAuthorId builder with application/json body
+func NewPatchAuthorsAuthorIdRequest(server string, authorId string, body PatchAuthorsAuthorIdJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPatchApiV1AuthorsAuthorIdRequestWithBody(server, authorId, "application/json", bodyReader)
+	return NewPatchAuthorsAuthorIdRequestWithBody(server, authorId, "application/json", bodyReader)
 }
 
-// NewPatchApiV1AuthorsAuthorIdRequestWithBody generates requests for PatchApiV1AuthorsAuthorId with any type of body
-func NewPatchApiV1AuthorsAuthorIdRequestWithBody(server string, authorId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewPatchAuthorsAuthorIdRequestWithBody generates requests for PatchAuthorsAuthorId with any type of body
+func NewPatchAuthorsAuthorIdRequestWithBody(server string, authorId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1121,7 +1200,7 @@ func NewPatchApiV1AuthorsAuthorIdRequestWithBody(server string, authorId string,
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/authors/%s", pathParam0)
+	operationPath := fmt.Sprintf("/authors/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1141,8 +1220,8 @@ func NewPatchApiV1AuthorsAuthorIdRequestWithBody(server string, authorId string,
 	return req, nil
 }
 
-// NewGetApiV1BooksRequest generates requests for GetApiV1Books
-func NewGetApiV1BooksRequest(server string, params *GetApiV1BooksParams) (*http.Request, error) {
+// NewGetBooksRequest generates requests for GetBooks
+func NewGetBooksRequest(server string, params *GetBooksParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1150,7 +1229,7 @@ func NewGetApiV1BooksRequest(server string, params *GetApiV1BooksParams) (*http.
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/books")
+	operationPath := fmt.Sprintf("/books")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1254,19 +1333,19 @@ func NewGetApiV1BooksRequest(server string, params *GetApiV1BooksParams) (*http.
 	return req, nil
 }
 
-// NewPostApiV1BooksRequest calls the generic PostApiV1Books builder with application/json body
-func NewPostApiV1BooksRequest(server string, body PostApiV1BooksJSONRequestBody) (*http.Request, error) {
+// NewPostBooksRequest calls the generic PostBooks builder with application/json body
+func NewPostBooksRequest(server string, body PostBooksJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostApiV1BooksRequestWithBody(server, "application/json", bodyReader)
+	return NewPostBooksRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1BooksRequestWithBody generates requests for PostApiV1Books with any type of body
-func NewPostApiV1BooksRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewPostBooksRequestWithBody generates requests for PostBooks with any type of body
+func NewPostBooksRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1274,7 +1353,7 @@ func NewPostApiV1BooksRequestWithBody(server string, contentType string, body io
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/books")
+	operationPath := fmt.Sprintf("/books")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1294,8 +1373,8 @@ func NewPostApiV1BooksRequestWithBody(server string, contentType string, body io
 	return req, nil
 }
 
-// NewDeleteApiV1BooksBookIdRequest generates requests for DeleteApiV1BooksBookId
-func NewDeleteApiV1BooksBookIdRequest(server string, bookId string) (*http.Request, error) {
+// NewDeleteBooksBookIdRequest generates requests for DeleteBooksBookId
+func NewDeleteBooksBookIdRequest(server string, bookId string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1310,7 +1389,7 @@ func NewDeleteApiV1BooksBookIdRequest(server string, bookId string) (*http.Reque
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/books/%s", pathParam0)
+	operationPath := fmt.Sprintf("/books/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1328,8 +1407,8 @@ func NewDeleteApiV1BooksBookIdRequest(server string, bookId string) (*http.Reque
 	return req, nil
 }
 
-// NewGetApiV1BooksBookIdRequest generates requests for GetApiV1BooksBookId
-func NewGetApiV1BooksBookIdRequest(server string, bookId string) (*http.Request, error) {
+// NewGetBooksBookIdRequest generates requests for GetBooksBookId
+func NewGetBooksBookIdRequest(server string, bookId string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1344,7 +1423,7 @@ func NewGetApiV1BooksBookIdRequest(server string, bookId string) (*http.Request,
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/books/%s", pathParam0)
+	operationPath := fmt.Sprintf("/books/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1362,19 +1441,19 @@ func NewGetApiV1BooksBookIdRequest(server string, bookId string) (*http.Request,
 	return req, nil
 }
 
-// NewPatchApiV1BooksBookIdRequest calls the generic PatchApiV1BooksBookId builder with application/json body
-func NewPatchApiV1BooksBookIdRequest(server string, bookId string, body PatchApiV1BooksBookIdJSONRequestBody) (*http.Request, error) {
+// NewPatchBooksBookIdRequest calls the generic PatchBooksBookId builder with application/json body
+func NewPatchBooksBookIdRequest(server string, bookId string, body PatchBooksBookIdJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPatchApiV1BooksBookIdRequestWithBody(server, bookId, "application/json", bodyReader)
+	return NewPatchBooksBookIdRequestWithBody(server, bookId, "application/json", bodyReader)
 }
 
-// NewPatchApiV1BooksBookIdRequestWithBody generates requests for PatchApiV1BooksBookId with any type of body
-func NewPatchApiV1BooksBookIdRequestWithBody(server string, bookId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewPatchBooksBookIdRequestWithBody generates requests for PatchBooksBookId with any type of body
+func NewPatchBooksBookIdRequestWithBody(server string, bookId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1389,7 +1468,7 @@ func NewPatchApiV1BooksBookIdRequestWithBody(server string, bookId string, conte
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/books/%s", pathParam0)
+	operationPath := fmt.Sprintf("/books/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1409,8 +1488,8 @@ func NewPatchApiV1BooksBookIdRequestWithBody(server string, bookId string, conte
 	return req, nil
 }
 
-// NewGetApiV1EpisodePagesRequest generates requests for GetApiV1EpisodePages
-func NewGetApiV1EpisodePagesRequest(server string, params *GetApiV1EpisodePagesParams) (*http.Request, error) {
+// NewGetEpisodePagesRequest generates requests for GetEpisodePages
+func NewGetEpisodePagesRequest(server string, params *GetEpisodePagesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1418,7 +1497,7 @@ func NewGetApiV1EpisodePagesRequest(server string, params *GetApiV1EpisodePagesP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/episodePages")
+	operationPath := fmt.Sprintf("/episodePages")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1486,19 +1565,19 @@ func NewGetApiV1EpisodePagesRequest(server string, params *GetApiV1EpisodePagesP
 	return req, nil
 }
 
-// NewPostApiV1EpisodePagesRequest calls the generic PostApiV1EpisodePages builder with application/json body
-func NewPostApiV1EpisodePagesRequest(server string, body PostApiV1EpisodePagesJSONRequestBody) (*http.Request, error) {
+// NewPostEpisodePagesRequest calls the generic PostEpisodePages builder with application/json body
+func NewPostEpisodePagesRequest(server string, body PostEpisodePagesJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostApiV1EpisodePagesRequestWithBody(server, "application/json", bodyReader)
+	return NewPostEpisodePagesRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1EpisodePagesRequestWithBody generates requests for PostApiV1EpisodePages with any type of body
-func NewPostApiV1EpisodePagesRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewPostEpisodePagesRequestWithBody generates requests for PostEpisodePages with any type of body
+func NewPostEpisodePagesRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1506,7 +1585,7 @@ func NewPostApiV1EpisodePagesRequestWithBody(server string, contentType string, 
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/episodePages")
+	operationPath := fmt.Sprintf("/episodePages")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1526,8 +1605,8 @@ func NewPostApiV1EpisodePagesRequestWithBody(server string, contentType string, 
 	return req, nil
 }
 
-// NewDeleteApiV1EpisodePagesEpisodePageIdRequest generates requests for DeleteApiV1EpisodePagesEpisodePageId
-func NewDeleteApiV1EpisodePagesEpisodePageIdRequest(server string, episodePageId string) (*http.Request, error) {
+// NewDeleteEpisodePagesEpisodePageIdRequest generates requests for DeleteEpisodePagesEpisodePageId
+func NewDeleteEpisodePagesEpisodePageIdRequest(server string, episodePageId string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1542,7 +1621,7 @@ func NewDeleteApiV1EpisodePagesEpisodePageIdRequest(server string, episodePageId
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/episodePages/%s", pathParam0)
+	operationPath := fmt.Sprintf("/episodePages/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1560,19 +1639,19 @@ func NewDeleteApiV1EpisodePagesEpisodePageIdRequest(server string, episodePageId
 	return req, nil
 }
 
-// NewPatchApiV1EpisodePagesEpisodePageIdRequest calls the generic PatchApiV1EpisodePagesEpisodePageId builder with application/json body
-func NewPatchApiV1EpisodePagesEpisodePageIdRequest(server string, episodePageId string, body PatchApiV1EpisodePagesEpisodePageIdJSONRequestBody) (*http.Request, error) {
+// NewPatchEpisodePagesEpisodePageIdRequest calls the generic PatchEpisodePagesEpisodePageId builder with application/json body
+func NewPatchEpisodePagesEpisodePageIdRequest(server string, episodePageId string, body PatchEpisodePagesEpisodePageIdJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPatchApiV1EpisodePagesEpisodePageIdRequestWithBody(server, episodePageId, "application/json", bodyReader)
+	return NewPatchEpisodePagesEpisodePageIdRequestWithBody(server, episodePageId, "application/json", bodyReader)
 }
 
-// NewPatchApiV1EpisodePagesEpisodePageIdRequestWithBody generates requests for PatchApiV1EpisodePagesEpisodePageId with any type of body
-func NewPatchApiV1EpisodePagesEpisodePageIdRequestWithBody(server string, episodePageId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewPatchEpisodePagesEpisodePageIdRequestWithBody generates requests for PatchEpisodePagesEpisodePageId with any type of body
+func NewPatchEpisodePagesEpisodePageIdRequestWithBody(server string, episodePageId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1587,7 +1666,7 @@ func NewPatchApiV1EpisodePagesEpisodePageIdRequestWithBody(server string, episod
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/episodePages/%s", pathParam0)
+	operationPath := fmt.Sprintf("/episodePages/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1607,8 +1686,8 @@ func NewPatchApiV1EpisodePagesEpisodePageIdRequestWithBody(server string, episod
 	return req, nil
 }
 
-// NewGetApiV1EpisodePagesPageIdRequest generates requests for GetApiV1EpisodePagesPageId
-func NewGetApiV1EpisodePagesPageIdRequest(server string, pageId string) (*http.Request, error) {
+// NewGetEpisodePagesPageIdRequest generates requests for GetEpisodePagesPageId
+func NewGetEpisodePagesPageIdRequest(server string, pageId string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1623,7 +1702,7 @@ func NewGetApiV1EpisodePagesPageIdRequest(server string, pageId string) (*http.R
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/episodePages/%s", pathParam0)
+	operationPath := fmt.Sprintf("/episodePages/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1641,8 +1720,8 @@ func NewGetApiV1EpisodePagesPageIdRequest(server string, pageId string) (*http.R
 	return req, nil
 }
 
-// NewGetApiV1EpisodesRequest generates requests for GetApiV1Episodes
-func NewGetApiV1EpisodesRequest(server string, params *GetApiV1EpisodesParams) (*http.Request, error) {
+// NewGetEpisodesRequest generates requests for GetEpisodes
+func NewGetEpisodesRequest(server string, params *GetEpisodesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1650,7 +1729,7 @@ func NewGetApiV1EpisodesRequest(server string, params *GetApiV1EpisodesParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/episodes")
+	operationPath := fmt.Sprintf("/episodes")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1718,19 +1797,19 @@ func NewGetApiV1EpisodesRequest(server string, params *GetApiV1EpisodesParams) (
 	return req, nil
 }
 
-// NewPostApiV1EpisodesRequest calls the generic PostApiV1Episodes builder with application/json body
-func NewPostApiV1EpisodesRequest(server string, body PostApiV1EpisodesJSONRequestBody) (*http.Request, error) {
+// NewPostEpisodesRequest calls the generic PostEpisodes builder with application/json body
+func NewPostEpisodesRequest(server string, body PostEpisodesJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPostApiV1EpisodesRequestWithBody(server, "application/json", bodyReader)
+	return NewPostEpisodesRequestWithBody(server, "application/json", bodyReader)
 }
 
-// NewPostApiV1EpisodesRequestWithBody generates requests for PostApiV1Episodes with any type of body
-func NewPostApiV1EpisodesRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewPostEpisodesRequestWithBody generates requests for PostEpisodes with any type of body
+func NewPostEpisodesRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1738,7 +1817,7 @@ func NewPostApiV1EpisodesRequestWithBody(server string, contentType string, body
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/episodes")
+	operationPath := fmt.Sprintf("/episodes")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1758,8 +1837,8 @@ func NewPostApiV1EpisodesRequestWithBody(server string, contentType string, body
 	return req, nil
 }
 
-// NewDeleteApiV1EpisodesEpisodeIdRequest generates requests for DeleteApiV1EpisodesEpisodeId
-func NewDeleteApiV1EpisodesEpisodeIdRequest(server string, episodeId string) (*http.Request, error) {
+// NewDeleteEpisodesEpisodeIdRequest generates requests for DeleteEpisodesEpisodeId
+func NewDeleteEpisodesEpisodeIdRequest(server string, episodeId string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1774,7 +1853,7 @@ func NewDeleteApiV1EpisodesEpisodeIdRequest(server string, episodeId string) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/episodes/%s", pathParam0)
+	operationPath := fmt.Sprintf("/episodes/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1792,8 +1871,8 @@ func NewDeleteApiV1EpisodesEpisodeIdRequest(server string, episodeId string) (*h
 	return req, nil
 }
 
-// NewGetApiV1EpisodesEpisodeIdRequest generates requests for GetApiV1EpisodesEpisodeId
-func NewGetApiV1EpisodesEpisodeIdRequest(server string, episodeId string) (*http.Request, error) {
+// NewGetEpisodesEpisodeIdRequest generates requests for GetEpisodesEpisodeId
+func NewGetEpisodesEpisodeIdRequest(server string, episodeId string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1808,7 +1887,7 @@ func NewGetApiV1EpisodesEpisodeIdRequest(server string, episodeId string) (*http
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/episodes/%s", pathParam0)
+	operationPath := fmt.Sprintf("/episodes/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1826,19 +1905,19 @@ func NewGetApiV1EpisodesEpisodeIdRequest(server string, episodeId string) (*http
 	return req, nil
 }
 
-// NewPatchApiV1EpisodesEpisodeIdRequest calls the generic PatchApiV1EpisodesEpisodeId builder with application/json body
-func NewPatchApiV1EpisodesEpisodeIdRequest(server string, episodeId string, body PatchApiV1EpisodesEpisodeIdJSONRequestBody) (*http.Request, error) {
+// NewPatchEpisodesEpisodeIdRequest calls the generic PatchEpisodesEpisodeId builder with application/json body
+func NewPatchEpisodesEpisodeIdRequest(server string, episodeId string, body PatchEpisodesEpisodeIdJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewPatchApiV1EpisodesEpisodeIdRequestWithBody(server, episodeId, "application/json", bodyReader)
+	return NewPatchEpisodesEpisodeIdRequestWithBody(server, episodeId, "application/json", bodyReader)
 }
 
-// NewPatchApiV1EpisodesEpisodeIdRequestWithBody generates requests for PatchApiV1EpisodesEpisodeId with any type of body
-func NewPatchApiV1EpisodesEpisodeIdRequestWithBody(server string, episodeId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewPatchEpisodesEpisodeIdRequestWithBody generates requests for PatchEpisodesEpisodeId with any type of body
+func NewPatchEpisodesEpisodeIdRequestWithBody(server string, episodeId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -1853,7 +1932,7 @@ func NewPatchApiV1EpisodesEpisodeIdRequestWithBody(server string, episodeId stri
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/episodes/%s", pathParam0)
+	operationPath := fmt.Sprintf("/episodes/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1873,8 +1952,8 @@ func NewPatchApiV1EpisodesEpisodeIdRequestWithBody(server string, episodeId stri
 	return req, nil
 }
 
-// NewGetApiV1FeaturesRequest generates requests for GetApiV1Features
-func NewGetApiV1FeaturesRequest(server string, params *GetApiV1FeaturesParams) (*http.Request, error) {
+// NewGetFeaturesRequest generates requests for GetFeatures
+func NewGetFeaturesRequest(server string, params *GetFeaturesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1882,7 +1961,7 @@ func NewGetApiV1FeaturesRequest(server string, params *GetApiV1FeaturesParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/features")
+	operationPath := fmt.Sprintf("/features")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1938,8 +2017,8 @@ func NewGetApiV1FeaturesRequest(server string, params *GetApiV1FeaturesParams) (
 	return req, nil
 }
 
-// NewPostApiV1ImagesRequestWithBody generates requests for PostApiV1Images with any type of body
-func NewPostApiV1ImagesRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+// NewPostImagesRequestWithBody generates requests for PostImages with any type of body
+func NewPostImagesRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1947,7 +2026,7 @@ func NewPostApiV1ImagesRequestWithBody(server string, contentType string, body i
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/images")
+	operationPath := fmt.Sprintf("/images")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1967,8 +2046,8 @@ func NewPostApiV1ImagesRequestWithBody(server string, contentType string, body i
 	return req, nil
 }
 
-// NewPostApiV1InitializeRequest generates requests for PostApiV1Initialize
-func NewPostApiV1InitializeRequest(server string) (*http.Request, error) {
+// NewPostInitializeRequest generates requests for PostInitialize
+func NewPostInitializeRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1976,7 +2055,7 @@ func NewPostApiV1InitializeRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/initialize")
+	operationPath := fmt.Sprintf("/initialize")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1994,8 +2073,8 @@ func NewPostApiV1InitializeRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewGetApiV1RankingsRequest generates requests for GetApiV1Rankings
-func NewGetApiV1RankingsRequest(server string, params *GetApiV1RankingsParams) (*http.Request, error) {
+// NewGetRankingsRequest generates requests for GetRankings
+func NewGetRankingsRequest(server string, params *GetRankingsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -2003,7 +2082,7 @@ func NewGetApiV1RankingsRequest(server string, params *GetApiV1RankingsParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/rankings")
+	operationPath := fmt.Sprintf("/rankings")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -2059,8 +2138,8 @@ func NewGetApiV1RankingsRequest(server string, params *GetApiV1RankingsParams) (
 	return req, nil
 }
 
-// NewGetApiV1ReleasesRequest generates requests for GetApiV1Releases
-func NewGetApiV1ReleasesRequest(server string) (*http.Request, error) {
+// NewGetReleasesRequest generates requests for GetReleases
+func NewGetReleasesRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -2068,7 +2147,7 @@ func NewGetApiV1ReleasesRequest(server string) (*http.Request, error) {
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/releases")
+	operationPath := fmt.Sprintf("/releases")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -2086,8 +2165,8 @@ func NewGetApiV1ReleasesRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
-// NewGetApiV1ReleasesDayOfWeekRequest generates requests for GetApiV1ReleasesDayOfWeek
-func NewGetApiV1ReleasesDayOfWeekRequest(server string, dayOfWeek string) (*http.Request, error) {
+// NewGetReleasesDayOfWeekRequest generates requests for GetReleasesDayOfWeek
+func NewGetReleasesDayOfWeekRequest(server string, dayOfWeek string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -2102,7 +2181,7 @@ func NewGetApiV1ReleasesDayOfWeekRequest(server string, dayOfWeek string) (*http
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/v1/releases/%s", pathParam0)
+	operationPath := fmt.Sprintf("/releases/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -2163,113 +2242,113 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// PostApiV1AdminLoginWithBodyWithResponse request with any body
-	PostApiV1AdminLoginWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1AdminLoginResponse, error)
+	// PostAdminLoginWithBodyWithResponse request with any body
+	PostAdminLoginWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostAdminLoginResponse, error)
 
-	PostApiV1AdminLoginWithResponse(ctx context.Context, body PostApiV1AdminLoginJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1AdminLoginResponse, error)
+	PostAdminLoginWithResponse(ctx context.Context, body PostAdminLoginJSONRequestBody, reqEditors ...RequestEditorFn) (*PostAdminLoginResponse, error)
 
-	// PostApiV1AdminLogoutWithResponse request
-	PostApiV1AdminLogoutWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostApiV1AdminLogoutResponse, error)
+	// PostAdminLogoutWithResponse request
+	PostAdminLogoutWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostAdminLogoutResponse, error)
 
-	// GetApiV1AdminMeWithResponse request
-	GetApiV1AdminMeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiV1AdminMeResponse, error)
+	// GetAdminMeWithResponse request
+	GetAdminMeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAdminMeResponse, error)
 
-	// GetApiV1AuthorsWithResponse request
-	GetApiV1AuthorsWithResponse(ctx context.Context, params *GetApiV1AuthorsParams, reqEditors ...RequestEditorFn) (*GetApiV1AuthorsResponse, error)
+	// GetAuthorsWithResponse request
+	GetAuthorsWithResponse(ctx context.Context, params *GetAuthorsParams, reqEditors ...RequestEditorFn) (*GetAuthorsResponse, error)
 
-	// PostApiV1AuthorsWithBodyWithResponse request with any body
-	PostApiV1AuthorsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1AuthorsResponse, error)
+	// PostAuthorsWithBodyWithResponse request with any body
+	PostAuthorsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostAuthorsResponse, error)
 
-	PostApiV1AuthorsWithResponse(ctx context.Context, body PostApiV1AuthorsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1AuthorsResponse, error)
+	PostAuthorsWithResponse(ctx context.Context, body PostAuthorsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostAuthorsResponse, error)
 
-	// DeleteApiV1AuthorsAuthorIdWithResponse request
-	DeleteApiV1AuthorsAuthorIdWithResponse(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*DeleteApiV1AuthorsAuthorIdResponse, error)
+	// DeleteAuthorsAuthorIdWithResponse request
+	DeleteAuthorsAuthorIdWithResponse(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*DeleteAuthorsAuthorIdResponse, error)
 
-	// GetApiV1AuthorsAuthorIdWithResponse request
-	GetApiV1AuthorsAuthorIdWithResponse(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*GetApiV1AuthorsAuthorIdResponse, error)
+	// GetAuthorsAuthorIdWithResponse request
+	GetAuthorsAuthorIdWithResponse(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*GetAuthorsAuthorIdResponse, error)
 
-	// PatchApiV1AuthorsAuthorIdWithBodyWithResponse request with any body
-	PatchApiV1AuthorsAuthorIdWithBodyWithResponse(ctx context.Context, authorId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchApiV1AuthorsAuthorIdResponse, error)
+	// PatchAuthorsAuthorIdWithBodyWithResponse request with any body
+	PatchAuthorsAuthorIdWithBodyWithResponse(ctx context.Context, authorId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchAuthorsAuthorIdResponse, error)
 
-	PatchApiV1AuthorsAuthorIdWithResponse(ctx context.Context, authorId string, body PatchApiV1AuthorsAuthorIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchApiV1AuthorsAuthorIdResponse, error)
+	PatchAuthorsAuthorIdWithResponse(ctx context.Context, authorId string, body PatchAuthorsAuthorIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchAuthorsAuthorIdResponse, error)
 
-	// GetApiV1BooksWithResponse request
-	GetApiV1BooksWithResponse(ctx context.Context, params *GetApiV1BooksParams, reqEditors ...RequestEditorFn) (*GetApiV1BooksResponse, error)
+	// GetBooksWithResponse request
+	GetBooksWithResponse(ctx context.Context, params *GetBooksParams, reqEditors ...RequestEditorFn) (*GetBooksResponse, error)
 
-	// PostApiV1BooksWithBodyWithResponse request with any body
-	PostApiV1BooksWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1BooksResponse, error)
+	// PostBooksWithBodyWithResponse request with any body
+	PostBooksWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostBooksResponse, error)
 
-	PostApiV1BooksWithResponse(ctx context.Context, body PostApiV1BooksJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1BooksResponse, error)
+	PostBooksWithResponse(ctx context.Context, body PostBooksJSONRequestBody, reqEditors ...RequestEditorFn) (*PostBooksResponse, error)
 
-	// DeleteApiV1BooksBookIdWithResponse request
-	DeleteApiV1BooksBookIdWithResponse(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*DeleteApiV1BooksBookIdResponse, error)
+	// DeleteBooksBookIdWithResponse request
+	DeleteBooksBookIdWithResponse(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*DeleteBooksBookIdResponse, error)
 
-	// GetApiV1BooksBookIdWithResponse request
-	GetApiV1BooksBookIdWithResponse(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*GetApiV1BooksBookIdResponse, error)
+	// GetBooksBookIdWithResponse request
+	GetBooksBookIdWithResponse(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*GetBooksBookIdResponse, error)
 
-	// PatchApiV1BooksBookIdWithBodyWithResponse request with any body
-	PatchApiV1BooksBookIdWithBodyWithResponse(ctx context.Context, bookId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchApiV1BooksBookIdResponse, error)
+	// PatchBooksBookIdWithBodyWithResponse request with any body
+	PatchBooksBookIdWithBodyWithResponse(ctx context.Context, bookId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchBooksBookIdResponse, error)
 
-	PatchApiV1BooksBookIdWithResponse(ctx context.Context, bookId string, body PatchApiV1BooksBookIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchApiV1BooksBookIdResponse, error)
+	PatchBooksBookIdWithResponse(ctx context.Context, bookId string, body PatchBooksBookIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchBooksBookIdResponse, error)
 
-	// GetApiV1EpisodePagesWithResponse request
-	GetApiV1EpisodePagesWithResponse(ctx context.Context, params *GetApiV1EpisodePagesParams, reqEditors ...RequestEditorFn) (*GetApiV1EpisodePagesResponse, error)
+	// GetEpisodePagesWithResponse request
+	GetEpisodePagesWithResponse(ctx context.Context, params *GetEpisodePagesParams, reqEditors ...RequestEditorFn) (*GetEpisodePagesResponse, error)
 
-	// PostApiV1EpisodePagesWithBodyWithResponse request with any body
-	PostApiV1EpisodePagesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1EpisodePagesResponse, error)
+	// PostEpisodePagesWithBodyWithResponse request with any body
+	PostEpisodePagesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostEpisodePagesResponse, error)
 
-	PostApiV1EpisodePagesWithResponse(ctx context.Context, body PostApiV1EpisodePagesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1EpisodePagesResponse, error)
+	PostEpisodePagesWithResponse(ctx context.Context, body PostEpisodePagesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostEpisodePagesResponse, error)
 
-	// DeleteApiV1EpisodePagesEpisodePageIdWithResponse request
-	DeleteApiV1EpisodePagesEpisodePageIdWithResponse(ctx context.Context, episodePageId string, reqEditors ...RequestEditorFn) (*DeleteApiV1EpisodePagesEpisodePageIdResponse, error)
+	// DeleteEpisodePagesEpisodePageIdWithResponse request
+	DeleteEpisodePagesEpisodePageIdWithResponse(ctx context.Context, episodePageId string, reqEditors ...RequestEditorFn) (*DeleteEpisodePagesEpisodePageIdResponse, error)
 
-	// PatchApiV1EpisodePagesEpisodePageIdWithBodyWithResponse request with any body
-	PatchApiV1EpisodePagesEpisodePageIdWithBodyWithResponse(ctx context.Context, episodePageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchApiV1EpisodePagesEpisodePageIdResponse, error)
+	// PatchEpisodePagesEpisodePageIdWithBodyWithResponse request with any body
+	PatchEpisodePagesEpisodePageIdWithBodyWithResponse(ctx context.Context, episodePageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchEpisodePagesEpisodePageIdResponse, error)
 
-	PatchApiV1EpisodePagesEpisodePageIdWithResponse(ctx context.Context, episodePageId string, body PatchApiV1EpisodePagesEpisodePageIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchApiV1EpisodePagesEpisodePageIdResponse, error)
+	PatchEpisodePagesEpisodePageIdWithResponse(ctx context.Context, episodePageId string, body PatchEpisodePagesEpisodePageIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchEpisodePagesEpisodePageIdResponse, error)
 
-	// GetApiV1EpisodePagesPageIdWithResponse request
-	GetApiV1EpisodePagesPageIdWithResponse(ctx context.Context, pageId string, reqEditors ...RequestEditorFn) (*GetApiV1EpisodePagesPageIdResponse, error)
+	// GetEpisodePagesPageIdWithResponse request
+	GetEpisodePagesPageIdWithResponse(ctx context.Context, pageId string, reqEditors ...RequestEditorFn) (*GetEpisodePagesPageIdResponse, error)
 
-	// GetApiV1EpisodesWithResponse request
-	GetApiV1EpisodesWithResponse(ctx context.Context, params *GetApiV1EpisodesParams, reqEditors ...RequestEditorFn) (*GetApiV1EpisodesResponse, error)
+	// GetEpisodesWithResponse request
+	GetEpisodesWithResponse(ctx context.Context, params *GetEpisodesParams, reqEditors ...RequestEditorFn) (*GetEpisodesResponse, error)
 
-	// PostApiV1EpisodesWithBodyWithResponse request with any body
-	PostApiV1EpisodesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1EpisodesResponse, error)
+	// PostEpisodesWithBodyWithResponse request with any body
+	PostEpisodesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostEpisodesResponse, error)
 
-	PostApiV1EpisodesWithResponse(ctx context.Context, body PostApiV1EpisodesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1EpisodesResponse, error)
+	PostEpisodesWithResponse(ctx context.Context, body PostEpisodesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostEpisodesResponse, error)
 
-	// DeleteApiV1EpisodesEpisodeIdWithResponse request
-	DeleteApiV1EpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*DeleteApiV1EpisodesEpisodeIdResponse, error)
+	// DeleteEpisodesEpisodeIdWithResponse request
+	DeleteEpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*DeleteEpisodesEpisodeIdResponse, error)
 
-	// GetApiV1EpisodesEpisodeIdWithResponse request
-	GetApiV1EpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*GetApiV1EpisodesEpisodeIdResponse, error)
+	// GetEpisodesEpisodeIdWithResponse request
+	GetEpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*GetEpisodesEpisodeIdResponse, error)
 
-	// PatchApiV1EpisodesEpisodeIdWithBodyWithResponse request with any body
-	PatchApiV1EpisodesEpisodeIdWithBodyWithResponse(ctx context.Context, episodeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchApiV1EpisodesEpisodeIdResponse, error)
+	// PatchEpisodesEpisodeIdWithBodyWithResponse request with any body
+	PatchEpisodesEpisodeIdWithBodyWithResponse(ctx context.Context, episodeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchEpisodesEpisodeIdResponse, error)
 
-	PatchApiV1EpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, body PatchApiV1EpisodesEpisodeIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchApiV1EpisodesEpisodeIdResponse, error)
+	PatchEpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, body PatchEpisodesEpisodeIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchEpisodesEpisodeIdResponse, error)
 
-	// GetApiV1FeaturesWithResponse request
-	GetApiV1FeaturesWithResponse(ctx context.Context, params *GetApiV1FeaturesParams, reqEditors ...RequestEditorFn) (*GetApiV1FeaturesResponse, error)
+	// GetFeaturesWithResponse request
+	GetFeaturesWithResponse(ctx context.Context, params *GetFeaturesParams, reqEditors ...RequestEditorFn) (*GetFeaturesResponse, error)
 
-	// PostApiV1ImagesWithBodyWithResponse request with any body
-	PostApiV1ImagesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1ImagesResponse, error)
+	// PostImagesWithBodyWithResponse request with any body
+	PostImagesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostImagesResponse, error)
 
-	// PostApiV1InitializeWithResponse request
-	PostApiV1InitializeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostApiV1InitializeResponse, error)
+	// PostInitializeWithResponse request
+	PostInitializeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostInitializeResponse, error)
 
-	// GetApiV1RankingsWithResponse request
-	GetApiV1RankingsWithResponse(ctx context.Context, params *GetApiV1RankingsParams, reqEditors ...RequestEditorFn) (*GetApiV1RankingsResponse, error)
+	// GetRankingsWithResponse request
+	GetRankingsWithResponse(ctx context.Context, params *GetRankingsParams, reqEditors ...RequestEditorFn) (*GetRankingsResponse, error)
 
-	// GetApiV1ReleasesWithResponse request
-	GetApiV1ReleasesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiV1ReleasesResponse, error)
+	// GetReleasesWithResponse request
+	GetReleasesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetReleasesResponse, error)
 
-	// GetApiV1ReleasesDayOfWeekWithResponse request
-	GetApiV1ReleasesDayOfWeekWithResponse(ctx context.Context, dayOfWeek string, reqEditors ...RequestEditorFn) (*GetApiV1ReleasesDayOfWeekResponse, error)
+	// GetReleasesDayOfWeekWithResponse request
+	GetReleasesDayOfWeekWithResponse(ctx context.Context, dayOfWeek string, reqEditors ...RequestEditorFn) (*GetReleasesDayOfWeekResponse, error)
 }
 
-type PostApiV1AdminLoginResponse struct {
+type PostAdminLoginResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2283,7 +2362,7 @@ type PostApiV1AdminLoginResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r PostApiV1AdminLoginResponse) Status() string {
+func (r PostAdminLoginResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2291,20 +2370,20 @@ func (r PostApiV1AdminLoginResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostApiV1AdminLoginResponse) StatusCode() int {
+func (r PostAdminLoginResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PostApiV1AdminLogoutResponse struct {
+type PostAdminLogoutResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 }
 
 // Status returns HTTPResponse.Status
-func (r PostApiV1AdminLogoutResponse) Status() string {
+func (r PostAdminLogoutResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2312,14 +2391,14 @@ func (r PostApiV1AdminLogoutResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostApiV1AdminLogoutResponse) StatusCode() int {
+func (r PostAdminLogoutResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1AdminMeResponse struct {
+type GetAdminMeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2333,7 +2412,7 @@ type GetApiV1AdminMeResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1AdminMeResponse) Status() string {
+func (r GetAdminMeResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2341,44 +2420,21 @@ func (r GetApiV1AdminMeResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1AdminMeResponse) StatusCode() int {
+func (r GetAdminMeResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1AuthorsResponse struct {
+type GetAuthorsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *[]struct {
-		Books []struct {
-			Description string `json:"description"`
-			Episodes    []struct {
-				Chapter     float32 `json:"chapter"`
-				Description string  `json:"description"`
-				Id          string  `json:"id"`
-				Name        string  `json:"name"`
-			} `json:"episodes"`
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
-		} `json:"books"`
-		Description string `json:"description"`
-		Id          string `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Name string `json:"name"`
-	}
+	JSON200      *[]GetAuthorListItem
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1AuthorsResponse) Status() string {
+func (r GetAuthorsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2386,14 +2442,14 @@ func (r GetApiV1AuthorsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1AuthorsResponse) StatusCode() int {
+func (r GetAuthorsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PostApiV1AuthorsResponse struct {
+type PostAuthorsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2423,7 +2479,7 @@ type PostApiV1AuthorsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r PostApiV1AuthorsResponse) Status() string {
+func (r PostAuthorsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2431,20 +2487,20 @@ func (r PostApiV1AuthorsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostApiV1AuthorsResponse) StatusCode() int {
+func (r PostAuthorsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DeleteApiV1AuthorsAuthorIdResponse struct {
+type DeleteAuthorsAuthorIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 }
 
 // Status returns HTTPResponse.Status
-func (r DeleteApiV1AuthorsAuthorIdResponse) Status() string {
+func (r DeleteAuthorsAuthorIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2452,44 +2508,21 @@ func (r DeleteApiV1AuthorsAuthorIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DeleteApiV1AuthorsAuthorIdResponse) StatusCode() int {
+func (r DeleteAuthorsAuthorIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1AuthorsAuthorIdResponse struct {
+type GetAuthorsAuthorIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
-		Books []struct {
-			Description string `json:"description"`
-			Episodes    []struct {
-				Chapter     float32 `json:"chapter"`
-				Description string  `json:"description"`
-				Id          string  `json:"id"`
-				Name        string  `json:"name"`
-			} `json:"episodes"`
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
-		} `json:"books"`
-		Description string `json:"description"`
-		Id          string `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Name string `json:"name"`
-	}
+	JSON200      *GetAuthorDetail
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1AuthorsAuthorIdResponse) Status() string {
+func (r GetAuthorsAuthorIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2497,14 +2530,14 @@ func (r GetApiV1AuthorsAuthorIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1AuthorsAuthorIdResponse) StatusCode() int {
+func (r GetAuthorsAuthorIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PatchApiV1AuthorsAuthorIdResponse struct {
+type PatchAuthorsAuthorIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2534,7 +2567,7 @@ type PatchApiV1AuthorsAuthorIdResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r PatchApiV1AuthorsAuthorIdResponse) Status() string {
+func (r PatchAuthorsAuthorIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2542,14 +2575,14 @@ func (r PatchApiV1AuthorsAuthorIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PatchApiV1AuthorsAuthorIdResponse) StatusCode() int {
+func (r PatchAuthorsAuthorIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1BooksResponse struct {
+type GetBooksResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *[]struct {
@@ -2577,7 +2610,7 @@ type GetApiV1BooksResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1BooksResponse) Status() string {
+func (r GetBooksResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2585,14 +2618,14 @@ func (r GetApiV1BooksResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1BooksResponse) StatusCode() int {
+func (r GetBooksResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PostApiV1BooksResponse struct {
+type PostBooksResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2620,7 +2653,7 @@ type PostApiV1BooksResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r PostApiV1BooksResponse) Status() string {
+func (r PostBooksResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2628,21 +2661,21 @@ func (r PostApiV1BooksResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostApiV1BooksResponse) StatusCode() int {
+func (r PostBooksResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DeleteApiV1BooksBookIdResponse struct {
+type DeleteBooksBookIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *map[string]interface{}
 }
 
 // Status returns HTTPResponse.Status
-func (r DeleteApiV1BooksBookIdResponse) Status() string {
+func (r DeleteBooksBookIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2650,14 +2683,14 @@ func (r DeleteApiV1BooksBookIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DeleteApiV1BooksBookIdResponse) StatusCode() int {
+func (r DeleteBooksBookIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1BooksBookIdResponse struct {
+type GetBooksBookIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2685,7 +2718,7 @@ type GetApiV1BooksBookIdResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1BooksBookIdResponse) Status() string {
+func (r GetBooksBookIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2693,14 +2726,14 @@ func (r GetApiV1BooksBookIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1BooksBookIdResponse) StatusCode() int {
+func (r GetBooksBookIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PatchApiV1BooksBookIdResponse struct {
+type PatchBooksBookIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2728,7 +2761,7 @@ type PatchApiV1BooksBookIdResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r PatchApiV1BooksBookIdResponse) Status() string {
+func (r PatchBooksBookIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2736,14 +2769,14 @@ func (r PatchApiV1BooksBookIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PatchApiV1BooksBookIdResponse) StatusCode() int {
+func (r PatchBooksBookIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1EpisodePagesResponse struct {
+type GetEpisodePagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *[]struct {
@@ -2757,7 +2790,7 @@ type GetApiV1EpisodePagesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1EpisodePagesResponse) Status() string {
+func (r GetEpisodePagesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2765,14 +2798,14 @@ func (r GetApiV1EpisodePagesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1EpisodePagesResponse) StatusCode() int {
+func (r GetEpisodePagesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PostApiV1EpisodePagesResponse struct {
+type PostEpisodePagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2786,7 +2819,7 @@ type PostApiV1EpisodePagesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r PostApiV1EpisodePagesResponse) Status() string {
+func (r PostEpisodePagesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2794,21 +2827,21 @@ func (r PostApiV1EpisodePagesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostApiV1EpisodePagesResponse) StatusCode() int {
+func (r PostEpisodePagesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DeleteApiV1EpisodePagesEpisodePageIdResponse struct {
+type DeleteEpisodePagesEpisodePageIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *map[string]interface{}
 }
 
 // Status returns HTTPResponse.Status
-func (r DeleteApiV1EpisodePagesEpisodePageIdResponse) Status() string {
+func (r DeleteEpisodePagesEpisodePageIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2816,14 +2849,14 @@ func (r DeleteApiV1EpisodePagesEpisodePageIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DeleteApiV1EpisodePagesEpisodePageIdResponse) StatusCode() int {
+func (r DeleteEpisodePagesEpisodePageIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PatchApiV1EpisodePagesEpisodePageIdResponse struct {
+type PatchEpisodePagesEpisodePageIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2837,7 +2870,7 @@ type PatchApiV1EpisodePagesEpisodePageIdResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r PatchApiV1EpisodePagesEpisodePageIdResponse) Status() string {
+func (r PatchEpisodePagesEpisodePageIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2845,14 +2878,14 @@ func (r PatchApiV1EpisodePagesEpisodePageIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PatchApiV1EpisodePagesEpisodePageIdResponse) StatusCode() int {
+func (r PatchEpisodePagesEpisodePageIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1EpisodePagesPageIdResponse struct {
+type GetEpisodePagesPageIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2866,7 +2899,7 @@ type GetApiV1EpisodePagesPageIdResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1EpisodePagesPageIdResponse) Status() string {
+func (r GetEpisodePagesPageIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2874,14 +2907,14 @@ func (r GetApiV1EpisodePagesPageIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1EpisodePagesPageIdResponse) StatusCode() int {
+func (r GetEpisodePagesPageIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1EpisodesResponse struct {
+type GetEpisodesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *[]struct {
@@ -2925,7 +2958,7 @@ type GetApiV1EpisodesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1EpisodesResponse) Status() string {
+func (r GetEpisodesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2933,14 +2966,14 @@ func (r GetApiV1EpisodesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1EpisodesResponse) StatusCode() int {
+func (r GetEpisodesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PostApiV1EpisodesResponse struct {
+type PostEpisodesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -2984,7 +3017,7 @@ type PostApiV1EpisodesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r PostApiV1EpisodesResponse) Status() string {
+func (r PostEpisodesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2992,21 +3025,21 @@ func (r PostApiV1EpisodesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostApiV1EpisodesResponse) StatusCode() int {
+func (r PostEpisodesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DeleteApiV1EpisodesEpisodeIdResponse struct {
+type DeleteEpisodesEpisodeIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *map[string]interface{}
 }
 
 // Status returns HTTPResponse.Status
-func (r DeleteApiV1EpisodesEpisodeIdResponse) Status() string {
+func (r DeleteEpisodesEpisodeIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -3014,14 +3047,36 @@ func (r DeleteApiV1EpisodesEpisodeIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DeleteApiV1EpisodesEpisodeIdResponse) StatusCode() int {
+func (r DeleteEpisodesEpisodeIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1EpisodesEpisodeIdResponse struct {
+type GetEpisodesEpisodeIdResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *GetEpisodes
+}
+
+// Status returns HTTPResponse.Status
+func (r GetEpisodesEpisodeIdResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetEpisodesEpisodeIdResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PatchEpisodesEpisodeIdResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -3065,7 +3120,7 @@ type GetApiV1EpisodesEpisodeIdResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1EpisodesEpisodeIdResponse) Status() string {
+func (r PatchEpisodesEpisodeIdResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -3073,73 +3128,14 @@ func (r GetApiV1EpisodesEpisodeIdResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1EpisodesEpisodeIdResponse) StatusCode() int {
+func (r PatchEpisodesEpisodeIdResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PatchApiV1EpisodesEpisodeIdResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Book struct {
-			Author struct {
-				Description string `json:"description"`
-				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
-			} `json:"author"`
-			Description string `json:"description"`
-			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name     string `json:"name"`
-			NameRuby string `json:"nameRuby"`
-		} `json:"book"`
-		Chapter     float32 `json:"chapter"`
-		Description string  `json:"description"`
-		Id          string  `json:"id"`
-		Image       struct {
-			Alt string `json:"alt"`
-			Id  string `json:"id"`
-		} `json:"image"`
-		Name     string `json:"name"`
-		NameRuby string `json:"nameRuby"`
-		Pages    []struct {
-			Id    string `json:"id"`
-			Image struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Page float32 `json:"page"`
-		} `json:"pages"`
-	}
-}
-
-// Status returns HTTPResponse.Status
-func (r PatchApiV1EpisodesEpisodeIdResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r PatchApiV1EpisodesEpisodeIdResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetApiV1FeaturesResponse struct {
+type GetFeaturesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *[]struct {
@@ -3166,7 +3162,7 @@ type GetApiV1FeaturesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1FeaturesResponse) Status() string {
+func (r GetFeaturesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -3174,14 +3170,14 @@ func (r GetApiV1FeaturesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1FeaturesResponse) StatusCode() int {
+func (r GetFeaturesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PostApiV1ImagesResponse struct {
+type PostImagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -3191,7 +3187,7 @@ type PostApiV1ImagesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r PostApiV1ImagesResponse) Status() string {
+func (r PostImagesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -3199,20 +3195,20 @@ func (r PostApiV1ImagesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostApiV1ImagesResponse) StatusCode() int {
+func (r PostImagesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PostApiV1InitializeResponse struct {
+type PostInitializeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 }
 
 // Status returns HTTPResponse.Status
-func (r PostApiV1InitializeResponse) Status() string {
+func (r PostInitializeResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -3220,14 +3216,14 @@ func (r PostApiV1InitializeResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PostApiV1InitializeResponse) StatusCode() int {
+func (r PostInitializeResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1RankingsResponse struct {
+type GetRankingsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *[]struct {
@@ -3261,7 +3257,7 @@ type GetApiV1RankingsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1RankingsResponse) Status() string {
+func (r GetRankingsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -3269,14 +3265,14 @@ func (r GetApiV1RankingsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1RankingsResponse) StatusCode() int {
+func (r GetRankingsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1ReleasesResponse struct {
+type GetReleasesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *[]struct {
@@ -3286,7 +3282,7 @@ type GetApiV1ReleasesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1ReleasesResponse) Status() string {
+func (r GetReleasesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -3294,14 +3290,14 @@ func (r GetApiV1ReleasesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1ReleasesResponse) StatusCode() int {
+func (r GetReleasesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetApiV1ReleasesDayOfWeekResponse struct {
+type GetReleasesDayOfWeekResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
@@ -3328,7 +3324,7 @@ type GetApiV1ReleasesDayOfWeekResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetApiV1ReleasesDayOfWeekResponse) Status() string {
+func (r GetReleasesDayOfWeekResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -3336,355 +3332,355 @@ func (r GetApiV1ReleasesDayOfWeekResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetApiV1ReleasesDayOfWeekResponse) StatusCode() int {
+func (r GetReleasesDayOfWeekResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-// PostApiV1AdminLoginWithBodyWithResponse request with arbitrary body returning *PostApiV1AdminLoginResponse
-func (c *ClientWithResponses) PostApiV1AdminLoginWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1AdminLoginResponse, error) {
-	rsp, err := c.PostApiV1AdminLoginWithBody(ctx, contentType, body, reqEditors...)
+// PostAdminLoginWithBodyWithResponse request with arbitrary body returning *PostAdminLoginResponse
+func (c *ClientWithResponses) PostAdminLoginWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostAdminLoginResponse, error) {
+	rsp, err := c.PostAdminLoginWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1AdminLoginResponse(rsp)
+	return ParsePostAdminLoginResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostApiV1AdminLoginWithResponse(ctx context.Context, body PostApiV1AdminLoginJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1AdminLoginResponse, error) {
-	rsp, err := c.PostApiV1AdminLogin(ctx, body, reqEditors...)
+func (c *ClientWithResponses) PostAdminLoginWithResponse(ctx context.Context, body PostAdminLoginJSONRequestBody, reqEditors ...RequestEditorFn) (*PostAdminLoginResponse, error) {
+	rsp, err := c.PostAdminLogin(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1AdminLoginResponse(rsp)
+	return ParsePostAdminLoginResponse(rsp)
 }
 
-// PostApiV1AdminLogoutWithResponse request returning *PostApiV1AdminLogoutResponse
-func (c *ClientWithResponses) PostApiV1AdminLogoutWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostApiV1AdminLogoutResponse, error) {
-	rsp, err := c.PostApiV1AdminLogout(ctx, reqEditors...)
+// PostAdminLogoutWithResponse request returning *PostAdminLogoutResponse
+func (c *ClientWithResponses) PostAdminLogoutWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostAdminLogoutResponse, error) {
+	rsp, err := c.PostAdminLogout(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1AdminLogoutResponse(rsp)
+	return ParsePostAdminLogoutResponse(rsp)
 }
 
-// GetApiV1AdminMeWithResponse request returning *GetApiV1AdminMeResponse
-func (c *ClientWithResponses) GetApiV1AdminMeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiV1AdminMeResponse, error) {
-	rsp, err := c.GetApiV1AdminMe(ctx, reqEditors...)
+// GetAdminMeWithResponse request returning *GetAdminMeResponse
+func (c *ClientWithResponses) GetAdminMeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetAdminMeResponse, error) {
+	rsp, err := c.GetAdminMe(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1AdminMeResponse(rsp)
+	return ParseGetAdminMeResponse(rsp)
 }
 
-// GetApiV1AuthorsWithResponse request returning *GetApiV1AuthorsResponse
-func (c *ClientWithResponses) GetApiV1AuthorsWithResponse(ctx context.Context, params *GetApiV1AuthorsParams, reqEditors ...RequestEditorFn) (*GetApiV1AuthorsResponse, error) {
-	rsp, err := c.GetApiV1Authors(ctx, params, reqEditors...)
+// GetAuthorsWithResponse request returning *GetAuthorsResponse
+func (c *ClientWithResponses) GetAuthorsWithResponse(ctx context.Context, params *GetAuthorsParams, reqEditors ...RequestEditorFn) (*GetAuthorsResponse, error) {
+	rsp, err := c.GetAuthors(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1AuthorsResponse(rsp)
+	return ParseGetAuthorsResponse(rsp)
 }
 
-// PostApiV1AuthorsWithBodyWithResponse request with arbitrary body returning *PostApiV1AuthorsResponse
-func (c *ClientWithResponses) PostApiV1AuthorsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1AuthorsResponse, error) {
-	rsp, err := c.PostApiV1AuthorsWithBody(ctx, contentType, body, reqEditors...)
+// PostAuthorsWithBodyWithResponse request with arbitrary body returning *PostAuthorsResponse
+func (c *ClientWithResponses) PostAuthorsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostAuthorsResponse, error) {
+	rsp, err := c.PostAuthorsWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1AuthorsResponse(rsp)
+	return ParsePostAuthorsResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostApiV1AuthorsWithResponse(ctx context.Context, body PostApiV1AuthorsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1AuthorsResponse, error) {
-	rsp, err := c.PostApiV1Authors(ctx, body, reqEditors...)
+func (c *ClientWithResponses) PostAuthorsWithResponse(ctx context.Context, body PostAuthorsJSONRequestBody, reqEditors ...RequestEditorFn) (*PostAuthorsResponse, error) {
+	rsp, err := c.PostAuthors(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1AuthorsResponse(rsp)
+	return ParsePostAuthorsResponse(rsp)
 }
 
-// DeleteApiV1AuthorsAuthorIdWithResponse request returning *DeleteApiV1AuthorsAuthorIdResponse
-func (c *ClientWithResponses) DeleteApiV1AuthorsAuthorIdWithResponse(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*DeleteApiV1AuthorsAuthorIdResponse, error) {
-	rsp, err := c.DeleteApiV1AuthorsAuthorId(ctx, authorId, reqEditors...)
+// DeleteAuthorsAuthorIdWithResponse request returning *DeleteAuthorsAuthorIdResponse
+func (c *ClientWithResponses) DeleteAuthorsAuthorIdWithResponse(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*DeleteAuthorsAuthorIdResponse, error) {
+	rsp, err := c.DeleteAuthorsAuthorId(ctx, authorId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDeleteApiV1AuthorsAuthorIdResponse(rsp)
+	return ParseDeleteAuthorsAuthorIdResponse(rsp)
 }
 
-// GetApiV1AuthorsAuthorIdWithResponse request returning *GetApiV1AuthorsAuthorIdResponse
-func (c *ClientWithResponses) GetApiV1AuthorsAuthorIdWithResponse(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*GetApiV1AuthorsAuthorIdResponse, error) {
-	rsp, err := c.GetApiV1AuthorsAuthorId(ctx, authorId, reqEditors...)
+// GetAuthorsAuthorIdWithResponse request returning *GetAuthorsAuthorIdResponse
+func (c *ClientWithResponses) GetAuthorsAuthorIdWithResponse(ctx context.Context, authorId string, reqEditors ...RequestEditorFn) (*GetAuthorsAuthorIdResponse, error) {
+	rsp, err := c.GetAuthorsAuthorId(ctx, authorId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1AuthorsAuthorIdResponse(rsp)
+	return ParseGetAuthorsAuthorIdResponse(rsp)
 }
 
-// PatchApiV1AuthorsAuthorIdWithBodyWithResponse request with arbitrary body returning *PatchApiV1AuthorsAuthorIdResponse
-func (c *ClientWithResponses) PatchApiV1AuthorsAuthorIdWithBodyWithResponse(ctx context.Context, authorId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchApiV1AuthorsAuthorIdResponse, error) {
-	rsp, err := c.PatchApiV1AuthorsAuthorIdWithBody(ctx, authorId, contentType, body, reqEditors...)
+// PatchAuthorsAuthorIdWithBodyWithResponse request with arbitrary body returning *PatchAuthorsAuthorIdResponse
+func (c *ClientWithResponses) PatchAuthorsAuthorIdWithBodyWithResponse(ctx context.Context, authorId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchAuthorsAuthorIdResponse, error) {
+	rsp, err := c.PatchAuthorsAuthorIdWithBody(ctx, authorId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePatchApiV1AuthorsAuthorIdResponse(rsp)
+	return ParsePatchAuthorsAuthorIdResponse(rsp)
 }
 
-func (c *ClientWithResponses) PatchApiV1AuthorsAuthorIdWithResponse(ctx context.Context, authorId string, body PatchApiV1AuthorsAuthorIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchApiV1AuthorsAuthorIdResponse, error) {
-	rsp, err := c.PatchApiV1AuthorsAuthorId(ctx, authorId, body, reqEditors...)
+func (c *ClientWithResponses) PatchAuthorsAuthorIdWithResponse(ctx context.Context, authorId string, body PatchAuthorsAuthorIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchAuthorsAuthorIdResponse, error) {
+	rsp, err := c.PatchAuthorsAuthorId(ctx, authorId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePatchApiV1AuthorsAuthorIdResponse(rsp)
+	return ParsePatchAuthorsAuthorIdResponse(rsp)
 }
 
-// GetApiV1BooksWithResponse request returning *GetApiV1BooksResponse
-func (c *ClientWithResponses) GetApiV1BooksWithResponse(ctx context.Context, params *GetApiV1BooksParams, reqEditors ...RequestEditorFn) (*GetApiV1BooksResponse, error) {
-	rsp, err := c.GetApiV1Books(ctx, params, reqEditors...)
+// GetBooksWithResponse request returning *GetBooksResponse
+func (c *ClientWithResponses) GetBooksWithResponse(ctx context.Context, params *GetBooksParams, reqEditors ...RequestEditorFn) (*GetBooksResponse, error) {
+	rsp, err := c.GetBooks(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1BooksResponse(rsp)
+	return ParseGetBooksResponse(rsp)
 }
 
-// PostApiV1BooksWithBodyWithResponse request with arbitrary body returning *PostApiV1BooksResponse
-func (c *ClientWithResponses) PostApiV1BooksWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1BooksResponse, error) {
-	rsp, err := c.PostApiV1BooksWithBody(ctx, contentType, body, reqEditors...)
+// PostBooksWithBodyWithResponse request with arbitrary body returning *PostBooksResponse
+func (c *ClientWithResponses) PostBooksWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostBooksResponse, error) {
+	rsp, err := c.PostBooksWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1BooksResponse(rsp)
+	return ParsePostBooksResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostApiV1BooksWithResponse(ctx context.Context, body PostApiV1BooksJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1BooksResponse, error) {
-	rsp, err := c.PostApiV1Books(ctx, body, reqEditors...)
+func (c *ClientWithResponses) PostBooksWithResponse(ctx context.Context, body PostBooksJSONRequestBody, reqEditors ...RequestEditorFn) (*PostBooksResponse, error) {
+	rsp, err := c.PostBooks(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1BooksResponse(rsp)
+	return ParsePostBooksResponse(rsp)
 }
 
-// DeleteApiV1BooksBookIdWithResponse request returning *DeleteApiV1BooksBookIdResponse
-func (c *ClientWithResponses) DeleteApiV1BooksBookIdWithResponse(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*DeleteApiV1BooksBookIdResponse, error) {
-	rsp, err := c.DeleteApiV1BooksBookId(ctx, bookId, reqEditors...)
+// DeleteBooksBookIdWithResponse request returning *DeleteBooksBookIdResponse
+func (c *ClientWithResponses) DeleteBooksBookIdWithResponse(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*DeleteBooksBookIdResponse, error) {
+	rsp, err := c.DeleteBooksBookId(ctx, bookId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDeleteApiV1BooksBookIdResponse(rsp)
+	return ParseDeleteBooksBookIdResponse(rsp)
 }
 
-// GetApiV1BooksBookIdWithResponse request returning *GetApiV1BooksBookIdResponse
-func (c *ClientWithResponses) GetApiV1BooksBookIdWithResponse(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*GetApiV1BooksBookIdResponse, error) {
-	rsp, err := c.GetApiV1BooksBookId(ctx, bookId, reqEditors...)
+// GetBooksBookIdWithResponse request returning *GetBooksBookIdResponse
+func (c *ClientWithResponses) GetBooksBookIdWithResponse(ctx context.Context, bookId string, reqEditors ...RequestEditorFn) (*GetBooksBookIdResponse, error) {
+	rsp, err := c.GetBooksBookId(ctx, bookId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1BooksBookIdResponse(rsp)
+	return ParseGetBooksBookIdResponse(rsp)
 }
 
-// PatchApiV1BooksBookIdWithBodyWithResponse request with arbitrary body returning *PatchApiV1BooksBookIdResponse
-func (c *ClientWithResponses) PatchApiV1BooksBookIdWithBodyWithResponse(ctx context.Context, bookId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchApiV1BooksBookIdResponse, error) {
-	rsp, err := c.PatchApiV1BooksBookIdWithBody(ctx, bookId, contentType, body, reqEditors...)
+// PatchBooksBookIdWithBodyWithResponse request with arbitrary body returning *PatchBooksBookIdResponse
+func (c *ClientWithResponses) PatchBooksBookIdWithBodyWithResponse(ctx context.Context, bookId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchBooksBookIdResponse, error) {
+	rsp, err := c.PatchBooksBookIdWithBody(ctx, bookId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePatchApiV1BooksBookIdResponse(rsp)
+	return ParsePatchBooksBookIdResponse(rsp)
 }
 
-func (c *ClientWithResponses) PatchApiV1BooksBookIdWithResponse(ctx context.Context, bookId string, body PatchApiV1BooksBookIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchApiV1BooksBookIdResponse, error) {
-	rsp, err := c.PatchApiV1BooksBookId(ctx, bookId, body, reqEditors...)
+func (c *ClientWithResponses) PatchBooksBookIdWithResponse(ctx context.Context, bookId string, body PatchBooksBookIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchBooksBookIdResponse, error) {
+	rsp, err := c.PatchBooksBookId(ctx, bookId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePatchApiV1BooksBookIdResponse(rsp)
+	return ParsePatchBooksBookIdResponse(rsp)
 }
 
-// GetApiV1EpisodePagesWithResponse request returning *GetApiV1EpisodePagesResponse
-func (c *ClientWithResponses) GetApiV1EpisodePagesWithResponse(ctx context.Context, params *GetApiV1EpisodePagesParams, reqEditors ...RequestEditorFn) (*GetApiV1EpisodePagesResponse, error) {
-	rsp, err := c.GetApiV1EpisodePages(ctx, params, reqEditors...)
+// GetEpisodePagesWithResponse request returning *GetEpisodePagesResponse
+func (c *ClientWithResponses) GetEpisodePagesWithResponse(ctx context.Context, params *GetEpisodePagesParams, reqEditors ...RequestEditorFn) (*GetEpisodePagesResponse, error) {
+	rsp, err := c.GetEpisodePages(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1EpisodePagesResponse(rsp)
+	return ParseGetEpisodePagesResponse(rsp)
 }
 
-// PostApiV1EpisodePagesWithBodyWithResponse request with arbitrary body returning *PostApiV1EpisodePagesResponse
-func (c *ClientWithResponses) PostApiV1EpisodePagesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1EpisodePagesResponse, error) {
-	rsp, err := c.PostApiV1EpisodePagesWithBody(ctx, contentType, body, reqEditors...)
+// PostEpisodePagesWithBodyWithResponse request with arbitrary body returning *PostEpisodePagesResponse
+func (c *ClientWithResponses) PostEpisodePagesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostEpisodePagesResponse, error) {
+	rsp, err := c.PostEpisodePagesWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1EpisodePagesResponse(rsp)
+	return ParsePostEpisodePagesResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostApiV1EpisodePagesWithResponse(ctx context.Context, body PostApiV1EpisodePagesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1EpisodePagesResponse, error) {
-	rsp, err := c.PostApiV1EpisodePages(ctx, body, reqEditors...)
+func (c *ClientWithResponses) PostEpisodePagesWithResponse(ctx context.Context, body PostEpisodePagesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostEpisodePagesResponse, error) {
+	rsp, err := c.PostEpisodePages(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1EpisodePagesResponse(rsp)
+	return ParsePostEpisodePagesResponse(rsp)
 }
 
-// DeleteApiV1EpisodePagesEpisodePageIdWithResponse request returning *DeleteApiV1EpisodePagesEpisodePageIdResponse
-func (c *ClientWithResponses) DeleteApiV1EpisodePagesEpisodePageIdWithResponse(ctx context.Context, episodePageId string, reqEditors ...RequestEditorFn) (*DeleteApiV1EpisodePagesEpisodePageIdResponse, error) {
-	rsp, err := c.DeleteApiV1EpisodePagesEpisodePageId(ctx, episodePageId, reqEditors...)
+// DeleteEpisodePagesEpisodePageIdWithResponse request returning *DeleteEpisodePagesEpisodePageIdResponse
+func (c *ClientWithResponses) DeleteEpisodePagesEpisodePageIdWithResponse(ctx context.Context, episodePageId string, reqEditors ...RequestEditorFn) (*DeleteEpisodePagesEpisodePageIdResponse, error) {
+	rsp, err := c.DeleteEpisodePagesEpisodePageId(ctx, episodePageId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDeleteApiV1EpisodePagesEpisodePageIdResponse(rsp)
+	return ParseDeleteEpisodePagesEpisodePageIdResponse(rsp)
 }
 
-// PatchApiV1EpisodePagesEpisodePageIdWithBodyWithResponse request with arbitrary body returning *PatchApiV1EpisodePagesEpisodePageIdResponse
-func (c *ClientWithResponses) PatchApiV1EpisodePagesEpisodePageIdWithBodyWithResponse(ctx context.Context, episodePageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchApiV1EpisodePagesEpisodePageIdResponse, error) {
-	rsp, err := c.PatchApiV1EpisodePagesEpisodePageIdWithBody(ctx, episodePageId, contentType, body, reqEditors...)
+// PatchEpisodePagesEpisodePageIdWithBodyWithResponse request with arbitrary body returning *PatchEpisodePagesEpisodePageIdResponse
+func (c *ClientWithResponses) PatchEpisodePagesEpisodePageIdWithBodyWithResponse(ctx context.Context, episodePageId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchEpisodePagesEpisodePageIdResponse, error) {
+	rsp, err := c.PatchEpisodePagesEpisodePageIdWithBody(ctx, episodePageId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePatchApiV1EpisodePagesEpisodePageIdResponse(rsp)
+	return ParsePatchEpisodePagesEpisodePageIdResponse(rsp)
 }
 
-func (c *ClientWithResponses) PatchApiV1EpisodePagesEpisodePageIdWithResponse(ctx context.Context, episodePageId string, body PatchApiV1EpisodePagesEpisodePageIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchApiV1EpisodePagesEpisodePageIdResponse, error) {
-	rsp, err := c.PatchApiV1EpisodePagesEpisodePageId(ctx, episodePageId, body, reqEditors...)
+func (c *ClientWithResponses) PatchEpisodePagesEpisodePageIdWithResponse(ctx context.Context, episodePageId string, body PatchEpisodePagesEpisodePageIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchEpisodePagesEpisodePageIdResponse, error) {
+	rsp, err := c.PatchEpisodePagesEpisodePageId(ctx, episodePageId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePatchApiV1EpisodePagesEpisodePageIdResponse(rsp)
+	return ParsePatchEpisodePagesEpisodePageIdResponse(rsp)
 }
 
-// GetApiV1EpisodePagesPageIdWithResponse request returning *GetApiV1EpisodePagesPageIdResponse
-func (c *ClientWithResponses) GetApiV1EpisodePagesPageIdWithResponse(ctx context.Context, pageId string, reqEditors ...RequestEditorFn) (*GetApiV1EpisodePagesPageIdResponse, error) {
-	rsp, err := c.GetApiV1EpisodePagesPageId(ctx, pageId, reqEditors...)
+// GetEpisodePagesPageIdWithResponse request returning *GetEpisodePagesPageIdResponse
+func (c *ClientWithResponses) GetEpisodePagesPageIdWithResponse(ctx context.Context, pageId string, reqEditors ...RequestEditorFn) (*GetEpisodePagesPageIdResponse, error) {
+	rsp, err := c.GetEpisodePagesPageId(ctx, pageId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1EpisodePagesPageIdResponse(rsp)
+	return ParseGetEpisodePagesPageIdResponse(rsp)
 }
 
-// GetApiV1EpisodesWithResponse request returning *GetApiV1EpisodesResponse
-func (c *ClientWithResponses) GetApiV1EpisodesWithResponse(ctx context.Context, params *GetApiV1EpisodesParams, reqEditors ...RequestEditorFn) (*GetApiV1EpisodesResponse, error) {
-	rsp, err := c.GetApiV1Episodes(ctx, params, reqEditors...)
+// GetEpisodesWithResponse request returning *GetEpisodesResponse
+func (c *ClientWithResponses) GetEpisodesWithResponse(ctx context.Context, params *GetEpisodesParams, reqEditors ...RequestEditorFn) (*GetEpisodesResponse, error) {
+	rsp, err := c.GetEpisodes(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1EpisodesResponse(rsp)
+	return ParseGetEpisodesResponse(rsp)
 }
 
-// PostApiV1EpisodesWithBodyWithResponse request with arbitrary body returning *PostApiV1EpisodesResponse
-func (c *ClientWithResponses) PostApiV1EpisodesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1EpisodesResponse, error) {
-	rsp, err := c.PostApiV1EpisodesWithBody(ctx, contentType, body, reqEditors...)
+// PostEpisodesWithBodyWithResponse request with arbitrary body returning *PostEpisodesResponse
+func (c *ClientWithResponses) PostEpisodesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostEpisodesResponse, error) {
+	rsp, err := c.PostEpisodesWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1EpisodesResponse(rsp)
+	return ParsePostEpisodesResponse(rsp)
 }
 
-func (c *ClientWithResponses) PostApiV1EpisodesWithResponse(ctx context.Context, body PostApiV1EpisodesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiV1EpisodesResponse, error) {
-	rsp, err := c.PostApiV1Episodes(ctx, body, reqEditors...)
+func (c *ClientWithResponses) PostEpisodesWithResponse(ctx context.Context, body PostEpisodesJSONRequestBody, reqEditors ...RequestEditorFn) (*PostEpisodesResponse, error) {
+	rsp, err := c.PostEpisodes(ctx, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1EpisodesResponse(rsp)
+	return ParsePostEpisodesResponse(rsp)
 }
 
-// DeleteApiV1EpisodesEpisodeIdWithResponse request returning *DeleteApiV1EpisodesEpisodeIdResponse
-func (c *ClientWithResponses) DeleteApiV1EpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*DeleteApiV1EpisodesEpisodeIdResponse, error) {
-	rsp, err := c.DeleteApiV1EpisodesEpisodeId(ctx, episodeId, reqEditors...)
+// DeleteEpisodesEpisodeIdWithResponse request returning *DeleteEpisodesEpisodeIdResponse
+func (c *ClientWithResponses) DeleteEpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*DeleteEpisodesEpisodeIdResponse, error) {
+	rsp, err := c.DeleteEpisodesEpisodeId(ctx, episodeId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDeleteApiV1EpisodesEpisodeIdResponse(rsp)
+	return ParseDeleteEpisodesEpisodeIdResponse(rsp)
 }
 
-// GetApiV1EpisodesEpisodeIdWithResponse request returning *GetApiV1EpisodesEpisodeIdResponse
-func (c *ClientWithResponses) GetApiV1EpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*GetApiV1EpisodesEpisodeIdResponse, error) {
-	rsp, err := c.GetApiV1EpisodesEpisodeId(ctx, episodeId, reqEditors...)
+// GetEpisodesEpisodeIdWithResponse request returning *GetEpisodesEpisodeIdResponse
+func (c *ClientWithResponses) GetEpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, reqEditors ...RequestEditorFn) (*GetEpisodesEpisodeIdResponse, error) {
+	rsp, err := c.GetEpisodesEpisodeId(ctx, episodeId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1EpisodesEpisodeIdResponse(rsp)
+	return ParseGetEpisodesEpisodeIdResponse(rsp)
 }
 
-// PatchApiV1EpisodesEpisodeIdWithBodyWithResponse request with arbitrary body returning *PatchApiV1EpisodesEpisodeIdResponse
-func (c *ClientWithResponses) PatchApiV1EpisodesEpisodeIdWithBodyWithResponse(ctx context.Context, episodeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchApiV1EpisodesEpisodeIdResponse, error) {
-	rsp, err := c.PatchApiV1EpisodesEpisodeIdWithBody(ctx, episodeId, contentType, body, reqEditors...)
+// PatchEpisodesEpisodeIdWithBodyWithResponse request with arbitrary body returning *PatchEpisodesEpisodeIdResponse
+func (c *ClientWithResponses) PatchEpisodesEpisodeIdWithBodyWithResponse(ctx context.Context, episodeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchEpisodesEpisodeIdResponse, error) {
+	rsp, err := c.PatchEpisodesEpisodeIdWithBody(ctx, episodeId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePatchApiV1EpisodesEpisodeIdResponse(rsp)
+	return ParsePatchEpisodesEpisodeIdResponse(rsp)
 }
 
-func (c *ClientWithResponses) PatchApiV1EpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, body PatchApiV1EpisodesEpisodeIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchApiV1EpisodesEpisodeIdResponse, error) {
-	rsp, err := c.PatchApiV1EpisodesEpisodeId(ctx, episodeId, body, reqEditors...)
+func (c *ClientWithResponses) PatchEpisodesEpisodeIdWithResponse(ctx context.Context, episodeId string, body PatchEpisodesEpisodeIdJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchEpisodesEpisodeIdResponse, error) {
+	rsp, err := c.PatchEpisodesEpisodeId(ctx, episodeId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePatchApiV1EpisodesEpisodeIdResponse(rsp)
+	return ParsePatchEpisodesEpisodeIdResponse(rsp)
 }
 
-// GetApiV1FeaturesWithResponse request returning *GetApiV1FeaturesResponse
-func (c *ClientWithResponses) GetApiV1FeaturesWithResponse(ctx context.Context, params *GetApiV1FeaturesParams, reqEditors ...RequestEditorFn) (*GetApiV1FeaturesResponse, error) {
-	rsp, err := c.GetApiV1Features(ctx, params, reqEditors...)
+// GetFeaturesWithResponse request returning *GetFeaturesResponse
+func (c *ClientWithResponses) GetFeaturesWithResponse(ctx context.Context, params *GetFeaturesParams, reqEditors ...RequestEditorFn) (*GetFeaturesResponse, error) {
+	rsp, err := c.GetFeatures(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1FeaturesResponse(rsp)
+	return ParseGetFeaturesResponse(rsp)
 }
 
-// PostApiV1ImagesWithBodyWithResponse request with arbitrary body returning *PostApiV1ImagesResponse
-func (c *ClientWithResponses) PostApiV1ImagesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiV1ImagesResponse, error) {
-	rsp, err := c.PostApiV1ImagesWithBody(ctx, contentType, body, reqEditors...)
+// PostImagesWithBodyWithResponse request with arbitrary body returning *PostImagesResponse
+func (c *ClientWithResponses) PostImagesWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostImagesResponse, error) {
+	rsp, err := c.PostImagesWithBody(ctx, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1ImagesResponse(rsp)
+	return ParsePostImagesResponse(rsp)
 }
 
-// PostApiV1InitializeWithResponse request returning *PostApiV1InitializeResponse
-func (c *ClientWithResponses) PostApiV1InitializeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostApiV1InitializeResponse, error) {
-	rsp, err := c.PostApiV1Initialize(ctx, reqEditors...)
+// PostInitializeWithResponse request returning *PostInitializeResponse
+func (c *ClientWithResponses) PostInitializeWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*PostInitializeResponse, error) {
+	rsp, err := c.PostInitialize(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePostApiV1InitializeResponse(rsp)
+	return ParsePostInitializeResponse(rsp)
 }
 
-// GetApiV1RankingsWithResponse request returning *GetApiV1RankingsResponse
-func (c *ClientWithResponses) GetApiV1RankingsWithResponse(ctx context.Context, params *GetApiV1RankingsParams, reqEditors ...RequestEditorFn) (*GetApiV1RankingsResponse, error) {
-	rsp, err := c.GetApiV1Rankings(ctx, params, reqEditors...)
+// GetRankingsWithResponse request returning *GetRankingsResponse
+func (c *ClientWithResponses) GetRankingsWithResponse(ctx context.Context, params *GetRankingsParams, reqEditors ...RequestEditorFn) (*GetRankingsResponse, error) {
+	rsp, err := c.GetRankings(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1RankingsResponse(rsp)
+	return ParseGetRankingsResponse(rsp)
 }
 
-// GetApiV1ReleasesWithResponse request returning *GetApiV1ReleasesResponse
-func (c *ClientWithResponses) GetApiV1ReleasesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiV1ReleasesResponse, error) {
-	rsp, err := c.GetApiV1Releases(ctx, reqEditors...)
+// GetReleasesWithResponse request returning *GetReleasesResponse
+func (c *ClientWithResponses) GetReleasesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetReleasesResponse, error) {
+	rsp, err := c.GetReleases(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1ReleasesResponse(rsp)
+	return ParseGetReleasesResponse(rsp)
 }
 
-// GetApiV1ReleasesDayOfWeekWithResponse request returning *GetApiV1ReleasesDayOfWeekResponse
-func (c *ClientWithResponses) GetApiV1ReleasesDayOfWeekWithResponse(ctx context.Context, dayOfWeek string, reqEditors ...RequestEditorFn) (*GetApiV1ReleasesDayOfWeekResponse, error) {
-	rsp, err := c.GetApiV1ReleasesDayOfWeek(ctx, dayOfWeek, reqEditors...)
+// GetReleasesDayOfWeekWithResponse request returning *GetReleasesDayOfWeekResponse
+func (c *ClientWithResponses) GetReleasesDayOfWeekWithResponse(ctx context.Context, dayOfWeek string, reqEditors ...RequestEditorFn) (*GetReleasesDayOfWeekResponse, error) {
+	rsp, err := c.GetReleasesDayOfWeek(ctx, dayOfWeek, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetApiV1ReleasesDayOfWeekResponse(rsp)
+	return ParseGetReleasesDayOfWeekResponse(rsp)
 }
 
-// ParsePostApiV1AdminLoginResponse parses an HTTP response from a PostApiV1AdminLoginWithResponse call
-func ParsePostApiV1AdminLoginResponse(rsp *http.Response) (*PostApiV1AdminLoginResponse, error) {
+// ParsePostAdminLoginResponse parses an HTTP response from a PostAdminLoginWithResponse call
+func ParsePostAdminLoginResponse(rsp *http.Response) (*PostAdminLoginResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PostApiV1AdminLoginResponse{
+	response := &PostAdminLoginResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -3709,15 +3705,15 @@ func ParsePostApiV1AdminLoginResponse(rsp *http.Response) (*PostApiV1AdminLoginR
 	return response, nil
 }
 
-// ParsePostApiV1AdminLogoutResponse parses an HTTP response from a PostApiV1AdminLogoutWithResponse call
-func ParsePostApiV1AdminLogoutResponse(rsp *http.Response) (*PostApiV1AdminLogoutResponse, error) {
+// ParsePostAdminLogoutResponse parses an HTTP response from a PostAdminLogoutWithResponse call
+func ParsePostAdminLogoutResponse(rsp *http.Response) (*PostAdminLogoutResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PostApiV1AdminLogoutResponse{
+	response := &PostAdminLogoutResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -3725,15 +3721,15 @@ func ParsePostApiV1AdminLogoutResponse(rsp *http.Response) (*PostApiV1AdminLogou
 	return response, nil
 }
 
-// ParseGetApiV1AdminMeResponse parses an HTTP response from a GetApiV1AdminMeWithResponse call
-func ParseGetApiV1AdminMeResponse(rsp *http.Response) (*GetApiV1AdminMeResponse, error) {
+// ParseGetAdminMeResponse parses an HTTP response from a GetAdminMeWithResponse call
+func ParseGetAdminMeResponse(rsp *http.Response) (*GetAdminMeResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1AdminMeResponse{
+	response := &GetAdminMeResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -3758,45 +3754,22 @@ func ParseGetApiV1AdminMeResponse(rsp *http.Response) (*GetApiV1AdminMeResponse,
 	return response, nil
 }
 
-// ParseGetApiV1AuthorsResponse parses an HTTP response from a GetApiV1AuthorsWithResponse call
-func ParseGetApiV1AuthorsResponse(rsp *http.Response) (*GetApiV1AuthorsResponse, error) {
+// ParseGetAuthorsResponse parses an HTTP response from a GetAuthorsWithResponse call
+func ParseGetAuthorsResponse(rsp *http.Response) (*GetAuthorsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1AuthorsResponse{
+	response := &GetAuthorsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest []struct {
-			Books []struct {
-				Description string `json:"description"`
-				Episodes    []struct {
-					Chapter     float32 `json:"chapter"`
-					Description string  `json:"description"`
-					Id          string  `json:"id"`
-					Name        string  `json:"name"`
-				} `json:"episodes"`
-				Id    string `json:"id"`
-				Image struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
-			} `json:"books"`
-			Description string `json:"description"`
-			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
-		}
+		var dest []GetAuthorListItem
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -3807,15 +3780,15 @@ func ParseGetApiV1AuthorsResponse(rsp *http.Response) (*GetApiV1AuthorsResponse,
 	return response, nil
 }
 
-// ParsePostApiV1AuthorsResponse parses an HTTP response from a PostApiV1AuthorsWithResponse call
-func ParsePostApiV1AuthorsResponse(rsp *http.Response) (*PostApiV1AuthorsResponse, error) {
+// ParsePostAuthorsResponse parses an HTTP response from a PostAuthorsWithResponse call
+func ParsePostAuthorsResponse(rsp *http.Response) (*PostAuthorsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PostApiV1AuthorsResponse{
+	response := &PostAuthorsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -3856,15 +3829,15 @@ func ParsePostApiV1AuthorsResponse(rsp *http.Response) (*PostApiV1AuthorsRespons
 	return response, nil
 }
 
-// ParseDeleteApiV1AuthorsAuthorIdResponse parses an HTTP response from a DeleteApiV1AuthorsAuthorIdWithResponse call
-func ParseDeleteApiV1AuthorsAuthorIdResponse(rsp *http.Response) (*DeleteApiV1AuthorsAuthorIdResponse, error) {
+// ParseDeleteAuthorsAuthorIdResponse parses an HTTP response from a DeleteAuthorsAuthorIdWithResponse call
+func ParseDeleteAuthorsAuthorIdResponse(rsp *http.Response) (*DeleteAuthorsAuthorIdResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DeleteApiV1AuthorsAuthorIdResponse{
+	response := &DeleteAuthorsAuthorIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -3872,15 +3845,41 @@ func ParseDeleteApiV1AuthorsAuthorIdResponse(rsp *http.Response) (*DeleteApiV1Au
 	return response, nil
 }
 
-// ParseGetApiV1AuthorsAuthorIdResponse parses an HTTP response from a GetApiV1AuthorsAuthorIdWithResponse call
-func ParseGetApiV1AuthorsAuthorIdResponse(rsp *http.Response) (*GetApiV1AuthorsAuthorIdResponse, error) {
+// ParseGetAuthorsAuthorIdResponse parses an HTTP response from a GetAuthorsAuthorIdWithResponse call
+func ParseGetAuthorsAuthorIdResponse(rsp *http.Response) (*GetAuthorsAuthorIdResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1AuthorsAuthorIdResponse{
+	response := &GetAuthorsAuthorIdResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetAuthorDetail
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePatchAuthorsAuthorIdResponse parses an HTTP response from a PatchAuthorsAuthorIdWithResponse call
+func ParsePatchAuthorsAuthorIdResponse(rsp *http.Response) (*PatchAuthorsAuthorIdResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PatchAuthorsAuthorIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -3921,64 +3920,15 @@ func ParseGetApiV1AuthorsAuthorIdResponse(rsp *http.Response) (*GetApiV1AuthorsA
 	return response, nil
 }
 
-// ParsePatchApiV1AuthorsAuthorIdResponse parses an HTTP response from a PatchApiV1AuthorsAuthorIdWithResponse call
-func ParsePatchApiV1AuthorsAuthorIdResponse(rsp *http.Response) (*PatchApiV1AuthorsAuthorIdResponse, error) {
+// ParseGetBooksResponse parses an HTTP response from a GetBooksWithResponse call
+func ParseGetBooksResponse(rsp *http.Response) (*GetBooksResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PatchApiV1AuthorsAuthorIdResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Books []struct {
-				Description string `json:"description"`
-				Episodes    []struct {
-					Chapter     float32 `json:"chapter"`
-					Description string  `json:"description"`
-					Id          string  `json:"id"`
-					Name        string  `json:"name"`
-				} `json:"episodes"`
-				Id    string `json:"id"`
-				Image struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name string `json:"name"`
-			} `json:"books"`
-			Description string `json:"description"`
-			Id          string `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name string `json:"name"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetApiV1BooksResponse parses an HTTP response from a GetApiV1BooksWithResponse call
-func ParseGetApiV1BooksResponse(rsp *http.Response) (*GetApiV1BooksResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiV1BooksResponse{
+	response := &GetBooksResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4017,15 +3967,15 @@ func ParseGetApiV1BooksResponse(rsp *http.Response) (*GetApiV1BooksResponse, err
 	return response, nil
 }
 
-// ParsePostApiV1BooksResponse parses an HTTP response from a PostApiV1BooksWithResponse call
-func ParsePostApiV1BooksResponse(rsp *http.Response) (*PostApiV1BooksResponse, error) {
+// ParsePostBooksResponse parses an HTTP response from a PostBooksWithResponse call
+func ParsePostBooksResponse(rsp *http.Response) (*PostBooksResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PostApiV1BooksResponse{
+	response := &PostBooksResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4064,15 +4014,15 @@ func ParsePostApiV1BooksResponse(rsp *http.Response) (*PostApiV1BooksResponse, e
 	return response, nil
 }
 
-// ParseDeleteApiV1BooksBookIdResponse parses an HTTP response from a DeleteApiV1BooksBookIdWithResponse call
-func ParseDeleteApiV1BooksBookIdResponse(rsp *http.Response) (*DeleteApiV1BooksBookIdResponse, error) {
+// ParseDeleteBooksBookIdResponse parses an HTTP response from a DeleteBooksBookIdWithResponse call
+func ParseDeleteBooksBookIdResponse(rsp *http.Response) (*DeleteBooksBookIdResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DeleteApiV1BooksBookIdResponse{
+	response := &DeleteBooksBookIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4090,15 +4040,15 @@ func ParseDeleteApiV1BooksBookIdResponse(rsp *http.Response) (*DeleteApiV1BooksB
 	return response, nil
 }
 
-// ParseGetApiV1BooksBookIdResponse parses an HTTP response from a GetApiV1BooksBookIdWithResponse call
-func ParseGetApiV1BooksBookIdResponse(rsp *http.Response) (*GetApiV1BooksBookIdResponse, error) {
+// ParseGetBooksBookIdResponse parses an HTTP response from a GetBooksBookIdWithResponse call
+func ParseGetBooksBookIdResponse(rsp *http.Response) (*GetBooksBookIdResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1BooksBookIdResponse{
+	response := &GetBooksBookIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4137,15 +4087,15 @@ func ParseGetApiV1BooksBookIdResponse(rsp *http.Response) (*GetApiV1BooksBookIdR
 	return response, nil
 }
 
-// ParsePatchApiV1BooksBookIdResponse parses an HTTP response from a PatchApiV1BooksBookIdWithResponse call
-func ParsePatchApiV1BooksBookIdResponse(rsp *http.Response) (*PatchApiV1BooksBookIdResponse, error) {
+// ParsePatchBooksBookIdResponse parses an HTTP response from a PatchBooksBookIdWithResponse call
+func ParsePatchBooksBookIdResponse(rsp *http.Response) (*PatchBooksBookIdResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PatchApiV1BooksBookIdResponse{
+	response := &PatchBooksBookIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4184,15 +4134,15 @@ func ParsePatchApiV1BooksBookIdResponse(rsp *http.Response) (*PatchApiV1BooksBoo
 	return response, nil
 }
 
-// ParseGetApiV1EpisodePagesResponse parses an HTTP response from a GetApiV1EpisodePagesWithResponse call
-func ParseGetApiV1EpisodePagesResponse(rsp *http.Response) (*GetApiV1EpisodePagesResponse, error) {
+// ParseGetEpisodePagesResponse parses an HTTP response from a GetEpisodePagesWithResponse call
+func ParseGetEpisodePagesResponse(rsp *http.Response) (*GetEpisodePagesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1EpisodePagesResponse{
+	response := &GetEpisodePagesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4217,15 +4167,15 @@ func ParseGetApiV1EpisodePagesResponse(rsp *http.Response) (*GetApiV1EpisodePage
 	return response, nil
 }
 
-// ParsePostApiV1EpisodePagesResponse parses an HTTP response from a PostApiV1EpisodePagesWithResponse call
-func ParsePostApiV1EpisodePagesResponse(rsp *http.Response) (*PostApiV1EpisodePagesResponse, error) {
+// ParsePostEpisodePagesResponse parses an HTTP response from a PostEpisodePagesWithResponse call
+func ParsePostEpisodePagesResponse(rsp *http.Response) (*PostEpisodePagesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PostApiV1EpisodePagesResponse{
+	response := &PostEpisodePagesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4250,15 +4200,15 @@ func ParsePostApiV1EpisodePagesResponse(rsp *http.Response) (*PostApiV1EpisodePa
 	return response, nil
 }
 
-// ParseDeleteApiV1EpisodePagesEpisodePageIdResponse parses an HTTP response from a DeleteApiV1EpisodePagesEpisodePageIdWithResponse call
-func ParseDeleteApiV1EpisodePagesEpisodePageIdResponse(rsp *http.Response) (*DeleteApiV1EpisodePagesEpisodePageIdResponse, error) {
+// ParseDeleteEpisodePagesEpisodePageIdResponse parses an HTTP response from a DeleteEpisodePagesEpisodePageIdWithResponse call
+func ParseDeleteEpisodePagesEpisodePageIdResponse(rsp *http.Response) (*DeleteEpisodePagesEpisodePageIdResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DeleteApiV1EpisodePagesEpisodePageIdResponse{
+	response := &DeleteEpisodePagesEpisodePageIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4276,15 +4226,15 @@ func ParseDeleteApiV1EpisodePagesEpisodePageIdResponse(rsp *http.Response) (*Del
 	return response, nil
 }
 
-// ParsePatchApiV1EpisodePagesEpisodePageIdResponse parses an HTTP response from a PatchApiV1EpisodePagesEpisodePageIdWithResponse call
-func ParsePatchApiV1EpisodePagesEpisodePageIdResponse(rsp *http.Response) (*PatchApiV1EpisodePagesEpisodePageIdResponse, error) {
+// ParsePatchEpisodePagesEpisodePageIdResponse parses an HTTP response from a PatchEpisodePagesEpisodePageIdWithResponse call
+func ParsePatchEpisodePagesEpisodePageIdResponse(rsp *http.Response) (*PatchEpisodePagesEpisodePageIdResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PatchApiV1EpisodePagesEpisodePageIdResponse{
+	response := &PatchEpisodePagesEpisodePageIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4309,15 +4259,15 @@ func ParsePatchApiV1EpisodePagesEpisodePageIdResponse(rsp *http.Response) (*Patc
 	return response, nil
 }
 
-// ParseGetApiV1EpisodePagesPageIdResponse parses an HTTP response from a GetApiV1EpisodePagesPageIdWithResponse call
-func ParseGetApiV1EpisodePagesPageIdResponse(rsp *http.Response) (*GetApiV1EpisodePagesPageIdResponse, error) {
+// ParseGetEpisodePagesPageIdResponse parses an HTTP response from a GetEpisodePagesPageIdWithResponse call
+func ParseGetEpisodePagesPageIdResponse(rsp *http.Response) (*GetEpisodePagesPageIdResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1EpisodePagesPageIdResponse{
+	response := &GetEpisodePagesPageIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4342,15 +4292,15 @@ func ParseGetApiV1EpisodePagesPageIdResponse(rsp *http.Response) (*GetApiV1Episo
 	return response, nil
 }
 
-// ParseGetApiV1EpisodesResponse parses an HTTP response from a GetApiV1EpisodesWithResponse call
-func ParseGetApiV1EpisodesResponse(rsp *http.Response) (*GetApiV1EpisodesResponse, error) {
+// ParseGetEpisodesResponse parses an HTTP response from a GetEpisodesWithResponse call
+func ParseGetEpisodesResponse(rsp *http.Response) (*GetEpisodesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1EpisodesResponse{
+	response := &GetEpisodesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4405,15 +4355,15 @@ func ParseGetApiV1EpisodesResponse(rsp *http.Response) (*GetApiV1EpisodesRespons
 	return response, nil
 }
 
-// ParsePostApiV1EpisodesResponse parses an HTTP response from a PostApiV1EpisodesWithResponse call
-func ParsePostApiV1EpisodesResponse(rsp *http.Response) (*PostApiV1EpisodesResponse, error) {
+// ParsePostEpisodesResponse parses an HTTP response from a PostEpisodesWithResponse call
+func ParsePostEpisodesResponse(rsp *http.Response) (*PostEpisodesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PostApiV1EpisodesResponse{
+	response := &PostEpisodesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4468,15 +4418,15 @@ func ParsePostApiV1EpisodesResponse(rsp *http.Response) (*PostApiV1EpisodesRespo
 	return response, nil
 }
 
-// ParseDeleteApiV1EpisodesEpisodeIdResponse parses an HTTP response from a DeleteApiV1EpisodesEpisodeIdWithResponse call
-func ParseDeleteApiV1EpisodesEpisodeIdResponse(rsp *http.Response) (*DeleteApiV1EpisodesEpisodeIdResponse, error) {
+// ParseDeleteEpisodesEpisodeIdResponse parses an HTTP response from a DeleteEpisodesEpisodeIdWithResponse call
+func ParseDeleteEpisodesEpisodeIdResponse(rsp *http.Response) (*DeleteEpisodesEpisodeIdResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DeleteApiV1EpisodesEpisodeIdResponse{
+	response := &DeleteEpisodesEpisodeIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4494,15 +4444,41 @@ func ParseDeleteApiV1EpisodesEpisodeIdResponse(rsp *http.Response) (*DeleteApiV1
 	return response, nil
 }
 
-// ParseGetApiV1EpisodesEpisodeIdResponse parses an HTTP response from a GetApiV1EpisodesEpisodeIdWithResponse call
-func ParseGetApiV1EpisodesEpisodeIdResponse(rsp *http.Response) (*GetApiV1EpisodesEpisodeIdResponse, error) {
+// ParseGetEpisodesEpisodeIdResponse parses an HTTP response from a GetEpisodesEpisodeIdWithResponse call
+func ParseGetEpisodesEpisodeIdResponse(rsp *http.Response) (*GetEpisodesEpisodeIdResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1EpisodesEpisodeIdResponse{
+	response := &GetEpisodesEpisodeIdResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetEpisodes
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePatchEpisodesEpisodeIdResponse parses an HTTP response from a PatchEpisodesEpisodeIdWithResponse call
+func ParsePatchEpisodesEpisodeIdResponse(rsp *http.Response) (*PatchEpisodesEpisodeIdResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PatchEpisodesEpisodeIdResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4557,78 +4533,15 @@ func ParseGetApiV1EpisodesEpisodeIdResponse(rsp *http.Response) (*GetApiV1Episod
 	return response, nil
 }
 
-// ParsePatchApiV1EpisodesEpisodeIdResponse parses an HTTP response from a PatchApiV1EpisodesEpisodeIdWithResponse call
-func ParsePatchApiV1EpisodesEpisodeIdResponse(rsp *http.Response) (*PatchApiV1EpisodesEpisodeIdResponse, error) {
+// ParseGetFeaturesResponse parses an HTTP response from a GetFeaturesWithResponse call
+func ParseGetFeaturesResponse(rsp *http.Response) (*GetFeaturesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PatchApiV1EpisodesEpisodeIdResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Book struct {
-				Author struct {
-					Description string `json:"description"`
-					Id          string `json:"id"`
-					Image       struct {
-						Alt string `json:"alt"`
-						Id  string `json:"id"`
-					} `json:"image"`
-					Name string `json:"name"`
-				} `json:"author"`
-				Description string `json:"description"`
-				Id          string `json:"id"`
-				Image       struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Name     string `json:"name"`
-				NameRuby string `json:"nameRuby"`
-			} `json:"book"`
-			Chapter     float32 `json:"chapter"`
-			Description string  `json:"description"`
-			Id          string  `json:"id"`
-			Image       struct {
-				Alt string `json:"alt"`
-				Id  string `json:"id"`
-			} `json:"image"`
-			Name     string `json:"name"`
-			NameRuby string `json:"nameRuby"`
-			Pages    []struct {
-				Id    string `json:"id"`
-				Image struct {
-					Alt string `json:"alt"`
-					Id  string `json:"id"`
-				} `json:"image"`
-				Page float32 `json:"page"`
-			} `json:"pages"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetApiV1FeaturesResponse parses an HTTP response from a GetApiV1FeaturesWithResponse call
-func ParseGetApiV1FeaturesResponse(rsp *http.Response) (*GetApiV1FeaturesResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetApiV1FeaturesResponse{
+	response := &GetFeaturesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4666,15 +4579,15 @@ func ParseGetApiV1FeaturesResponse(rsp *http.Response) (*GetApiV1FeaturesRespons
 	return response, nil
 }
 
-// ParsePostApiV1ImagesResponse parses an HTTP response from a PostApiV1ImagesWithResponse call
-func ParsePostApiV1ImagesResponse(rsp *http.Response) (*PostApiV1ImagesResponse, error) {
+// ParsePostImagesResponse parses an HTTP response from a PostImagesWithResponse call
+func ParsePostImagesResponse(rsp *http.Response) (*PostImagesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PostApiV1ImagesResponse{
+	response := &PostImagesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4695,15 +4608,15 @@ func ParsePostApiV1ImagesResponse(rsp *http.Response) (*PostApiV1ImagesResponse,
 	return response, nil
 }
 
-// ParsePostApiV1InitializeResponse parses an HTTP response from a PostApiV1InitializeWithResponse call
-func ParsePostApiV1InitializeResponse(rsp *http.Response) (*PostApiV1InitializeResponse, error) {
+// ParsePostInitializeResponse parses an HTTP response from a PostInitializeWithResponse call
+func ParsePostInitializeResponse(rsp *http.Response) (*PostInitializeResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PostApiV1InitializeResponse{
+	response := &PostInitializeResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4711,15 +4624,15 @@ func ParsePostApiV1InitializeResponse(rsp *http.Response) (*PostApiV1InitializeR
 	return response, nil
 }
 
-// ParseGetApiV1RankingsResponse parses an HTTP response from a GetApiV1RankingsWithResponse call
-func ParseGetApiV1RankingsResponse(rsp *http.Response) (*GetApiV1RankingsResponse, error) {
+// ParseGetRankingsResponse parses an HTTP response from a GetRankingsWithResponse call
+func ParseGetRankingsResponse(rsp *http.Response) (*GetRankingsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1RankingsResponse{
+	response := &GetRankingsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4764,15 +4677,15 @@ func ParseGetApiV1RankingsResponse(rsp *http.Response) (*GetApiV1RankingsRespons
 	return response, nil
 }
 
-// ParseGetApiV1ReleasesResponse parses an HTTP response from a GetApiV1ReleasesWithResponse call
-func ParseGetApiV1ReleasesResponse(rsp *http.Response) (*GetApiV1ReleasesResponse, error) {
+// ParseGetReleasesResponse parses an HTTP response from a GetReleasesWithResponse call
+func ParseGetReleasesResponse(rsp *http.Response) (*GetReleasesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1ReleasesResponse{
+	response := &GetReleasesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4793,15 +4706,15 @@ func ParseGetApiV1ReleasesResponse(rsp *http.Response) (*GetApiV1ReleasesRespons
 	return response, nil
 }
 
-// ParseGetApiV1ReleasesDayOfWeekResponse parses an HTTP response from a GetApiV1ReleasesDayOfWeekWithResponse call
-func ParseGetApiV1ReleasesDayOfWeekResponse(rsp *http.Response) (*GetApiV1ReleasesDayOfWeekResponse, error) {
+// ParseGetReleasesDayOfWeekResponse parses an HTTP response from a GetReleasesDayOfWeekWithResponse call
+func ParseGetReleasesDayOfWeekResponse(rsp *http.Response) (*GetReleasesDayOfWeekResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetApiV1ReleasesDayOfWeekResponse{
+	response := &GetReleasesDayOfWeekResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -4842,92 +4755,92 @@ func ParseGetApiV1ReleasesDayOfWeekResponse(rsp *http.Response) (*GetApiV1Releas
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
 
-	// (POST /api/v1/admin/login)
-	PostApiV1AdminLogin(ctx echo.Context) error
+	// (POST /admin/login)
+	PostAdminLogin(ctx echo.Context) error
 
-	// (POST /api/v1/admin/logout)
-	PostApiV1AdminLogout(ctx echo.Context) error
+	// (POST /admin/logout)
+	PostAdminLogout(ctx echo.Context) error
 
-	// (GET /api/v1/admin/me)
-	GetApiV1AdminMe(ctx echo.Context) error
+	// (GET /admin/me)
+	GetAdminMe(ctx echo.Context) error
 
-	// (GET /api/v1/authors)
-	GetApiV1Authors(ctx echo.Context, params GetApiV1AuthorsParams) error
+	// (GET /authors)
+	GetAuthors(ctx echo.Context, params GetAuthorsParams) error
 
-	// (POST /api/v1/authors)
-	PostApiV1Authors(ctx echo.Context) error
+	// (POST /authors)
+	PostAuthors(ctx echo.Context) error
 
-	// (DELETE /api/v1/authors/{authorId})
-	DeleteApiV1AuthorsAuthorId(ctx echo.Context, authorId string) error
+	// (DELETE /authors/{authorId})
+	DeleteAuthorsAuthorId(ctx echo.Context, authorId string) error
 
-	// (GET /api/v1/authors/{authorId})
-	GetApiV1AuthorsAuthorId(ctx echo.Context, authorId string) error
+	// (GET /authors/{authorId})
+	GetAuthorsAuthorId(ctx echo.Context, authorId string) error
 
-	// (PATCH /api/v1/authors/{authorId})
-	PatchApiV1AuthorsAuthorId(ctx echo.Context, authorId string) error
+	// (PATCH /authors/{authorId})
+	PatchAuthorsAuthorId(ctx echo.Context, authorId string) error
 
-	// (GET /api/v1/books)
-	GetApiV1Books(ctx echo.Context, params GetApiV1BooksParams) error
+	// (GET /books)
+	GetBooks(ctx echo.Context, params GetBooksParams) error
 
-	// (POST /api/v1/books)
-	PostApiV1Books(ctx echo.Context) error
+	// (POST /books)
+	PostBooks(ctx echo.Context) error
 
-	// (DELETE /api/v1/books/{bookId})
-	DeleteApiV1BooksBookId(ctx echo.Context, bookId string) error
+	// (DELETE /books/{bookId})
+	DeleteBooksBookId(ctx echo.Context, bookId string) error
 
-	// (GET /api/v1/books/{bookId})
-	GetApiV1BooksBookId(ctx echo.Context, bookId string) error
+	// (GET /books/{bookId})
+	GetBooksBookId(ctx echo.Context, bookId string) error
 
-	// (PATCH /api/v1/books/{bookId})
-	PatchApiV1BooksBookId(ctx echo.Context, bookId string) error
+	// (PATCH /books/{bookId})
+	PatchBooksBookId(ctx echo.Context, bookId string) error
 
-	// (GET /api/v1/episodePages)
-	GetApiV1EpisodePages(ctx echo.Context, params GetApiV1EpisodePagesParams) error
+	// (GET /episodePages)
+	GetEpisodePages(ctx echo.Context, params GetEpisodePagesParams) error
 
-	// (POST /api/v1/episodePages)
-	PostApiV1EpisodePages(ctx echo.Context) error
+	// (POST /episodePages)
+	PostEpisodePages(ctx echo.Context) error
 
-	// (DELETE /api/v1/episodePages/{episodePageId})
-	DeleteApiV1EpisodePagesEpisodePageId(ctx echo.Context, episodePageId string) error
+	// (DELETE /episodePages/{episodePageId})
+	DeleteEpisodePagesEpisodePageId(ctx echo.Context, episodePageId string) error
 
-	// (PATCH /api/v1/episodePages/{episodePageId})
-	PatchApiV1EpisodePagesEpisodePageId(ctx echo.Context, episodePageId string) error
+	// (PATCH /episodePages/{episodePageId})
+	PatchEpisodePagesEpisodePageId(ctx echo.Context, episodePageId string) error
 
-	// (GET /api/v1/episodePages/{pageId})
-	GetApiV1EpisodePagesPageId(ctx echo.Context, pageId string) error
+	// (GET /episodePages/{pageId})
+	GetEpisodePagesPageId(ctx echo.Context, pageId string) error
 
-	// (GET /api/v1/episodes)
-	GetApiV1Episodes(ctx echo.Context, params GetApiV1EpisodesParams) error
+	// (GET /episodes)
+	GetEpisodes(ctx echo.Context, params GetEpisodesParams) error
 
-	// (POST /api/v1/episodes)
-	PostApiV1Episodes(ctx echo.Context) error
+	// (POST /episodes)
+	PostEpisodes(ctx echo.Context) error
 
-	// (DELETE /api/v1/episodes/{episodeId})
-	DeleteApiV1EpisodesEpisodeId(ctx echo.Context, episodeId string) error
+	// (DELETE /episodes/{episodeId})
+	DeleteEpisodesEpisodeId(ctx echo.Context, episodeId string) error
 
-	// (GET /api/v1/episodes/{episodeId})
-	GetApiV1EpisodesEpisodeId(ctx echo.Context, episodeId string) error
+	// (GET /episodes/{episodeId})
+	GetEpisodesEpisodeId(ctx echo.Context, episodeId string) error
 
-	// (PATCH /api/v1/episodes/{episodeId})
-	PatchApiV1EpisodesEpisodeId(ctx echo.Context, episodeId string) error
+	// (PATCH /episodes/{episodeId})
+	PatchEpisodesEpisodeId(ctx echo.Context, episodeId string) error
 
-	// (GET /api/v1/features)
-	GetApiV1Features(ctx echo.Context, params GetApiV1FeaturesParams) error
+	// (GET /features)
+	GetFeatures(ctx echo.Context, params GetFeaturesParams) error
 
-	// (POST /api/v1/images)
-	PostApiV1Images(ctx echo.Context) error
+	// (POST /images)
+	PostImages(ctx echo.Context) error
 
-	// (POST /api/v1/initialize)
-	PostApiV1Initialize(ctx echo.Context) error
+	// (POST /initialize)
+	PostInitialize(ctx echo.Context) error
 
-	// (GET /api/v1/rankings)
-	GetApiV1Rankings(ctx echo.Context, params GetApiV1RankingsParams) error
+	// (GET /rankings)
+	GetRankings(ctx echo.Context, params GetRankingsParams) error
 
-	// (GET /api/v1/releases)
-	GetApiV1Releases(ctx echo.Context) error
+	// (GET /releases)
+	GetReleases(ctx echo.Context) error
 
-	// (GET /api/v1/releases/{dayOfWeek})
-	GetApiV1ReleasesDayOfWeek(ctx echo.Context, dayOfWeek string) error
+	// (GET /releases/{dayOfWeek})
+	GetReleasesDayOfWeek(ctx echo.Context, dayOfWeek string) error
 }
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
@@ -4935,39 +4848,39 @@ type ServerInterfaceWrapper struct {
 	Handler ServerInterface
 }
 
-// PostApiV1AdminLogin converts echo context to params.
-func (w *ServerInterfaceWrapper) PostApiV1AdminLogin(ctx echo.Context) error {
+// PostAdminLogin converts echo context to params.
+func (w *ServerInterfaceWrapper) PostAdminLogin(ctx echo.Context) error {
 	var err error
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PostApiV1AdminLogin(ctx)
+	err = w.Handler.PostAdminLogin(ctx)
 	return err
 }
 
-// PostApiV1AdminLogout converts echo context to params.
-func (w *ServerInterfaceWrapper) PostApiV1AdminLogout(ctx echo.Context) error {
+// PostAdminLogout converts echo context to params.
+func (w *ServerInterfaceWrapper) PostAdminLogout(ctx echo.Context) error {
 	var err error
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PostApiV1AdminLogout(ctx)
+	err = w.Handler.PostAdminLogout(ctx)
 	return err
 }
 
-// GetApiV1AdminMe converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1AdminMe(ctx echo.Context) error {
+// GetAdminMe converts echo context to params.
+func (w *ServerInterfaceWrapper) GetAdminMe(ctx echo.Context) error {
 	var err error
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1AdminMe(ctx)
+	err = w.Handler.GetAdminMe(ctx)
 	return err
 }
 
-// GetApiV1Authors converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1Authors(ctx echo.Context) error {
+// GetAuthors converts echo context to params.
+func (w *ServerInterfaceWrapper) GetAuthors(ctx echo.Context) error {
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetApiV1AuthorsParams
+	var params GetAuthorsParams
 	// ------------- Optional query parameter "limit" -------------
 
 	err = runtime.BindQueryParameter("form", true, false, "limit", ctx.QueryParams(), &params.Limit)
@@ -4990,37 +4903,21 @@ func (w *ServerInterfaceWrapper) GetApiV1Authors(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1Authors(ctx, params)
+	err = w.Handler.GetAuthors(ctx, params)
 	return err
 }
 
-// PostApiV1Authors converts echo context to params.
-func (w *ServerInterfaceWrapper) PostApiV1Authors(ctx echo.Context) error {
+// PostAuthors converts echo context to params.
+func (w *ServerInterfaceWrapper) PostAuthors(ctx echo.Context) error {
 	var err error
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PostApiV1Authors(ctx)
+	err = w.Handler.PostAuthors(ctx)
 	return err
 }
 
-// DeleteApiV1AuthorsAuthorId converts echo context to params.
-func (w *ServerInterfaceWrapper) DeleteApiV1AuthorsAuthorId(ctx echo.Context) error {
-	var err error
-	// ------------- Path parameter "authorId" -------------
-	var authorId string
-
-	err = runtime.BindStyledParameterWithLocation("simple", false, "authorId", runtime.ParamLocationPath, ctx.Param("authorId"), &authorId)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter authorId: %s", err))
-	}
-
-	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.DeleteApiV1AuthorsAuthorId(ctx, authorId)
-	return err
-}
-
-// GetApiV1AuthorsAuthorId converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1AuthorsAuthorId(ctx echo.Context) error {
+// DeleteAuthorsAuthorId converts echo context to params.
+func (w *ServerInterfaceWrapper) DeleteAuthorsAuthorId(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "authorId" -------------
 	var authorId string
@@ -5031,12 +4928,12 @@ func (w *ServerInterfaceWrapper) GetApiV1AuthorsAuthorId(ctx echo.Context) error
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1AuthorsAuthorId(ctx, authorId)
+	err = w.Handler.DeleteAuthorsAuthorId(ctx, authorId)
 	return err
 }
 
-// PatchApiV1AuthorsAuthorId converts echo context to params.
-func (w *ServerInterfaceWrapper) PatchApiV1AuthorsAuthorId(ctx echo.Context) error {
+// GetAuthorsAuthorId converts echo context to params.
+func (w *ServerInterfaceWrapper) GetAuthorsAuthorId(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "authorId" -------------
 	var authorId string
@@ -5047,16 +4944,32 @@ func (w *ServerInterfaceWrapper) PatchApiV1AuthorsAuthorId(ctx echo.Context) err
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PatchApiV1AuthorsAuthorId(ctx, authorId)
+	err = w.Handler.GetAuthorsAuthorId(ctx, authorId)
 	return err
 }
 
-// GetApiV1Books converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1Books(ctx echo.Context) error {
+// PatchAuthorsAuthorId converts echo context to params.
+func (w *ServerInterfaceWrapper) PatchAuthorsAuthorId(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "authorId" -------------
+	var authorId string
+
+	err = runtime.BindStyledParameterWithLocation("simple", false, "authorId", runtime.ParamLocationPath, ctx.Param("authorId"), &authorId)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter authorId: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PatchAuthorsAuthorId(ctx, authorId)
+	return err
+}
+
+// GetBooks converts echo context to params.
+func (w *ServerInterfaceWrapper) GetBooks(ctx echo.Context) error {
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetApiV1BooksParams
+	var params GetBooksParams
 	// ------------- Optional query parameter "authorId" -------------
 
 	err = runtime.BindQueryParameter("form", true, false, "authorId", ctx.QueryParams(), &params.AuthorId)
@@ -5093,37 +5006,21 @@ func (w *ServerInterfaceWrapper) GetApiV1Books(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1Books(ctx, params)
+	err = w.Handler.GetBooks(ctx, params)
 	return err
 }
 
-// PostApiV1Books converts echo context to params.
-func (w *ServerInterfaceWrapper) PostApiV1Books(ctx echo.Context) error {
+// PostBooks converts echo context to params.
+func (w *ServerInterfaceWrapper) PostBooks(ctx echo.Context) error {
 	var err error
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PostApiV1Books(ctx)
+	err = w.Handler.PostBooks(ctx)
 	return err
 }
 
-// DeleteApiV1BooksBookId converts echo context to params.
-func (w *ServerInterfaceWrapper) DeleteApiV1BooksBookId(ctx echo.Context) error {
-	var err error
-	// ------------- Path parameter "bookId" -------------
-	var bookId string
-
-	err = runtime.BindStyledParameterWithLocation("simple", false, "bookId", runtime.ParamLocationPath, ctx.Param("bookId"), &bookId)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter bookId: %s", err))
-	}
-
-	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.DeleteApiV1BooksBookId(ctx, bookId)
-	return err
-}
-
-// GetApiV1BooksBookId converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1BooksBookId(ctx echo.Context) error {
+// DeleteBooksBookId converts echo context to params.
+func (w *ServerInterfaceWrapper) DeleteBooksBookId(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "bookId" -------------
 	var bookId string
@@ -5134,12 +5031,12 @@ func (w *ServerInterfaceWrapper) GetApiV1BooksBookId(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1BooksBookId(ctx, bookId)
+	err = w.Handler.DeleteBooksBookId(ctx, bookId)
 	return err
 }
 
-// PatchApiV1BooksBookId converts echo context to params.
-func (w *ServerInterfaceWrapper) PatchApiV1BooksBookId(ctx echo.Context) error {
+// GetBooksBookId converts echo context to params.
+func (w *ServerInterfaceWrapper) GetBooksBookId(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "bookId" -------------
 	var bookId string
@@ -5150,16 +5047,32 @@ func (w *ServerInterfaceWrapper) PatchApiV1BooksBookId(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PatchApiV1BooksBookId(ctx, bookId)
+	err = w.Handler.GetBooksBookId(ctx, bookId)
 	return err
 }
 
-// GetApiV1EpisodePages converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1EpisodePages(ctx echo.Context) error {
+// PatchBooksBookId converts echo context to params.
+func (w *ServerInterfaceWrapper) PatchBooksBookId(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "bookId" -------------
+	var bookId string
+
+	err = runtime.BindStyledParameterWithLocation("simple", false, "bookId", runtime.ParamLocationPath, ctx.Param("bookId"), &bookId)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter bookId: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PatchBooksBookId(ctx, bookId)
+	return err
+}
+
+// GetEpisodePages converts echo context to params.
+func (w *ServerInterfaceWrapper) GetEpisodePages(ctx echo.Context) error {
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetApiV1EpisodePagesParams
+	var params GetEpisodePagesParams
 	// ------------- Required query parameter "episodeId" -------------
 
 	err = runtime.BindQueryParameter("form", true, true, "episodeId", ctx.QueryParams(), &params.EpisodeId)
@@ -5182,37 +5095,21 @@ func (w *ServerInterfaceWrapper) GetApiV1EpisodePages(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1EpisodePages(ctx, params)
+	err = w.Handler.GetEpisodePages(ctx, params)
 	return err
 }
 
-// PostApiV1EpisodePages converts echo context to params.
-func (w *ServerInterfaceWrapper) PostApiV1EpisodePages(ctx echo.Context) error {
+// PostEpisodePages converts echo context to params.
+func (w *ServerInterfaceWrapper) PostEpisodePages(ctx echo.Context) error {
 	var err error
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PostApiV1EpisodePages(ctx)
+	err = w.Handler.PostEpisodePages(ctx)
 	return err
 }
 
-// DeleteApiV1EpisodePagesEpisodePageId converts echo context to params.
-func (w *ServerInterfaceWrapper) DeleteApiV1EpisodePagesEpisodePageId(ctx echo.Context) error {
-	var err error
-	// ------------- Path parameter "episodePageId" -------------
-	var episodePageId string
-
-	err = runtime.BindStyledParameterWithLocation("simple", false, "episodePageId", runtime.ParamLocationPath, ctx.Param("episodePageId"), &episodePageId)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter episodePageId: %s", err))
-	}
-
-	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.DeleteApiV1EpisodePagesEpisodePageId(ctx, episodePageId)
-	return err
-}
-
-// PatchApiV1EpisodePagesEpisodePageId converts echo context to params.
-func (w *ServerInterfaceWrapper) PatchApiV1EpisodePagesEpisodePageId(ctx echo.Context) error {
+// DeleteEpisodePagesEpisodePageId converts echo context to params.
+func (w *ServerInterfaceWrapper) DeleteEpisodePagesEpisodePageId(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "episodePageId" -------------
 	var episodePageId string
@@ -5223,12 +5120,28 @@ func (w *ServerInterfaceWrapper) PatchApiV1EpisodePagesEpisodePageId(ctx echo.Co
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PatchApiV1EpisodePagesEpisodePageId(ctx, episodePageId)
+	err = w.Handler.DeleteEpisodePagesEpisodePageId(ctx, episodePageId)
 	return err
 }
 
-// GetApiV1EpisodePagesPageId converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1EpisodePagesPageId(ctx echo.Context) error {
+// PatchEpisodePagesEpisodePageId converts echo context to params.
+func (w *ServerInterfaceWrapper) PatchEpisodePagesEpisodePageId(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "episodePageId" -------------
+	var episodePageId string
+
+	err = runtime.BindStyledParameterWithLocation("simple", false, "episodePageId", runtime.ParamLocationPath, ctx.Param("episodePageId"), &episodePageId)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter episodePageId: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PatchEpisodePagesEpisodePageId(ctx, episodePageId)
+	return err
+}
+
+// GetEpisodePagesPageId converts echo context to params.
+func (w *ServerInterfaceWrapper) GetEpisodePagesPageId(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "pageId" -------------
 	var pageId string
@@ -5239,16 +5152,16 @@ func (w *ServerInterfaceWrapper) GetApiV1EpisodePagesPageId(ctx echo.Context) er
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1EpisodePagesPageId(ctx, pageId)
+	err = w.Handler.GetEpisodePagesPageId(ctx, pageId)
 	return err
 }
 
-// GetApiV1Episodes converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1Episodes(ctx echo.Context) error {
+// GetEpisodes converts echo context to params.
+func (w *ServerInterfaceWrapper) GetEpisodes(ctx echo.Context) error {
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetApiV1EpisodesParams
+	var params GetEpisodesParams
 	// ------------- Required query parameter "bookId" -------------
 
 	err = runtime.BindQueryParameter("form", true, true, "bookId", ctx.QueryParams(), &params.BookId)
@@ -5271,37 +5184,21 @@ func (w *ServerInterfaceWrapper) GetApiV1Episodes(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1Episodes(ctx, params)
+	err = w.Handler.GetEpisodes(ctx, params)
 	return err
 }
 
-// PostApiV1Episodes converts echo context to params.
-func (w *ServerInterfaceWrapper) PostApiV1Episodes(ctx echo.Context) error {
+// PostEpisodes converts echo context to params.
+func (w *ServerInterfaceWrapper) PostEpisodes(ctx echo.Context) error {
 	var err error
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PostApiV1Episodes(ctx)
+	err = w.Handler.PostEpisodes(ctx)
 	return err
 }
 
-// DeleteApiV1EpisodesEpisodeId converts echo context to params.
-func (w *ServerInterfaceWrapper) DeleteApiV1EpisodesEpisodeId(ctx echo.Context) error {
-	var err error
-	// ------------- Path parameter "episodeId" -------------
-	var episodeId string
-
-	err = runtime.BindStyledParameterWithLocation("simple", false, "episodeId", runtime.ParamLocationPath, ctx.Param("episodeId"), &episodeId)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter episodeId: %s", err))
-	}
-
-	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.DeleteApiV1EpisodesEpisodeId(ctx, episodeId)
-	return err
-}
-
-// GetApiV1EpisodesEpisodeId converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1EpisodesEpisodeId(ctx echo.Context) error {
+// DeleteEpisodesEpisodeId converts echo context to params.
+func (w *ServerInterfaceWrapper) DeleteEpisodesEpisodeId(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "episodeId" -------------
 	var episodeId string
@@ -5312,12 +5209,12 @@ func (w *ServerInterfaceWrapper) GetApiV1EpisodesEpisodeId(ctx echo.Context) err
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1EpisodesEpisodeId(ctx, episodeId)
+	err = w.Handler.DeleteEpisodesEpisodeId(ctx, episodeId)
 	return err
 }
 
-// PatchApiV1EpisodesEpisodeId converts echo context to params.
-func (w *ServerInterfaceWrapper) PatchApiV1EpisodesEpisodeId(ctx echo.Context) error {
+// GetEpisodesEpisodeId converts echo context to params.
+func (w *ServerInterfaceWrapper) GetEpisodesEpisodeId(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "episodeId" -------------
 	var episodeId string
@@ -5328,16 +5225,32 @@ func (w *ServerInterfaceWrapper) PatchApiV1EpisodesEpisodeId(ctx echo.Context) e
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PatchApiV1EpisodesEpisodeId(ctx, episodeId)
+	err = w.Handler.GetEpisodesEpisodeId(ctx, episodeId)
 	return err
 }
 
-// GetApiV1Features converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1Features(ctx echo.Context) error {
+// PatchEpisodesEpisodeId converts echo context to params.
+func (w *ServerInterfaceWrapper) PatchEpisodesEpisodeId(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "episodeId" -------------
+	var episodeId string
+
+	err = runtime.BindStyledParameterWithLocation("simple", false, "episodeId", runtime.ParamLocationPath, ctx.Param("episodeId"), &episodeId)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter episodeId: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PatchEpisodesEpisodeId(ctx, episodeId)
+	return err
+}
+
+// GetFeatures converts echo context to params.
+func (w *ServerInterfaceWrapper) GetFeatures(ctx echo.Context) error {
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetApiV1FeaturesParams
+	var params GetFeaturesParams
 	// ------------- Optional query parameter "limit" -------------
 
 	err = runtime.BindQueryParameter("form", true, false, "limit", ctx.QueryParams(), &params.Limit)
@@ -5353,34 +5266,34 @@ func (w *ServerInterfaceWrapper) GetApiV1Features(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1Features(ctx, params)
+	err = w.Handler.GetFeatures(ctx, params)
 	return err
 }
 
-// PostApiV1Images converts echo context to params.
-func (w *ServerInterfaceWrapper) PostApiV1Images(ctx echo.Context) error {
+// PostImages converts echo context to params.
+func (w *ServerInterfaceWrapper) PostImages(ctx echo.Context) error {
 	var err error
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PostApiV1Images(ctx)
+	err = w.Handler.PostImages(ctx)
 	return err
 }
 
-// PostApiV1Initialize converts echo context to params.
-func (w *ServerInterfaceWrapper) PostApiV1Initialize(ctx echo.Context) error {
+// PostInitialize converts echo context to params.
+func (w *ServerInterfaceWrapper) PostInitialize(ctx echo.Context) error {
 	var err error
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.PostApiV1Initialize(ctx)
+	err = w.Handler.PostInitialize(ctx)
 	return err
 }
 
-// GetApiV1Rankings converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1Rankings(ctx echo.Context) error {
+// GetRankings converts echo context to params.
+func (w *ServerInterfaceWrapper) GetRankings(ctx echo.Context) error {
 	var err error
 
 	// Parameter object where we will unmarshal all parameters from the context
-	var params GetApiV1RankingsParams
+	var params GetRankingsParams
 	// ------------- Optional query parameter "limit" -------------
 
 	err = runtime.BindQueryParameter("form", true, false, "limit", ctx.QueryParams(), &params.Limit)
@@ -5396,21 +5309,21 @@ func (w *ServerInterfaceWrapper) GetApiV1Rankings(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1Rankings(ctx, params)
+	err = w.Handler.GetRankings(ctx, params)
 	return err
 }
 
-// GetApiV1Releases converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1Releases(ctx echo.Context) error {
+// GetReleases converts echo context to params.
+func (w *ServerInterfaceWrapper) GetReleases(ctx echo.Context) error {
 	var err error
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1Releases(ctx)
+	err = w.Handler.GetReleases(ctx)
 	return err
 }
 
-// GetApiV1ReleasesDayOfWeek converts echo context to params.
-func (w *ServerInterfaceWrapper) GetApiV1ReleasesDayOfWeek(ctx echo.Context) error {
+// GetReleasesDayOfWeek converts echo context to params.
+func (w *ServerInterfaceWrapper) GetReleasesDayOfWeek(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "dayOfWeek" -------------
 	var dayOfWeek string
@@ -5421,7 +5334,7 @@ func (w *ServerInterfaceWrapper) GetApiV1ReleasesDayOfWeek(ctx echo.Context) err
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.GetApiV1ReleasesDayOfWeek(ctx, dayOfWeek)
+	err = w.Handler.GetReleasesDayOfWeek(ctx, dayOfWeek)
 	return err
 }
 
@@ -5453,68 +5366,70 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 		Handler: si,
 	}
 
-	router.POST(baseURL+"/api/v1/admin/login", wrapper.PostApiV1AdminLogin)
-	router.POST(baseURL+"/api/v1/admin/logout", wrapper.PostApiV1AdminLogout)
-	router.GET(baseURL+"/api/v1/admin/me", wrapper.GetApiV1AdminMe)
-	router.GET(baseURL+"/api/v1/authors", wrapper.GetApiV1Authors)
-	router.POST(baseURL+"/api/v1/authors", wrapper.PostApiV1Authors)
-	router.DELETE(baseURL+"/api/v1/authors/:authorId", wrapper.DeleteApiV1AuthorsAuthorId)
-	router.GET(baseURL+"/api/v1/authors/:authorId", wrapper.GetApiV1AuthorsAuthorId)
-	router.PATCH(baseURL+"/api/v1/authors/:authorId", wrapper.PatchApiV1AuthorsAuthorId)
-	router.GET(baseURL+"/api/v1/books", wrapper.GetApiV1Books)
-	router.POST(baseURL+"/api/v1/books", wrapper.PostApiV1Books)
-	router.DELETE(baseURL+"/api/v1/books/:bookId", wrapper.DeleteApiV1BooksBookId)
-	router.GET(baseURL+"/api/v1/books/:bookId", wrapper.GetApiV1BooksBookId)
-	router.PATCH(baseURL+"/api/v1/books/:bookId", wrapper.PatchApiV1BooksBookId)
-	router.GET(baseURL+"/api/v1/episodePages", wrapper.GetApiV1EpisodePages)
-	router.POST(baseURL+"/api/v1/episodePages", wrapper.PostApiV1EpisodePages)
-	router.DELETE(baseURL+"/api/v1/episodePages/:episodePageId", wrapper.DeleteApiV1EpisodePagesEpisodePageId)
-	router.PATCH(baseURL+"/api/v1/episodePages/:episodePageId", wrapper.PatchApiV1EpisodePagesEpisodePageId)
-	router.GET(baseURL+"/api/v1/episodePages/:pageId", wrapper.GetApiV1EpisodePagesPageId)
-	router.GET(baseURL+"/api/v1/episodes", wrapper.GetApiV1Episodes)
-	router.POST(baseURL+"/api/v1/episodes", wrapper.PostApiV1Episodes)
-	router.DELETE(baseURL+"/api/v1/episodes/:episodeId", wrapper.DeleteApiV1EpisodesEpisodeId)
-	router.GET(baseURL+"/api/v1/episodes/:episodeId", wrapper.GetApiV1EpisodesEpisodeId)
-	router.PATCH(baseURL+"/api/v1/episodes/:episodeId", wrapper.PatchApiV1EpisodesEpisodeId)
-	router.GET(baseURL+"/api/v1/features", wrapper.GetApiV1Features)
-	router.POST(baseURL+"/api/v1/images", wrapper.PostApiV1Images)
-	router.POST(baseURL+"/api/v1/initialize", wrapper.PostApiV1Initialize)
-	router.GET(baseURL+"/api/v1/rankings", wrapper.GetApiV1Rankings)
-	router.GET(baseURL+"/api/v1/releases", wrapper.GetApiV1Releases)
-	router.GET(baseURL+"/api/v1/releases/:dayOfWeek", wrapper.GetApiV1ReleasesDayOfWeek)
+	router.POST(baseURL+"/admin/login", wrapper.PostAdminLogin)
+	router.POST(baseURL+"/admin/logout", wrapper.PostAdminLogout)
+	router.GET(baseURL+"/admin/me", wrapper.GetAdminMe)
+	router.GET(baseURL+"/authors", wrapper.GetAuthors)
+	router.POST(baseURL+"/authors", wrapper.PostAuthors)
+	router.DELETE(baseURL+"/authors/:authorId", wrapper.DeleteAuthorsAuthorId)
+	router.GET(baseURL+"/authors/:authorId", wrapper.GetAuthorsAuthorId)
+	router.PATCH(baseURL+"/authors/:authorId", wrapper.PatchAuthorsAuthorId)
+	router.GET(baseURL+"/books", wrapper.GetBooks)
+	router.POST(baseURL+"/books", wrapper.PostBooks)
+	router.DELETE(baseURL+"/books/:bookId", wrapper.DeleteBooksBookId)
+	router.GET(baseURL+"/books/:bookId", wrapper.GetBooksBookId)
+	router.PATCH(baseURL+"/books/:bookId", wrapper.PatchBooksBookId)
+	router.GET(baseURL+"/episodePages", wrapper.GetEpisodePages)
+	router.POST(baseURL+"/episodePages", wrapper.PostEpisodePages)
+	router.DELETE(baseURL+"/episodePages/:episodePageId", wrapper.DeleteEpisodePagesEpisodePageId)
+	router.PATCH(baseURL+"/episodePages/:episodePageId", wrapper.PatchEpisodePagesEpisodePageId)
+	router.GET(baseURL+"/episodePages/:pageId", wrapper.GetEpisodePagesPageId)
+	router.GET(baseURL+"/episodes", wrapper.GetEpisodes)
+	router.POST(baseURL+"/episodes", wrapper.PostEpisodes)
+	router.DELETE(baseURL+"/episodes/:episodeId", wrapper.DeleteEpisodesEpisodeId)
+	router.GET(baseURL+"/episodes/:episodeId", wrapper.GetEpisodesEpisodeId)
+	router.PATCH(baseURL+"/episodes/:episodeId", wrapper.PatchEpisodesEpisodeId)
+	router.GET(baseURL+"/features", wrapper.GetFeatures)
+	router.POST(baseURL+"/images", wrapper.PostImages)
+	router.POST(baseURL+"/initialize", wrapper.PostInitialize)
+	router.GET(baseURL+"/rankings", wrapper.GetRankings)
+	router.GET(baseURL+"/releases", wrapper.GetReleases)
+	router.GET(baseURL+"/releases/:dayOfWeek", wrapper.GetReleasesDayOfWeek)
 
 }
 
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/+xcS4/iuBP/Ksjn/Jue/9y4MduzI6R9tEba3UOLgyEGPJ3EHtuZEYv47is7CQnETioQ",
-	"aGh8ohtcFdfrV48k3iCaLBgabZCiKiJohMbPk8ETm0sUoB9ESMoSNEIfHh4fHtE2QIyTBHOKRujjw+PD",
-	"RxQgjtVKagZDzOnwx4chDmOaDCO2pIn+mjOp9CfjRGBFWTIJ0Qg9M6nGnP79YaxX/2YWB0iQ7ymR6hML",
-	"15pkzhJFEkONOY/o3NAPv0lmOMv5isTYXENo7ooSsxESYxoZkdZcSySVoMlS755jKX8yEVp+3GZXp4KE",
-	"aPSS86hQTIOCgs2+kblC221GIzlLZHbh/z8+nrDtkMi5oFzRbFlt8zS0fx3jJalzw5GCczkQXtOalRah",
-	"91dW92woiv3Y1BXsi4iM1R8MT4WXUvN7Me4wHYxTtRqMnydoqn+teRZLVQfX0qvtlqrth6Wq+4Zio/4l",
-	"sezlC6ls5XeCvMOc4jBfiBpgbYhUEtHJTqlaMSHbzZSv03EvcEwU0UQvGiTRCH1PiVijACVYWxxFNKZa",
-	"7NI8uQBJGs+I0NuzE5oPC12pXDsdWywkab7i9EQHo4rEsu4bM8ZeZcPvbZ5IOJUsJE0s5ivMFREWoYJj",
-	"HT1TW5vvFhcObL5pWNRdc/cFFgKvrybWoCK7BK0Yyh2WddlvAodO100WBHDFuPGLiUFEZS3TcJ7hFxMy",
-	"h7CgNcXtAKuf0qnVlFr2ySnhdqDfnJ8z0vousjySeSTzSNaCZHXk+kUQrEgOXu7Kq0SuevE13GR/TMJt",
-	"FmgRUaQObU/m+yq4jXMyR1Wm+8+yRsLl4lIXSqSkqd6aQrqDbGMdVBCAas03k84DqAdQD6CXAtCy9ANV",
-	"fVjNV5ayT3/9BuBxvZWlrxY92Hmwuzaw+4uHR1eLu5BrLJ4+5XsCjOkqsNd54pbR/nHkvO6OBoSZom50",
-	"RH16iLgxo4cMAZHOIddtoXX2w9d0tj7FFjseQeGVR8G7vYTT6OSc3RlQgk7uCgTrp7ragZxNq2covRpN",
-	"pYWKCJZ2noeOUsJz42hwz7Al//NPDD20eWi7bWhzjvM0mtnLsyqUHRZnw43+gI/xDK9PhgTUp86KpZcb",
-	"cbUqLB/+wRQWAGrX69aHR0CPgO8bAYtiDlDHtc3iLhXP91cn+srO45rHtWNGb50ru/xiz3hJ2qdvn6uL",
-	"QUO4nH1H2Ot7rvZ287Er8WGeX66mr8O4zJeeOi7JzT7QzJxjk9ybBsadoOOTAxfs6cHxnZd2hX0HCUzf",
-	"1eAopx7cFfL9JsF355nObrfqjHZstHmiAyOHm8p/8F646rafqwxAlSM5oLi+Bvk4HQOK7DdV3I1hi0eM",
-	"UxEjr6J6RgxeQgW4vOrg5PzysHB3jnFY1EDrmbpPgKtsYIV9xFTh/ZTXWnjf3/fW399rx+3W2Bme0roF",
-	"bWYIKe+6se361NyeaxlgKi5WaPPEbroh53Rtn/trnfP0YzPuSbHT88j5wJq7pOk0q/MhhMu8quSTmk9q",
-	"Pqn5pHaLSa1tENfYUTc0TrvRW+exWzE56jY1urZRW7UHtc3UrXoMYL3mLSjIZ0mfJX2W9FnyvWbJzq0e",
-	"8N7J5cD9vhpK3wb6BOcTnE9wPsEBE9z+3dWubeCCYJUKwP2zX4uF5z3Nzd/18pnhmhQAQHzgw7l5iB97",
-	"uyIPVOdzf0V81kPc7FwCTvicxK3P/8VppCjHQg0XTMT/C7HCjc+EO8xa4aj5YIVGaEYTbJCg3doXeE3x",
-	"TMd3uoZ4xkZ27M6sYjFrQhXFEf2XQExbLoaczlQuP9jTJFFEJDiaDoq/6hsTOHmlybI9pXwtFvqU4lNK",
-	"Py9K+PNfrippgk4KcAitYQRYqJulZ86vBVhZ8C577QqAd8XC86BNiNd/Lv4h5PVopyg5BLDXieyqzBXi",
-	"VmWuB7cqh5vdVrZgtT5Vdt8+kKvKeq2n//lM0Q0yrlPAju1E7VysvsO6OIMKOj3PgxISyeWCw4oSY1zG",
-	"Xv2YPl27NRLUz7lqJamN94EX6UZjf0a526W6E1aaAtAO97pDEEX5ZiNwSx0Iaq4Do6hm4A4OA1rvaGw0",
-	"4P8ks1UG1EkaRdv/AgAA///DQOBq5GUAAA==",
+	"H4sIAAAAAAAC/+xcT3PiNhT/KozaI42z3Ru3pEl3mNm2mZ3p9LDDQcCDaNe2vJJIJ2X47h3Jsq3Yki2D",
+	"IZDolAB60tP783t/LHmLFjTJaAqp4GiyRXzxCAlW/95sxCNldyAwiW8p/a6+zBjNgAkC6tMS+IKRTBCa",
+	"yo/iOQM0QVwwkq7RbozI0v51gtcgf/mZwQpN0E9RxUSkOYimatBujFKcgGWa3Rgx+LEhDJZo8vUFK2ph",
+	"TVisNhsXE9D5N1gIOfN9RjhdAn/Aa+BTAUlzh4PsINOD9TTpJpkDa+xA8ayGtvH8CYSpmCbH80JVREDC",
+	"u3hsKnlXLooZw8/y855qdivOvavPhAu7Jpr76meLoJXdMsXiEWcCmEVVR5CBqfpi4bHTjG2mUFfTWXhb",
+	"KeY2Ix7IwE67s9wAO3zz3rCypv02v8XK6odH1toqsfCfpSYQSatG2nZ8PGy+bAHkP3zZzJ8PkU45x7iw",
+	"kzaJHQG9BnGwVlnkEc8/XjVDdgNOemPrC0ErNy12XnBnE/f0pJYmh5J0RdUkRMTyt5uH6eiOLiQmPQHj",
+	"Srfow9X11bVckGaQ4oygCfp4dX31Ue1FPCoeI7xMSBrFdE2UOWSUK6blPrAUz3SJJuiBcnEjB35W43JW",
+	"gYtbulSaXNBUQKoIcZbFZKFIo288t7FcY00BQaLTFoslcP4vZR6CyucwKGwCUzQ8oynPF/71+voAti8C",
+	"j7qRxQUfuzpIIKX1qzxdw2su5/uqzGE2kqna6OZhimby18qa6Eb4mZMcaNdOgwe6ET2YyAFoDZb1ZYop",
+	"x/wBKBjGIYbxCcRIhqPRhgPz040KXrxVNXqI9GmGExAgx3/dIolQ6McG2HMB1xMUk4TIrVYqaVRWdkIN",
+	"9w26SqB2OrpacWhfcXagUXlFv2aZ1Ix+Tn1RNooJb3hTluX6ooxrlY3bPLjU0zDRoNN7pFlOD6mtarau",
+	"53OWVUPHjVC2Hlq2Xkgp8yqF74XIpqt0boLWbwywAI1b7iBTgZYRZ6Jt/s90ucs9LAYBTTi7U9/rWW40",
+	"hSMAydS5Cge4GlztX7ANtIWWmU/Ck/PUY9vjroj6ahvzxkuvgKe7na3hzSuyYbF4tIQ2+fVpJXa+0TNE",
+	"xBARQ0Q8t4j4d7bsHxFLX3NFiVvNh0fVZUBd7wIqp/1zz/LrTdd74XnAIM8DPKKCz+4c+7oshD7e04c9",
+	"IN2esUlgcrYjFCh5NCMK8BommSrxzSbQI2RaHc9FGMSAuX3Ouo1UyNza7Xih02r+4zdBAqoFVLtsVHN2",
+	"KCSQ2bMxE8XKXCzayj9enQlFf6tGe5Wi82Lo6Ur3TiHpfoafkMbtWep5iyIAXgC8tw14RdrmkbG1NNlO",
+	"5crvLyMMOVyAtABp+/TU/HM4vcpDcWbNlbDcm+O8umt65p5QN3TD7PUaX2dit0Me1ffpg2i1j+Rkzn6I",
+	"tqaRMiePvkjN+gY6t1caaF+Ud5D4idr0i6qdkbk8fNiY9+aM0lnGmnZoh0KbEdYhMdoan7yKXNNU701a",
+	"r+QQahTnV/nuJ9f2FPpVZXZhUBIA4lCA0DnSUACRVcjgkzz1MOzs9Cjw7oyhnrL4ZiuGHfjkzZ458x69",
+	"gbeTMIf7ZOE+2cXeJztjadpupL23UvU0N+h61MctcaZHQTxcMawjj02vB7nNwD3jmiLLeOnUqPO8wGku",
+	"SoR4FuJZiGchnl1iPOtqrbUWzbY6qWym9WmkFQ2hfs2gc2uemWWmrSluld24s6q8BNl03IYpM5kh8qXu",
+	"HuPpRPa+srKQS4VcKuRSIZcKuZRnLvXyKYR3LrUCLDasvef8ezHmuO+eCJ3iEA3OSQAeKO95LE279b4t",
+	"Pu2jztMvhX8abq1Y5u3vGpomncdfkk0sSIaZiFaUJb8sscCtJyAdqjRmlPNggSZoTlKsvL9bwye4fnO8",
+	"d5JZK16lHjtG51oxVZkSQXBM/oMOdVbjfF6kUA2v8TFNBbAUx7NR8Z/BDMPpd5KuW8PFl2JMCBchXAxz",
+	"/De8ruCsAqLXJVfHpiWCeCbeauiRY2cBVibG5bcI2jGuGHMchFni579W/wB839sQqhnGfgfj7eLTsnCL",
+	"T8vBIr5oW/Kw8xHlncFxdyPN3N9rHWfqek9LiAj9oOE8N9izJGi8rmVoVy5ejeJ7Gk37o4/37saIA3sq",
+	"3G7DYjRBEc5I9PQBSefR5PVcEmNceWbztVIyg2slaL6cpZOk0a/3XKQfjf20Xr+l+hMaJYAXhy/qPy+K",
+	"6taOJ0s9CBqG5UdhxuEeBuM13lHS7Ga7/wMAAP//V6X+h95jAAA=",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
