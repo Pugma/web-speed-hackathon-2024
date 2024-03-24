@@ -29,7 +29,7 @@ export const jpegConverter: ConverterInterface = {
         width: data.width,
       },
     })
-      .webp({})
+      .webp({effort:6})
       .toBuffer();
   },
 };

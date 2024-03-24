@@ -29,7 +29,7 @@ export const pngConverter: ConverterInterface = {
         width: data.width,
       },
     })
-      .png({ compressionLevel: 9 })
+      .webp({ effort: 6 })
       .toBuffer();
   },
 };
