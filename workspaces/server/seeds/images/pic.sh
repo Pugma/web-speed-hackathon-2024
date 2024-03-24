@@ -1,8 +1,8 @@
 # DIRPATH=$1
 
 # jpgでもpngでも回した
-for FILE in *.jxl.webp.webp
+for FILE in *.png.webp
 do
-  convert ${FILE} ${FILE%.jxl.webp.webp}.webp
+  convert ${FILE} ${FILE%.png.webp}.webp
   rm ${FILE}
 done
