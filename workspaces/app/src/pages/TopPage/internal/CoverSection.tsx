@@ -28,7 +28,7 @@ const _SearchLink = styled(Link)`
 `;
 
 const CyberToonTopStyle = {
-  'aspect-ratio': 16 / 9,
+  aspectRatio: 16 / 9,
   height: 'auto',
   width: '100%',
 };
