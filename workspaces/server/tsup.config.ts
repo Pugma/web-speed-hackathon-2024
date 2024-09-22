@@ -20,7 +20,7 @@ export default defineConfig(async (): Promise<Options[]> => {
           : 'http://localhost:8000',
         NODE_ENV: process.env['NODE_ENV'] || 'development',
       },
-      format: 'esm',
+      format: 'cjs',
       metafile: true,
       minify: false,
       noExternal: [/@wsh-2024\/.*/],
@@ -28,7 +28,7 @@ export default defineConfig(async (): Promise<Options[]> => {
       shims: true,
       sourcemap: true,
       splitting: true,
-      target: 'node18',
+      target: 'esnext',
       treeshake: true,
     },
   ];
